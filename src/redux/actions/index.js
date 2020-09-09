@@ -33,10 +33,10 @@ const normalizator = (
   },
 ) => ({
   title: title,
-  author: authors.join(","),
+  author: authors.join(", ").concat("."),
   image_url: smallThumbnail,
   grade: 0,
-  categories: categories.join(","),
+  categories: categories.join(", ").concat("."),
   review: "",
   google_book_id: id,
 });
