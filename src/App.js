@@ -1,16 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { requestAddToShelf } from "./redux/actions";
+import "./App.css";
 
 const App = () => {
-	return (
-		<div className="App">
-			<header className="App-header">
-				<img src={"https://cristine.balsini.gitlab.io/pytroski/img/Photo%20de%20Perfil%20Roma%20Aeterna.jpg"} className="App-logo" alt="logo" />
-				<p>Written by Augusto Pietroski</p>
-			</header>
-		</div>
-	);
-}
+  const dispatch = useDispatch();
+  const books = useSelector((state) => state.books);
+
+  const a = (id, s) => {
+    dispatch(requestAddToShelf(id, s));
+  };
+  debugger;
+  return (
+    <div className="App">
+      <header className="App-header"></header>
+    </div>
+  );
+};
 
 export default App;
