@@ -1,6 +1,42 @@
-import { ACTION_TYPES } from './action-types';
+import axios from "axios";
 
-export const action_types = (/* parameters */) => ({
-    type: ACTION_TYPES,
-    /* parameters */
+export const ADD_TO_SHELF = "ADD_TO_SHELF";
+
+export const addToShelf = (book, shelf) => ({
+  type: ADD_TO_SHELF,
+  payload: {
+    book,
+    shelf
+  },
+});
+
+export const requestAddToShelf = (google_id, shelf) => (dispatch) => {
+  axios.get(`https://www.googleapis.com/books/v1/volumes/${google_id}`).then(
+    (res) => {
+      const normalized = normalizator(res);
+      dispatch(addToShelf(normalized, shelf));
+    }
+  );
+};
+
+const normalizator = (
+  {
+    data: {
+      id,
+      volumeInfo: {
+        title,
+        authors,
+        imageLinks: { smallThumbnail },
+        categories,
+      },
+    },
+  },
+) => ({
+  title: title,
+  author: authors.join(", ").concat("."),
+  image_url: smallThumbnail,
+  grade: 0,
+  categories: categories.join(", ").concat("."),
+  review: "",
+  google_book_id: id,
 });
