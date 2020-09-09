@@ -1,20 +1,19 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { requestAddToShelf } from "./redux/actions";
+import logo from "./assets/images/logo.svg";
 import "./App.css";
+import { Switch, Route } from "react-router-dom";
 
 const App = () => {
-  const dispatch = useDispatch();
-  const books = useSelector((state) => state.books);
-
-  const a = (id, s) => {
-    dispatch(requestAddToShelf(id, s));
-  };
-  debugger;
   return (
-    <div className="App">
-      <header className="App-header"></header>
-    </div>
+    <Switch>
+      <Route exact path="/">
+        <div className="App">
+          <header className="App-header">
+            <img src={logo} />
+          </header>
+        </div>
+      </Route>
+    </Switch>
   );
 };
 

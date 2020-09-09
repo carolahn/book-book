@@ -1,12 +1,13 @@
-import { ADD_TO_SHELF } from "../actions/action-types";
+import { ADD_TO_SHELF } from "../actions";
 
 const defaultState = {};
 
-const books = (state = defaultState, { type, variavel }) => {
+const books = (state = defaultState, { type, payload }) => {
   switch (type) {
     case ADD_TO_SHELF:
-      return { ...state, [state.length - 1]: variavel.book};
-    /* cases for the switch */
+      const { book, shelf } = payload;
+      const id = Object.keys(state).length;
+      return { ...state, [id]: { ...book, id, shelf } };
 
     default:
       return state;
