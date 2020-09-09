@@ -7,7 +7,6 @@ const App = () => {
 		<div className="App">
 			<header className="App-header">
 				<img src={logo} />
-				<p>Written by Augusto Pietroski</p>
 			</header>
 		</div>
 	);
