@@ -1,9 +1,9 @@
-import React, { useState, useEffect} from './node_modules/react'
-import { Form, Input, Button } from './node_modules/antd'
+import React, { useState, useEffect} from 'react'
+import { Form, Input, Button } from 'antd'
 import { Container, StyledRegister } from './styles'
-import { useDispatch, useSelector} from './node_modules/react-redux'
+import { useDispatch, useSelector} from 'react-redux'
 import { requestRegisterData } from '../../redux/actions/action-register'
-import { useHistory } from './node_modules/react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 const Register = () => {
 
