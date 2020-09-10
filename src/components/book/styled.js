@@ -2,8 +2,9 @@ import styled from "styled-components";
 
 export const BookContainer = styled.div`
   margin: 0;
-  padding: 0;
-  width: 304px;
+  /* padding: 0; */
+  padding: 4px;
+  width: 312px;
   background-color: white;
   display: grid;
   grid-template-columns: 100px 200px;

@@ -49,6 +49,7 @@ const Book = () => {
         </div>
         <div className="grade">
           <Rate
+            disabled
             allowHalf
             defaultValue={2.5}
             style={{ fontSize: 15, display: "revert" }}
