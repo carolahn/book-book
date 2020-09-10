@@ -5,6 +5,7 @@ export const StyledDiv = styled.div`
     width: 100vw;
     height: 100vh;
     background-image: url(${background_image});
+    background-size: cover;
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
