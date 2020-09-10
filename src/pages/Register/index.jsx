@@ -168,6 +168,7 @@ export default Register
 
 const Container = styled.div`
   width:100vw;
+  height:100vh;
   
   background-image: url(${backgroundImage});
   -webkit-background-size: cover;
@@ -178,6 +179,10 @@ const Container = styled.div`
   grid-template-rows: 1fr 3fr 1fr;
   grid-template-columns: 20vw 15vw 30vw 15vw 20vw;
 
+  @media (max-width: 1024px) {
+    grid-template-rows: 10vh 3fr 10vh;
+    grid-template-columns: 20vw 60vw 20vw;
+  }
 
   @media (max-width: 420px) {
     grid-template-rows: 10vh 3fr 10vh;
@@ -201,6 +206,7 @@ const StyledRegister = styled.div`
   flex-direction: column;
   align-items: center;
   border-radius:10px;
+  box-sizing: border-box;
   
 
   .serverResponse {
@@ -258,11 +264,25 @@ const StyledRegister = styled.div`
   }
 
 
+  @media (max-width: 1024px) {
+    grid-row-start: 2;
+    grid-row-end: 2;
+    grid-column-start: 2;
+    grid-column-end:2;
+  }
+
   @media (max-width: 420px) {
     grid-row-start: 2;
     grid-row-end: 2;
     grid-column-start: 2;
     grid-column-end:2;
+  }
+
+  @media (max-width: 280px) {
+    
+    .formRegister {
+      width: 70%;
+    }
   }
 
 
