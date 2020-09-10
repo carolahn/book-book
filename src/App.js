@@ -1,15 +1,23 @@
 import React from 'react';
+
 import './App.css';
-import 'antd/dist/antd.css';
-import Register from './pages/Register'
+import { Switch, Route } from 'react-router-dom';
+import Login from './pages/login';
+import Header from './components/header/';
+import Register from './pages/register';
 
 const App = () => {
 	return (
-		<div className="App">
-			<header className="App-header">
-				
-			</header>
-		</div>
+		<Switch>
+			<Route exact path="/">
+				<Header />
+				<Login />
+			</Route>
+			<Route exact path="/register">
+				<Header />
+				<Register />
+			</Route>
+		</Switch>
 	);
 }
 
