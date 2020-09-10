@@ -1,12 +1,24 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import styled from "styled-components";
-import { Card, Select, Rate } from "antd";
+import { Select, Rate } from "antd";
+import { DeleteTwoTone, PlusCircleTwoTone } from "@ant-design/icons";
 import "antd/dist/antd.css";
-import bookImage from "../../assets/images/book-example.png";
+import { BookContainer } from "./styled";
 
 const Book = () => {
   const { Option } = Select;
+
+  const bookData = {
+    title: "React JS Fundamental",
+    author: "Onesinus SPT",
+    image_url:
+      "http://books.google.com/books/content?id=Rhl1CgAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+    grade: 0,
+    categories: "Computers",
+    review:
+      "In this ebooks we will learn basic Single Page Application with React JS 1. How to Install React JS with create-react-app 2. Fetching data from API 3. Using Global Context with useContext 4. Unit Testing with JEST [Ongoing]",
+    google_book_id: "u1CsDwAAQBAJ",
+  };
 
   function onChange(value) {
     console.log(`selected ${value}`);
@@ -25,20 +37,13 @@ const Book = () => {
   }
 
   return (
-    <BookConatiner className="book">
-      <img src={bookImage} alt="cover" />
+    <BookContainer className="book">
+      <img src={bookData.image_url} alt="cover" />
       <div className="book-info">
-        <div className="title">Título do livro</div>
-        <div className="author">by Autor</div>
+        <div className="title">{bookData.title}</div>
+        <div className="author">{bookData.author}</div>
         <div className="description">
-          <p>
-            É um fato conhecido de todos que um leitor se distrairá com o
-            conteúdo de texto legível de uma página quando estiver examinando
-            sua diagramação. A vantagem de usar Lorem Ipsum é que ele tem uma
-            distribuição normal de letras, ao contrário de "Conteúdo aqui,
-            conteúdo aqui", fazendo com que ele tenha uma aparência similar a de
-            um texto legível.
-          </p>
+          <p>{bookData.review}</p>
         </div>
         <div className="grade">
           <Rate
@@ -64,93 +69,27 @@ const Book = () => {
             option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
           }
         >
-          <Option value="jack">Want to read</Option>
-          <Option value="lucy">Current reading</Option>
-          <Option value="tom">Read</Option>
-          <Option value="tom">Remove</Option>
+          <Option value="shelf1">
+            <span className="shelf-option">Want to read</span>
+          </Option>
+          <Option value="shelf2">
+            <span className="shelf-option">Current reading</span>
+          </Option>
+          <Option value="shelf3">
+            <span className="shelf-option">Read</span>
+            <PlusCircleTwoTone twoToneColor="#c4c4c4" />
+          </Option>
+          <Option value="delete" style={{ color: "#dd2e44" }}>
+            <span className="shelf-option remove">Remove</span>
+            <DeleteTwoTone
+              twoToneColor="#dd2e44"
+              style={{ paddingRight: 10 }}
+            />
+          </Option>
         </Select>
       </div>
-    </BookConatiner>
+    </BookContainer>
   );
 };
 
 export default Book;
-
-const BookConatiner = styled.div`
-  margin: 0;
-  padding: 0;
-  width: 300px;
-  background-color: white;
-  display: grid;
-  grid-template-columns: 100px 200px;
-  grid-template-rows: 30px 16px 60px 20px 24px;
-  box-sizing: border-box;
-  color: black;
-  text-align: left;
-
-  img {
-    grid-column: 1;
-    grid-row: 1/6;
-    width: 100%;
-    align-self: center;
-  }
-  div.title {
-    grid-column: 2;
-    grid-row: 1;
-    height: 30px;
-    font-size: 16px;
-    line-height: 30px;
-  }
-  div.author {
-    grid-column: 2;
-    grid-row: 2;
-    height: 16px;
-    font-size: 12px;
-    font-style: italic;
-    line-height: 16px;
-    margin: 0;
-  }
-  div.description {
-    grid-column: 2;
-    grid-row: 3;
-    height: 60px;
-    white-space: wrap;
-    width: 200px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 12px;
-    line-height: 15px;
-    color: #777777;
-  }
-
-  div.grade {
-    grid-column: 2;
-    grid-row: 4;
-    height: 20px;
-    line-height: 20px;
-    text-align: right;
-    margin: 0;
-    padding: 0;
-  }
-
-  .select-menu {
-    margin: 0;
-    grid-column: 2;
-    grid-row: 5;
-    display: grid;
-    text-align: center;
-  }
-
-  .select-menu .ant-select {
-    font-size: 12px;
-  }
-
-  .select-menu .ant-select-arrow {
-    top: 13px;
-    right: 61px;
-  }
-
-  @media (max-width: 800px) {
-    background-color: blue;
-  }
-`;
