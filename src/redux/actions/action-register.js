@@ -8,11 +8,11 @@ export const REGISTER_FAILED = 'REGISTER_FAILED'
   sucess
 })
 
-const registerFailed = (failed, user, email) => ({
-  type: REGISTER_SUCESS,
+const registerFailed = (failed, userError, emailError) => ({
+  type: REGISTER_FAILED,
   failed,
-  user,
-  email
+  userError,
+  emailError
 })
 
 
@@ -36,6 +36,5 @@ export const requestRegisterData = (name, username, email, password, confirmPass
   })
   .catch((err) => {
     dispatch(registerFailed(false, err.response.data.user, err.response.data.email))
-    
   })
 }

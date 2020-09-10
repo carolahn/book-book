@@ -1,14 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect} from 'react'
 import { Form, Input, Button } from 'antd'
 import styled from 'styled-components'
 import backgroundImage from '../../assets/images/background-covers.jpg'
 import { useDispatch, useSelector} from 'react-redux'
 import { requestRegisterData } from '../../redux/actions/action-register'
+import { useHistory } from 'react-router-dom'
 
 const Register = () => {
 
 
   const dispatch = useDispatch()
+
+  const status = useSelector((state) => state.register.status)
+  const usernameError = useSelector((state) => state.register.user)
+  const emailError = useSelector((state) => state.register.email)
+  const history = useHistory()
 
   const [name, setName] = useState('')
   const [username, setUsername] = useState('')
@@ -18,6 +24,9 @@ const Register = () => {
   const [form] = Form.useForm();
 
     
+  useEffect(() => {
+
+  }, [status])
 
   const handleName = (event) => {
     setName(event.target.value)
@@ -38,14 +47,21 @@ const Register = () => {
 
   
   const onFinish = values => {
-     
-      dispatch(requestRegisterData(name, username, email, password, confirmPassword))
+    dispatch(requestRegisterData(name, username, email, password, confirmPassword))
+    
+    if (status) {
+      setTimeout(() =>{
+        history.push('/')
+      }, 2000)
+    }
   }
-
+ 
   return(
     <Container>
       <StyledRegister>
+      
       <h2>Register</h2>
+      
       <Form
         onFinish={onFinish}
         form={form}
@@ -130,7 +146,18 @@ const Register = () => {
         </Button>
         
       </Form>
+      <div className='serverResponse'>
+        {status === false? 
+          <div className='error'>
+            <span>{usernameError !== '' && usernameError !== undefined && `User ${usernameError}`}</span>
+            <span>{emailError !== '' && emailError !==  undefined &&  `Email ${emailError}`}</span>
+          </div>
+        : status === true?
+          <span className='sucess'>Sucess</span> : null
+        }
+      </div>
     </StyledRegister>
+
     </Container>
   )
 }
@@ -161,7 +188,26 @@ const StyledRegister = styled.div`
   flex-direction: column;
   align-items: center;
   border-radius:10px;
+  
 
+  .serverResponse {
+    color: #696969;
+    font-size:20px;  
+  }
+
+  .error {
+    color: crimson;
+    display:flex;
+    flex-direction: column;
+  }
+
+  .error:last-child {
+    padding-bottom: 2.50rem;
+  }
+
+  .sucess {
+    color: green;
+  }
 
   h2{
     margin:1.25rem;
@@ -196,5 +242,7 @@ const StyledRegister = styled.div`
     margin: 1.25rem;
     margin-bottom: 2.50rem;
   }
+
+
 
 `
