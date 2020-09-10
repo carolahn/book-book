@@ -5,8 +5,20 @@ import { DeleteTwoTone } from "@ant-design/icons";
 import "antd/dist/antd.css";
 import { BookContainer } from "./styled";
 
-const Book = () => {
+const Book = (/* props || {bookData: {title, author, image_url, grade, categories, review, google_book_id}} */}) => {
   const { Option } = Select;
+
+  /* ainda a ser decidido
+    const bookData = {
+      title = props.title,
+      author: props.author,
+      image_url: props.image_url,
+      grade: props.grade,
+      categories: props.categories,
+      review: props.review,
+      google_book_id: props.google_book_id
+    }
+  */
 
   // exemplo de data
   const bookData = {
