@@ -1,21 +1,15 @@
 import React from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { StyledDiv, LoginBox, Header } from './styles/index';
+import { StyledDiv, LoginBox } from './styles/index';
 import 'antd/dist/antd.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory, useLocation } from 'react-router-dom';
 import login from '../../redux/actions/login/';
 
 const Login = () => {
 
     const dispatch = useDispatch();
     //const tokenInfo = useSelector();
-    const history = useHistory();
-    const location = useLocation();
-    const where = location.pathname;
-
-    console.log(where)
 
     const onFinish = values => {
         console.log('Received values of form: ', values);
@@ -24,16 +18,6 @@ const Login = () => {
 
     return (
         <StyledDiv>
-            <Header >
-                <div className="logo-holder" />
-                <div className="button-holder" >
-                    
-                    <button className={where === '/' ? "login button here" : ""} >Login</button>
-                    <button className={where === '/register' ? "register button here" : "register button"}
-                            onClick={() => history.push("/register")}            
-                    >Register</button>
-                </div>
-            </Header>
             <LoginBox>
                 <h1>Login</h1>
                 <Form
