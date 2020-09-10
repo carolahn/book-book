@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
-// import here your reducers
+import books from "./books";
+import register from './register'
 
-export default combineReducers({ /* reducers */ });
+export default combineReducers({ books, register });

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="255px"
+   height="40px"
+   viewBox="0 0 255 70"
+   version="1.1"
+   id="SVGRoot"
+   sodipodi:docname="logo255.svg"
+   inkscape:version="1.0.1 (1.0.1+r73)">
+  <defs
+     id="defs2032" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4"
+     inkscape:cx="156.59214"
+     inkscape:cy="83.960492"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:window-width="1427"
+     inkscape:window-height="966"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata2035">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="opacity:1;fill:#ff914d;fill-opacity:1;stroke:#ff914d;stroke-width:5.19239;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect2129"
+       width="10.507476"
+       height="51.76186"
+       x="11.635626"
+       y="5.3673992" />
+    <rect
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:5.19239;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect2129-3"
+       width="10.507476"
+       height="51.76186"
+       x="31.984444"
+       y="5.3673992" />
+    <rect
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:5.19239;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect2129-3-6"
+       width="10.507476"
+       height="51.76186"
+       x="47.516434"
+       y="21.309994"
+       transform="rotate(-16.2)" />
+    <rect
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:3.73784;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect2161"
+       width="66.957817"
+       height="2.1913753"
+       x="10.566442"
+       y="63.851173" />
+    <text
+       xml:space="preserve"
+       style="font-size:39.3654px;line-height:1.25;font-family:Norwester;-inkscape-font-specification:Norwester;fill:#ffffff;fill-opacity:1;stroke-width:0.820112"
+       x="87.730247"
+       y="48.955616"
+       id="text2165"><tspan
+         sodipodi:role="line"
+         id="tspan2163"
+         x="87.730247"
+         y="48.955616"
+         style="stroke-width:0.820112">BookBook</tspan></text>
+  </g>
+</svg>
