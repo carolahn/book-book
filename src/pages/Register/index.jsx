@@ -66,6 +66,7 @@ const Register = () => {
         onFinish={onFinish}
         form={form}
         name='register'
+        className='formRegister'
       >
         <Form.Item
         name='name'
@@ -167,22 +168,34 @@ export default Register
 
 const Container = styled.div`
   width:100vw;
-  height: 100vh;
+  
   background-image: url(${backgroundImage});
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-rows: 1fr 3fr 1fr;
+  grid-template-columns: 20vw 15vw 30vw 15vw 20vw;
+
+
+  @media (max-width: 420px) {
+    grid-template-rows: 10vh 3fr 10vh;
+    grid-template-columns: 10vw 80vw 10vw;
+  }
 
 `
 
 const StyledRegister = styled.div`
 
+  grid-row-start: 2;
+  grid-row-end: 2;
+  grid-column-start: 3;
+  grid-column-end:3;
+
+
   background-color: #fff;
-  width:500px;
+  width:100%;
   display:flex;
   justify-content: center;
   flex-direction: column;
@@ -215,9 +228,10 @@ const StyledRegister = styled.div`
 
 
   .formItem {
-    
     display: flex;
     flex-direction: column;
+    
+    
     
 
     .ant-form-item-label{
@@ -230,19 +244,26 @@ const StyledRegister = styled.div`
     }
   }
 
-  
-
-  .inputRegister {
-    width: 250px;
+  .formRegister {
+    width: 50%;
   }
+
+  
   
 
   .buttonRegister {
-    width: 200px;
+    width: 60%;
     margin: 1.25rem;
     margin-bottom: 2.50rem;
   }
 
+
+  @media (max-width: 420px) {
+    grid-row-start: 2;
+    grid-row-end: 2;
+    grid-column-start: 2;
+    grid-column-end:2;
+  }
 
 
 `
