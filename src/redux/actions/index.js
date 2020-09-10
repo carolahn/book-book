@@ -21,20 +21,18 @@ export const requestAddToShelf = (google_id, shelf) => (dispatch) => {
 
 const normalizator = (
   {
-    data: {
       id,
       volumeInfo: {
         title,
         authors,
-        imageLinks: { smallThumbnail },
+        imageLinks,
         categories,
       },
-    },
   },
 ) => ({
   title: title,
   author: authors.join(","),
-  image_url: smallThumbnail,
+  image_url: imageLinks.smallThumbnail || imageLinks.thumbnail,
   grade: 0,
   categories: categories.join(","),
   review: "",
