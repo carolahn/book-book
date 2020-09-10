@@ -1,4 +1,4 @@
 import { combineReducers } from "redux";
-// import here your reducers
+import register from './register'
 
-export default combineReducers({ /* reducers */ });
+export default combineReducers({ register });

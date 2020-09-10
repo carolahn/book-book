@@ -1,12 +1,13 @@
 import React from 'react';
-import logo from './assets/images/logo.svg'
 import './App.css';
+import 'antd/dist/antd.css';
+import Register from './pages/Register'
 
 const App = () => {
 	return (
 		<div className="App">
 			<header className="App-header">
-				<img src={logo} />
+				<Register />
 			</header>
 		</div>
 	);
