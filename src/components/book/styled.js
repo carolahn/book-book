@@ -72,7 +72,6 @@ export const BookContainer = styled.div`
 
   .select-menu .ant-select {
     font-size: 12px;
-    /* color: #000000; */
   }
 
   .select-menu .ant-select-selector {
@@ -87,13 +86,5 @@ export const BookContainer = styled.div`
   .select-menu .ant-select-arrow {
     top: 13px;
     right: 15px;
-  }
-
-  .select-menu .remove {
-    padding-left: 5px;
-  }
-
-  @media (max-width: 800px) {
-    background-color: blue;
   }
 `;

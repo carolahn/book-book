@@ -1,13 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Select, Rate } from "antd";
-import { DeleteTwoTone, PlusCircleTwoTone } from "@ant-design/icons";
+import { DeleteTwoTone } from "@ant-design/icons";
 import "antd/dist/antd.css";
 import { BookContainer } from "./styled";
 
 const Book = () => {
   const { Option } = Select;
 
+  // exemplo de data
   const bookData = {
     title: "React JS Fundamental",
     author: "Onesinus SPT",
@@ -22,6 +23,7 @@ const Book = () => {
 
   function onChange(value) {
     console.log(`selected ${value}`);
+    // adicionar o dispatch() aqui
   }
 
   function onBlur() {
@@ -55,7 +57,6 @@ const Book = () => {
       </div>
       <div className="select-menu">
         <Select
-          style={{ padding: 0 }}
           showSearch
           style={{ width: 200 }}
           size={"small"}
@@ -69,22 +70,18 @@ const Book = () => {
             option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
           }
         >
-          <Option value="shelf1">
-            <span className="shelf-option">Want to read</span>
+          <Option value="shelf1" style={{ paddingLeft: 37 }}>
+            <span>Want to read</span>
           </Option>
-          <Option value="shelf2">
-            <span className="shelf-option">Current reading</span>
+          <Option value="shelf2" style={{ paddingLeft: 37 }}>
+            <span>Current reading</span>
           </Option>
-          <Option value="shelf3">
-            <span className="shelf-option">Read</span>
-            <PlusCircleTwoTone twoToneColor="#c4c4c4" />
+          <Option value="shelf3" style={{ paddingLeft: 37 }}>
+            <span>Read</span>
           </Option>
           <Option value="delete" style={{ color: "#dd2e44" }}>
-            <span className="shelf-option remove">Remove</span>
-            <DeleteTwoTone
-              twoToneColor="#dd2e44"
-              style={{ paddingRight: 10 }}
-            />
+            <DeleteTwoTone twoToneColor="#dd2e44" style={{ marginRight: 10 }} />
+            <span>Remove</span>
           </Option>
         </Select>
       </div>
