@@ -2,10 +2,9 @@ import styled from "styled-components";
 import { Layout } from "antd";
 // const { Sider } = Layout;
 
-export const Container = styled(Layout)`
+export const Container = styled.div`
   margin: 5px;
-  margin-top: 50px;
-  background-color: #fff;
+  /* background-color: #fff; */
 
   > div {
     display: flex;

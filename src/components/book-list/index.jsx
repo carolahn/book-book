@@ -1,17 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Container } from "./styled";
-// import { Pagination } from "antd";
+import { Pagination } from "antd";
+import Book from "../book";
 
-const BookList = ({ showBooks, Book }) => {
-  const showScreen = (books) =>
-    books.map((currBook, key) => <Book data={currBook} key={key} />);
+const BookList = ({ showBooks }) => {
+//   const [page, setPage] = useState(1);
 
   return (
-    <Container>
-      {/* <Pagination defaultCurrent={1} total={50} onChange={(pag) => {console.log(pag)}}/> */}
-      <div>{showScreen(showBooks)}</div>
-    </Container>
+    <>
+      {/* <Pagination
+        defaultCurrent={page}
+        current={page}
+        total={showBooks.length}
+        onChange={(pag) => setPage(pag)}
+        showSizeChanger={false}
+      /> */}
+      <Container>
+        <div>
+          {showBooks
+            .map((currBook, key) => <Book data={currBook} key={key} />)
+            /*.slice(page - 1, page - 1 + 10)*/}
+        </div>
+      </Container>
+      {/* <Pagination
+        defaultCurrent={page}
+        current={page}
+        total={showBooks.length}
+        onChange={(pag) => setPage(pag)}
+        showSizeChanger={false}
+      /> */}
+    </>
   );
 };
 

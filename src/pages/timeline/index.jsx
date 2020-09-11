@@ -3,12 +3,12 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 
 import BookList from "../../components/book-list";
-import Book from "../../components/book";
 
 import { ListContainer } from "./styles";
 
 const Timeline = () => {
   const [booksReviews, setBooksReviews] = useState({});
+  const [message, setMessage] = useState("Loading");
   const token = useSelector((state) => state.token);
 
   useEffect(() => {
@@ -24,6 +24,10 @@ const Timeline = () => {
           normalized[currReview.id] = { ...currReview };
         });
         setBooksReviews(normalized);
+      })
+      .catch((e) => {
+        const errorstatus = e.response.status;
+        console.log("Erro: ", errorstatus);
       });
   }, []);
 
@@ -46,9 +50,9 @@ const Timeline = () => {
   return (
     <ListContainer>
       {Object.values(booksReviews).length !== 0 ? (
-        <BookList showBooks={Object.values(booksReviews)} Book={Book}/>
+        <BookList showBooks={Object.values(booksReviews)} />
       ) : (
-        "Loading"
+        message
       )}
       {/* <MostPopular>
         {showScreen(
