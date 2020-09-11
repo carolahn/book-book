@@ -5,6 +5,7 @@ import { Switch, Route } from 'react-router-dom';
 import Login from './pages/login';
 import Header from './components/header/';
 import Register from './pages/register';
+import BookInfo from './components/book-info';
 
 const App = () => {
 	return (
@@ -14,8 +15,8 @@ const App = () => {
 				<Login />
 			</Route>
 			<Route exact path="/register">
-				<Header />
-				<Register />
+				
+				<BookInfo />
 			</Route>
 		</Switch>
 
