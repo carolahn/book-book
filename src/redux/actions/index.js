@@ -6,37 +6,26 @@ export const addToShelf = (book, shelf) => ({
   type: ADD_TO_SHELF,
   payload: {
     book,
-    shelf
+    shelf,
   },
 });
 
 export const requestAddToShelf = (google_id, shelf) => (dispatch) => {
-  axios.get(`https://www.googleapis.com/books/v1/volumes/${google_id}`).then(
-    (res) => {
+  axios
+    .get(`https://www.googleapis.com/books/v1/volumes/${google_id}`)
+    .then((res) => {
       const normalized = normalizator(res);
       dispatch(addToShelf(normalized, shelf));
-    }
-  );
+    });
 };
 
-const normalizator = (
-  {
-    data: {
-      id,
-      volumeInfo: {
-        title,
-        authors,
-        imageLinks: { smallThumbnail },
-        categories,
-      },
-    },
-  },
-) => ({
-  title: title,
-  author: authors.join(", "),
-  image_url: smallThumbnail,
-  grade: 0,
-  categories: categories.join(", "),
-  review: "",
+const normalizator = ({
+  id,
+  volumeInfo: { title, authors, imageLinks, categories },
+}) => ({
+  title: title ? title : "No title!",
+  author: authors ? authors.join(", ") : "No author!",
+  image_url: imageLinks ? (imageLinks.smallThumbnail || imageLinks.thumbnail) : "",
+  categories: categories ? categories.join(", ") : "No categories!",
   google_book_id: id,
 });
