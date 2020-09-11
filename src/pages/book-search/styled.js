@@ -9,7 +9,7 @@ export const BookSearchContainer = styled.div`
 
 export const InputContainer = styled.div`
   width: 60%;
-  min-width: 515px;
+  min-width: 300px;
   .ant-btn-primary {
     background: #68c866;
     border-color: #68c866;
@@ -17,20 +17,17 @@ export const InputContainer = styled.div`
 
   @media screen and (max-width: 560px) {
     width: 95%;
-    min-width: 95%;
   }
 `;
 
 export const MainContainer = styled.div`
-  /* width: 60%; */
-  min-width: 515px;
+  width: 60%;
   margin-top: 15px;
   display: grid;
-  grid-template-columns: 61% 39%;
+  grid-template-columns: 70% 30%;
 
   @media screen and (max-width: 560px) {
-    width: 100%;
-    min-width: 100%;
+    width: 95%;
     display: flex;
     flex-direction: column;
   }
@@ -39,22 +36,13 @@ export const MainContainer = styled.div`
 export const ResultsContainer = styled.div`
   background-color: red;
   grid-column: 1;
-  min-width: 315px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  @media screen and (max-width: 560px) {
-    width: 100%;
-    min-width: 100%;
-  }
+  height: 200px;
 `;
 
 export const MostPopularContainer = styled.div`
   height: 200px;
   background-color: pink;
   grid-column: 2;
-  min-width: 200px;
 
   @media screen and (max-width: 560px) {
     display: none;
@@ -64,18 +52,4 @@ export const MostPopularContainer = styled.div`
 export const MostPopularCarousel = styled.div`
   height: 150px;
   background-color: pink;
-  width: 100%;
-  min-width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const StyledControl = styled.div`
-  padding: 10px;
-  max-width: 500px;
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
 `;
