@@ -6,6 +6,10 @@ import BookList from "../../components/book-list";
 
 import { ListContainer } from "./styles";
 
+/*
+    Ainda não está 100% completo, pois falta o componente MostPopular (se for criado)
+*/
+
 const Timeline = () => {
   const [booksReviews, setBooksReviews] = useState({});
   const [message, setMessage] = useState("Loading");
