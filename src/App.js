@@ -1,21 +1,19 @@
 import React from "react";
-import logo from "./assets/images/logo.svg";
 import "./App.css";
 import { Switch, Route } from "react-router-dom";
-import BookSearch from "./pages/book-search";
+import Login from "./pages/login";
+import Header from "./components/header/";
+import Register from "./pages/register";
+import { useSelector } from "react-redux";
+import styled from "styled-components";
+import Routes from "./routes";
 
 const App = () => {
   return (
-    <Switch>
-      <Route exact path="/">
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} />
-            <BookSearch />
-          </header>
-        </div>
-      </Route>
-    </Switch>
+    <div>
+      <Header />
+      <Routes />
+    </div>
   );
 };
 
