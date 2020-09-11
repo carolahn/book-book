@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Login from '../pages/login';
 import Register from '../pages/register';
+import Timeline from '../pages/timeline/';
 import { useSelector } from 'react-redux';
 
 import styled from 'styled-components';
@@ -28,7 +29,7 @@ const Routes = () => {
 
 					</Route>
 					<Route exact path="/timeline">
-
+						<Timeline />
 					</Route>
 				</>
 				:
