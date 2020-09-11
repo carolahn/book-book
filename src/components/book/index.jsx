@@ -1,13 +1,26 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Select, Rate } from "antd";
-import { DeleteTwoTone, PlusCircleTwoTone } from "@ant-design/icons";
+import { DeleteTwoTone } from "@ant-design/icons";
 import "antd/dist/antd.css";
 import { BookContainer } from "./styled";
 
-const Book = ({data}) => {
+const Book = ({data}/* props || {bookData: {title, author, image_url, grade, categories, review, google_book_id}} */) => {
   const { Option } = Select;
 
+  /* ainda a ser decidido
+    const bookData = {
+      title = props.title,
+      author: props.author,
+      image_url: props.image_url,
+      grade: props.grade,
+      categories: props.categories,
+      review: props.review,
+      google_book_id: props.google_book_id
+    }
+  */
+
+  // exemplo de data
   const bookData = data || {
     title: "React JS Fundamental",
     author: "Onesinus SPT",
@@ -22,6 +35,7 @@ const Book = ({data}) => {
 
   function onChange(value) {
     console.log(`selected ${value}`);
+    // adicionar o dispatch() aqui
   }
 
   function onBlur() {
@@ -47,7 +61,7 @@ const Book = ({data}) => {
         </div>
         <div className="grade">
           <Rate
-          disabled
+            disabled
             allowHalf
             defaultValue={bookData.grade}
             style={{ fontSize: 15, display: "revert" }}
@@ -56,7 +70,6 @@ const Book = ({data}) => {
       </div>
       <div className="select-menu">
         <Select
-          style={{ padding: 0 }}
           showSearch
           style={{ width: 200 }}
           size={"small"}
@@ -70,22 +83,18 @@ const Book = ({data}) => {
             option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
           }
         >
-          <Option value="shelf1">
-            <span className="shelf-option">Want to read</span>
+          <Option value="shelf1" style={{ paddingLeft: 37 }}>
+            <span>Want to read</span>
           </Option>
-          <Option value="shelf2">
-            <span className="shelf-option">Current reading</span>
+          <Option value="shelf2" style={{ paddingLeft: 37 }}>
+            <span>Current reading</span>
           </Option>
-          <Option value="shelf3">
-            <span className="shelf-option">Read</span>
-            <PlusCircleTwoTone twoToneColor="#c4c4c4" />
+          <Option value="shelf3" style={{ paddingLeft: 37 }}>
+            <span>Read</span>
           </Option>
           <Option value="delete" style={{ color: "#dd2e44" }}>
-            <span className="shelf-option remove">Remove</span>
-            <DeleteTwoTone
-              twoToneColor="#dd2e44"
-              style={{ paddingRight: 10 }}
-            />
+            <DeleteTwoTone twoToneColor="#dd2e44" style={{ marginRight: 10 }} />
+            <span>Remove</span>
           </Option>
         </Select>
       </div>
