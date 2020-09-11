@@ -24,7 +24,7 @@ const normalizator = ({
   volumeInfo: { title, authors, imageLinks, categories },
 }) => ({
   title: title ? title : "No title!",
-  author: authors ? authors.join(",") : "No author!",
+  author: authors ? authors.join(", ") : "No author!",
   image_url: imageLinks ? (imageLinks.smallThumbnail || imageLinks.thumbnail) : "",
   categories: categories ? categories.join(", ") : "No categories!",
   google_book_id: id,
