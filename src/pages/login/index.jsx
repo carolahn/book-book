@@ -1,18 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { StyledDiv, LoginBox } from './styles/index';
 import 'antd/dist/antd.css';
 import { useSelector, useDispatch } from 'react-redux';
-import login from '../../redux/actions/login/';
+import { login } from '../../redux/actions/login/';
+import { useHistory } from 'react-router-dom';
 
 const Login = () => {
 
     const dispatch = useDispatch();
-    //const tokenInfo = useSelector();
+    const tokenInfo = useSelector(state => state.login);
+    const history = useHistory();
+
+    console.log(tokenInfo.token);
+
+    useEffect(() => {
+        tokenInfo.token && tokenInfo.login_status && history.push('/timeline');
+    }, [tokenInfo]);
 
     const onFinish = values => {
-        console.log('Received values of form: ', values);
         dispatch(login(values.username, values.password));
     };
 
