@@ -22,7 +22,7 @@ const Routes = () => {
       {tokenInfo.token && tokenInfo.login_status ? (
         <>
           <Route exact path="/my-shelves"></Route>
-          <Route exact path="/search">
+          <Route exact path="/search/:page">
             <BookSearch />
           </Route>
           <Route exact path="/timeline"></Route>

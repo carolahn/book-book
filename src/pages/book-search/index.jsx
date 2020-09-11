@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { Input } from "antd";
 import "antd/dist/antd.css";
+import { executeSearch } from "../../redux/actions/search-list";
 import {
   BookSearchContainer,
   InputContainer,
@@ -9,55 +11,44 @@ import {
   ResultsContainer,
   MostPopularContainer,
   MostPopularCarousel,
+  StyledControl,
 } from "./styled";
-import axios from "axios";
-// import { res } from "./helper";
 import Book from "../../components/book";
+// import { res } from "./helper";
 
 const BookSearch = () => {
-  const { Search } = Input;
+  const dispatch = useDispatch();
+  const searchResults = useSelector((state) => state.searchList);
   const [typedInput, setTypedInput] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-  //   const {page} = useParams();
-  const start = 0;
+
+  const { Search } = Input;
+  const history = useHistory();
+  const { page } = useParams();
   const max = 10;
+  //   let start = page * max - max;
   const size = useWindowSize();
 
-  const normalizator = ({
-    id,
-    volumeInfo: { title, authors, description, imageLinks, categories },
-  }) => ({
-    title: title,
-    author: authors.join(", "),
-    description: description,
-    image_url: imageLinks.smallThumbnail || imageLinks.thumbnail,
-    grade: 0,
-    categories: categories.join(", "),
-    review: "",
-    google_book_id: id,
-  });
-
   useEffect(() => {
-    let resNormalized = [];
     if (typedInput) {
+      let start = page * max - max;
       const adaptedInput = typedInput.replace(/\s/g, "+");
-      axios
-        .get(
-          `https://www.googleapis.com/books/v1/volumes?q=${adaptedInput}&startIndex=${start}&maxResults=${max}`
-        )
-        .then((res) => res.data)
-        .then((res) => {
-          resNormalized = res.items.map((item, index) => {
-            return normalizator(item);
-          });
-          setSearchResults(resNormalized);
-        });
+      dispatch(executeSearch(adaptedInput, start, max));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [typedInput]);
 
-  console.log("search", searchResults);
+  useEffect(() => {
+    let start = page * max - max;
+    const adaptedInput = typedInput.replace(/\s/g, "+");
+    if (page > 0) {
+      dispatch(executeSearch(adaptedInput, start, max));
+    } else {
+      history.push("/search/1");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page]);
 
+  console.log("testResult", searchResults);
   return (
     <BookSearchContainer className="book-search">
       <InputContainer>
@@ -70,16 +61,21 @@ const BookSearch = () => {
       </InputContainer>
       <MainContainer>
         {size.width < 560 ? (
-          <MostPopularCarousel>Carousel</MostPopularCarousel>
+          <MostPopularCarousel>Carousel Extra</MostPopularCarousel>
         ) : (
           ""
         )}
         <ResultsContainer>
+          <StyledControl>
+            <Link to={`/search/${page - 1}`}> {" < "}Anterior</Link>
+            {page}
+            <Link to={`/search/${parseInt(page) + 1}`}>Próximo{" > "}</Link>
+          </StyledControl>
           {searchResults.map((item, index) => (
             <Book key={item.id} bookData={item} />
           ))}
         </ResultsContainer>
-        <MostPopularContainer></MostPopularContainer>
+        <MostPopularContainer>Aside Extra</MostPopularContainer>
       </MainContainer>
     </BookSearchContainer>
   );
