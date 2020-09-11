@@ -5,6 +5,7 @@ export const StyledDiv = styled.div`
     width: 100vw;
     height: 100vh;
     background-image: url(${background_image});
+    background-size: cover !important;
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
@@ -15,7 +16,7 @@ export const LoginBox = styled.div`
     width: 400px;
     height: 320px;
     border-radius: 25px;
-    box-shadow: darkslateblue 2rem;
+    box-shadow: 2rem darkslateblue;
     background-color: whitesmoke;
 
     display: flex;
