@@ -13,7 +13,7 @@ import { ListContainer } from "./styles";
 const Timeline = () => {
   const [booksReviews, setBooksReviews] = useState({});
   const [message, setMessage] = useState("Loading");
-  const token = useSelector((state) => state.token);
+  const token = useSelector((state) => state.login.token);
 
   useEffect(() => {
     axios

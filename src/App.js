@@ -5,7 +5,7 @@ import Login from "./pages/login";
 import Header from "./components/header/";
 import Timeline from "./pages/timeline";
 import Register from "./pages/register";
-
+import Test from "./pages/TEST";
 const App = () => {
   return (
     <Switch>
@@ -19,6 +19,9 @@ const App = () => {
       </Route>
       <Route path="/timeline">
         <Timeline />
+      </Route>
+      <Route path="/testing-reducers">
+        <Test />
       </Route>
     </Switch>
   );
