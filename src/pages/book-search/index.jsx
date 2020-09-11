@@ -8,6 +8,7 @@ import {
   MainContainer,
   ResultsContainer,
   MostPopularContainer,
+  MostPopularCarousel,
 } from "./styled";
 import axios from "axios";
 // import { res } from "./helper";
@@ -20,6 +21,7 @@ const BookSearch = () => {
   //   const {page} = useParams();
   const start = 0;
   const max = 10;
+  const size = useWindowSize();
 
   const normalizator = ({
     id,
@@ -67,6 +69,11 @@ const BookSearch = () => {
         />
       </InputContainer>
       <MainContainer>
+        {size.width < 560 ? (
+          <MostPopularCarousel>Carousel</MostPopularCarousel>
+        ) : (
+          ""
+        )}
         <ResultsContainer>
           {searchResults.map((item, index) => (
             <Book key={item.id} bookData={item} />
@@ -79,3 +86,27 @@ const BookSearch = () => {
 };
 
 export default BookSearch;
+
+function useWindowSize() {
+  const [windowSize, setWindowSize] = useState({
+    width: undefined,
+    height: undefined,
+  });
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    }
+
+    window.addEventListener("resize", handleResize);
+
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return windowSize;
+}
