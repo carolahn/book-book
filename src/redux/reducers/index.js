@@ -1,6 +1,8 @@
 import { combineReducers } from "redux";
-import books from "./books";
-import register from './register'
+import register from './register';
 import login from './login/login';
 
-export default combineReducers({ books, register, login });
+import books from "./tests/books";
+import token from "./tests/token";
+
+export default combineReducers({ books, register, login, token });
