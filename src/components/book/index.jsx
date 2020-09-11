@@ -5,7 +5,21 @@ import { DeleteTwoTone } from "@ant-design/icons";
 import "antd/dist/antd.css";
 import { BookContainer } from "./styled";
 
-const Book = (/* props || {bookData: {title, author, image_url, grade, categories, review, google_book_id}} */}) => {
+// const Book = (
+//   props || {
+//     bookData: {
+//       title,
+//       author,
+//       image_url,
+//       grade,
+//       categories,
+//       review,
+//       google_book_id,
+//     },
+//   }
+// ) => {
+
+const Book = ({ bookData }) => {
   const { Option } = Select;
 
   /* ainda a ser decidido

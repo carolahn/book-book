@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams, useHistory } from "react-router-dom";
 import { Input } from "antd";
 import "antd/dist/antd.css";
 import {
@@ -16,6 +17,7 @@ const BookSearch = () => {
   const { Search } = Input;
   const [typedInput, setTypedInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  //   const {page} = useParams();
   const start = 0;
   const max = 10;
 
@@ -36,9 +38,10 @@ const BookSearch = () => {
   useEffect(() => {
     let resNormalized = [];
     if (typedInput) {
+      const adaptedInput = typedInput.replace(/\s/g, "+");
       axios
         .get(
-          `https://www.googleapis.com/books/v1/volumes?q=${typedInput}&startIndex=${start}&maxResults=${max}`
+          `https://www.googleapis.com/books/v1/volumes?q=${adaptedInput}&startIndex=${start}&maxResults=${max}`
         )
         .then((res) => res.data)
         .then((res) => {
@@ -47,11 +50,6 @@ const BookSearch = () => {
           });
           setSearchResults(resNormalized);
         });
-
-      //   const resNormalized = res.items.map((item, index) => {
-      //     return normalizator(item);
-      //   });
-      //   setSearchResults(resNormalized);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [typedInput]);
