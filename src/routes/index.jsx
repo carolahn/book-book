@@ -1,11 +1,13 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import Login from "../pages/login";
-import Register from "../pages/register";
 import { useSelector } from "react-redux";
 
-import styled from "styled-components";
+import Login from "../pages/login";
+import Register from "../pages/register";
+import Timeline from "../pages/timeline/";
 import BookSearch from "../pages/book-search";
+
+import styled from "styled-components";
 
 const Routes = () => {
   const tokenInfo = useSelector((state) => state.login);
@@ -25,7 +27,9 @@ const Routes = () => {
           <Route exact path="/search/:page">
             <BookSearch />
           </Route>
-          <Route exact path="/timeline"></Route>
+          <Route exact path="/timeline">
+            <Timeline />
+          </Route>
         </>
       ) : (
         <>

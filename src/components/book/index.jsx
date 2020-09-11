@@ -20,6 +20,7 @@ import { BookContainer } from "./styled";
 // ) => {
 
 const Book = ({ bookData }) => {
+  // const Book = ({data}/* props || {bookData: {title, author, image_url, grade, categories, review, google_book_id}} */) => {
   const { Option } = Select;
 
   /* ainda a ser decidido
@@ -77,7 +78,7 @@ const Book = ({ bookData }) => {
           <Rate
             disabled
             allowHalf
-            defaultValue={2.5}
+            defaultValue={bookData.grade}
             style={{ fontSize: 15, display: "revert" }}
           />
         </div>
