@@ -3,7 +3,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../redux/actions/login/index';
 
-import { StyledHeader, Menu, LittleMenu } from './styled/styles';
+import { StyledHeader, Menu, LittleMenu, LoggedLittleMenu } from './styled/styles';
 
 const Header = () => {
 
@@ -58,18 +58,33 @@ const Header = () => {
             
             : 
 
-            (tokenInfo.token && tokenInfo.login_status && where === '/timeline') ? 
+            (tokenInfo.token && tokenInfo.login_status && (where === '/timeline' || where === '/search' || where === '/my-shelves')) ? 
                 
             <>
                 {size.width > 560 ?
                 <div className="button-holder" >
-                <button className={where === '/' ? "logout button here" : "logout button"}
+                    <button className={where === '/my-shelves' ? "button here" : "button"}
                     onClick={() => {
-                        dispatch(logout());
-                        localStorage.removeItem('book-book-token');
-                        history.push("/");
+                        history.push("/my-shelves");
                         setMenu(false);
-                    }} >Logout</button>
+                    }} >My Shelves</button>
+                    <button className={where === '/search' ? "button here" : "button"}
+                    onClick={() => {
+                        history.push("/search");
+                        setMenu(false);
+                    }} >Search</button>
+                    <button className={where === '/timeline' ? "button here" : "button"}
+                    onClick={() => {
+                        history.push("/timeline");
+                        setMenu(false);
+                    }} >Timeline</button>
+                    <button className="button logout"
+                        onClick={() => {
+                            dispatch(logout());
+                            localStorage.removeItem('book-book-token');
+                            history.push("/");
+                            setMenu(false);
+                        }} >Logout</button>
                 </div> 
                 :
                 <div className="button-holder" >
@@ -77,7 +92,22 @@ const Header = () => {
                         onClick={() => setMenu((prevState) => !prevState)} />
                     {menu ?
                         <Menu>
-                            <LittleMenu className="little-menu">
+                            <LoggedLittleMenu className="little-menu">
+                                <button className={where === '/my-shelves' ? "little hbtn" : "hbtn"}
+                                        onClick={() => {
+                                            history.push("/my-shelves");
+                                            setMenu(false);
+                                        }} >My Shelves</button>
+                                <button className={where === '/search' ? "little hbtn" : "hbtn"}
+                                        onClick={() => {
+                                            history.push("/search");
+                                            setMenu(false);
+                                        }} >Search</button>
+                                <button className={where === '/timeline' ? "little hbtn" : "hbtn"}
+                                        onClick={() => {
+                                            history.push("/timeline");
+                                            setMenu(false);
+                                        }} >Timeline</button>
                                 <button className={where === '/' ? "little-logout hbtn" : "hbtn"}
                                         onClick={() => {
                                             dispatch(logout());
@@ -85,7 +115,7 @@ const Header = () => {
                                             history.push("/");
                                             setMenu(false);
                                         }} >Logout</button>
-                            </LittleMenu>
+                            </LoggedLittleMenu>
                         </Menu>
                         :
                     <></>}

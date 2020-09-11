@@ -7,11 +7,11 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 const Routes = () => {
-    
-    const tokenInfo = useSelector(state => state.login); 
 
-    return (
-        <Switch>
+	const tokenInfo = useSelector(state => state.login);
+
+	return (
+		<Switch>
 			<Route exact path="/">
 				<Login />
 			</Route>
@@ -20,15 +20,32 @@ const Routes = () => {
 			</Route>
 
 			{(tokenInfo.token && tokenInfo.login_status) ?
-			<Route exact path="/timeline">
-				
-			</Route> 
-			: 
-			<Route exact path="/timeline">
-				<NotAuthorized>NOT Authorized</NotAuthorized>
-			</Route>}
+				<>
+					<Route exact path="/my-shelves">
+
+					</Route>
+					<Route exact path="/search">
+
+					</Route>
+					<Route exact path="/timeline">
+
+					</Route>
+				</>
+				:
+				<>
+					<Route exact path="/my-shelves">
+						<NotAuthorized>NOT Authorized</NotAuthorized>
+					</Route>
+					<Route exact path="/search">
+						<NotAuthorized>NOT Authorized</NotAuthorized>
+					</Route>
+					<Route exact path="/timeline">
+						<NotAuthorized>NOT Authorized</NotAuthorized>
+					</Route>
+				</>
+			}
 		</Switch>
-    )
+	)
 }
 
 export default Routes;
