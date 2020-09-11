@@ -5,21 +5,21 @@ import { DeleteTwoTone } from "@ant-design/icons";
 import "antd/dist/antd.css";
 import { BookContainer } from "./styled";
 
-const Book = () => {
+const Book = ({ bookData }) => {
   const { Option } = Select;
-
+  console.log(bookData);
   // exemplo de data
-  const bookData = {
-    title: "React JS Fundamental",
-    author: "Onesinus SPT",
-    image_url:
-      "http://books.google.com/books/content?id=Rhl1CgAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
-    grade: 0,
-    categories: "Computers",
-    review:
-      "In this ebooks we will learn basic Single Page Application with React JS 1. How to Install React JS with create-react-app 2. Fetching data from API 3. Using Global Context with useContext 4. Unit Testing with JEST [Ongoing]",
-    google_book_id: "u1CsDwAAQBAJ",
-  };
+  // const bookData = {
+  //   title: "React JS Fundamental",
+  //   author: "Onesinus SPT",
+  //   image_url:
+  //     "http://books.google.com/books/content?id=Rhl1CgAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+  //   grade: 0,
+  //   categories: "Computers",
+  //   review:
+  //     "In this ebooks we will learn basic Single Page Application with React JS 1. How to Install React JS with create-react-app 2. Fetching data from API 3. Using Global Context with useContext 4. Unit Testing with JEST [Ongoing]",
+  //   google_book_id: "u1CsDwAAQBAJ",
+  // };
 
   function onChange(value) {
     console.log(`selected ${value}`);
@@ -45,7 +45,7 @@ const Book = () => {
         <div className="title">{bookData.title}</div>
         <div className="author">{bookData.author}</div>
         <div className="description">
-          <p>{bookData.review}</p>
+          <p>{bookData.description}</p>
         </div>
         <div className="grade">
           <Rate
