@@ -20,15 +20,24 @@ const Routes = () => {
       </Route>
 
       {tokenInfo.token && tokenInfo.login_status ? (
-        <Route exact path="/timeline"></Route>
+        <>
+          <Route exact path="/my-shelves"></Route>
+          <Route exact path="/search"></Route>
+          <Route exact path="/timeline"></Route>
+        </>
       ) : (
-        <Route exact path="/timeline">
-          <NotAuthorized>NOT Authorized</NotAuthorized>
-        </Route>
+        <>
+          <Route exact path="/my-shelves">
+            <NotAuthorized>NOT Authorized</NotAuthorized>
+          </Route>
+          <Route exact path="/search">
+            <NotAuthorized>NOT Authorized</NotAuthorized>
+          </Route>
+          <Route exact path="/timeline">
+            <NotAuthorized>NOT Authorized</NotAuthorized>
+          </Route>
+        </>
       )}
-      <Route path="/search">
-        <BookSearch />
-      </Route>
     </Switch>
   );
 };

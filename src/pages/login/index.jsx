@@ -20,7 +20,6 @@ const Login = () => {
     }, [tokenInfo]);
 
     const onFinish = values => {
-        console.log('Received values of form: ', values);
         dispatch(login(values.username, values.password));
     };
 

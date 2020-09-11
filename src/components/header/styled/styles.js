@@ -10,7 +10,7 @@ export const StyledHeader = styled.div`
     width: 100%;
     height: 50px;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr 3fr;
     
     .logo-holder {
         background-image: url(${logo});
@@ -50,6 +50,10 @@ export const StyledHeader = styled.div`
         object-fit: cover;
         box-sizing: border-box;
         border-bottom: 4px solid #1890ff;
+    }
+
+    .logout {
+        margin-right: 1rem;
     }
 
     .menu-button {
@@ -96,7 +100,29 @@ export const LittleMenu = styled.div`
         background-color: whitesmoke;
     }
 
-    .little-login, .little-register {
+    .little-login, .little-register, .little {
+        border-bottom: 2px solid #1890ff;
+    }
+`;
+
+export const LoggedLittleMenu = styled.div`
+    margin: 0.2rem;
+    width: 150px;
+    height: 150px !important;
+    background-color: whitesmoke;
+    z-index: 2;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+    border: 2px solid black;
+
+    .hbtn {
+        border: none;
+        background-color: whitesmoke;
+    }
+
+    .little-login, .little-register, .little {
         border-bottom: 2px solid #1890ff;
     }
 `;
