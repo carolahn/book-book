@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Select, Rate } from "antd";
 import { DeleteTwoTone } from "@ant-design/icons";
 import "antd/dist/antd.css";
-import { BookContainer } from "./styled";
+import { BookContainer } from "./styles";
 
 const Book = ({ bookData }) => {
   const { Option } = Select;

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Container } from "./styled";
+import { Container } from "./styles";
 // import { Pagination } from "antd";
 import Book from "../book";
 
