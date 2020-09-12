@@ -33,7 +33,6 @@ const Timeline = () => {
     //     const errorstatus = e.response.status;
     //     console.log("Erro: ", errorstatus);
     //   });
-
     dispatch(requestReviews(token));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);

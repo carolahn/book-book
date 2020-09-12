@@ -14,6 +14,7 @@ import {
   StyledControl,
 } from "./styles";
 import Book from "../../components/book";
+import BookList from "../../components/book-list";
 
 const BookSearch = () => {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ const BookSearch = () => {
   const { page } = useParams();
   const { Search } = Input;
   const [typedInput, setTypedInput] = useState("");
+  const [message, setMessage] = useState("Loading");
 
   const max = 10;
   const size = useWindowSize();
@@ -66,14 +68,20 @@ const BookSearch = () => {
           ""
         )}
         <ResultsContainer>
-          <StyledControl>
+          {searchResults && Object.values(searchResults).length !== 0 ? (
+            <BookList showBooks={Object.values(searchResults)} />
+          ) : (
+            message
+          )}
+
+          {/* <StyledControl>
             <Link to={`/search/${page - 1}`}> {" < "}Anterior</Link>
             {page}
             <Link to={`/search/${parseInt(page) + 1}`}>Próximo{" > "}</Link>
           </StyledControl>
           {searchResults.map((item, index) => (
             <Book key={item.id} bookData={item} />
-          ))}
+          ))} */}
         </ResultsContainer>
 
         <MostPopularContainer>Aside Extra</MostPopularContainer>

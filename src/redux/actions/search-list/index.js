@@ -1,23 +1,23 @@
 import axios from "axios";
+import normalizator from "../../../normalizator";
 export const ADD_TO_LIST = "ADD_TO_LIST";
-// import {normalizator} from '../index';
 
 export const executeSearch = (adaptedInput, start, max) => (dispatch) => {
   let searchResult = [];
 
-  const normalizator = ({
-    id,
-    volumeInfo: { title, authors, description, imageLinks, categories },
-  }) => ({
-    title: title,
-    author: authors.join(", "),
-    description: description,
-    image_url: imageLinks.smallThumbnail || imageLinks.thumbnail,
-    grade: 0,
-    categories: categories.join(", "),
-    review: "",
-    google_book_id: id,
-  });
+  // const normalizator = ({
+  //   id,
+  //   volumeInfo: { title, authors, description, imageLinks, categories },
+  // }) => ({
+  //   title: title,
+  //   author: authors.join(", "),
+  //   description: description,
+  //   image_url: imageLinks.smallThumbnail || imageLinks.thumbnail,
+  //   grade: 0,
+  //   categories: categories.join(", "),
+  //   review: "",
+  //   google_book_id: id,
+  // });
 
   axios
     .get(
@@ -25,10 +25,11 @@ export const executeSearch = (adaptedInput, start, max) => (dispatch) => {
     )
     .then((res) => res.data)
     .then((res) => {
-      searchResult = res.items.map((item, index) => {
-        return normalizator(item);
+      const normalized = {};
+      res.items.map((item, index) => {
+        normalized[item.id] = normalizator(item);
       });
-      dispatch(addToList(searchResult));
+      dispatch(addToList(normalized));
     });
 };
 

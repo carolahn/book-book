@@ -17,8 +17,6 @@ export const requestReviews = (token) => (dispatch) => {
       data.map((currReview) => {
         normalized[currReview.id] = { ...currReview };
       });
-      // setBooksReviews(normalized);
-      console.log("passou");
       dispatch(addToReviewsList(normalized));
     })
     .catch((e) => {
