@@ -13,7 +13,6 @@ import {
   MostPopularCarousel,
   StyledControl,
 } from "./styles";
-import Book from "../../components/book";
 import BookList from "../../components/book-list";
 
 const BookSearch = () => {
@@ -69,7 +68,10 @@ const BookSearch = () => {
         )}
         <ResultsContainer>
           {searchResults && Object.values(searchResults).length !== 0 ? (
-            <BookList showBooks={Object.values(searchResults)} />
+            <BookList
+              showBooks={Object.values(searchResults)}
+              section="mostPopular"
+            />
           ) : (
             message
           )}

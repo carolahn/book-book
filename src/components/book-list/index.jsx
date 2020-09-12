@@ -11,7 +11,7 @@ import Book from "../book";
     Obs: já está responsivo!
 */
 
-const BookList = ({ showBooks }) => {
+const BookList = ({ showBooks, section }) => {
   //   const [page, setPage] = useState(1);
 
   return (
@@ -27,7 +27,7 @@ const BookList = ({ showBooks }) => {
         <div>
           {
             showBooks.map((currBook, key) => (
-              <Book bookData={currBook} key={key} />
+              <Book bookData={currBook} key={key} section={section} />
             ))
             /*.slice(page - 1, page - 1 + 10)*/
           }

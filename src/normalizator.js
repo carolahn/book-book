@@ -87,6 +87,7 @@ const normalizator = ({
     authors,
     imageLinks,
     categories,
+    publishedDate,
     description,
     averageRating,
   },
@@ -97,6 +98,7 @@ const normalizator = ({
     ? imageLinks.smallThumbnail || imageLinks.thumbnail
     : "",
   categories: categories ? categories.join(", ") : "No categories!",
+  year: publishedDate ? publishedDate : "No published date!",
   google_book_id: id,
   description: description ? description : "No description!",
   grade: averageRating ? averageRating : null,

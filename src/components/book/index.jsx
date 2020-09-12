@@ -5,7 +5,7 @@ import { DeleteTwoTone } from "@ant-design/icons";
 import "antd/dist/antd.css";
 import { BookContainer } from "./styles";
 
-const Book = ({ bookData }) => {
+const Book = ({ bookData, section }) => {
   const { Option } = Select;
 
   /* ainda a ser decidido
@@ -39,22 +39,47 @@ const Book = ({ bookData }) => {
 
   return (
     <BookContainer className="book">
-      <img src={bookData.image_url} alt="cover" />
-      <div className="book-info">
-        <div className="title">{bookData.title}</div>
-        <div className="author">{bookData.author}</div>
-        <div className="description">
-          <p>{bookData.review || bookData.description}</p>
-        </div>
-        <div className="grade">
-          <Rate
-            disabled
-            allowHalf
-            defaultValue={bookData.grade}
-            style={{ fontSize: 15, display: "revert" }}
-          />
-        </div>
-      </div>
+      {section === "search" || section === "timeline" ? (
+        <>
+          <img src={bookData.image_url} alt="cover" />
+          <div className="book-info">
+            <div className="title">{bookData.title}</div>
+            <div className="author">{bookData.author}</div>
+            <div className="description">
+              <p>{bookData.categories}</p>
+              <p>{bookData.year}</p>
+            </div>
+            <div className="grade">
+              <Rate
+                disabled
+                allowHalf
+                defaultValue={bookData.grade || 0}
+                style={{ fontSize: 15, display: "revert" }}
+              />
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <img src={bookData.image_url} alt="cover" />
+          <div className="book-info">
+            <div className="title">{bookData.title}</div>
+            <div className="author">{bookData.author}</div>
+            <div className="description">
+              <p>{bookData.review || bookData.description}</p>
+            </div>
+            <div className="grade">
+              <Rate
+                disabled
+                allowHalf
+                defaultValue={bookData.grade || 0}
+                style={{ fontSize: 15, display: "revert" }}
+              />
+            </div>
+          </div>
+        </>
+      )}
+
       <div className="select-menu">
         <Select
           showSearch
