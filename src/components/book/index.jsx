@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Select, Rate } from "antd";
-import { DeleteTwoTone } from "@ant-design/icons";
+import { Select, Rate} from "antd";
+import { DeleteTwoTone } from '@ant-design/icons'
 import "antd/dist/antd.css";
 import { BookContainer } from "./styled";
 
