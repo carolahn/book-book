@@ -12,7 +12,7 @@ import Book from "../book";
 */
 
 const BookList = ({ showBooks }) => {
-//   const [page, setPage] = useState(1);
+  //   const [page, setPage] = useState(1);
 
   return (
     <>
@@ -25,9 +25,12 @@ const BookList = ({ showBooks }) => {
       /> */}
       <Container>
         <div>
-          {showBooks
-            .map((currBook, key) => <Book data={currBook} key={key} />)
-            /*.slice(page - 1, page - 1 + 10)*/}
+          {
+            showBooks.map((currBook, key) => (
+              <Book bookData={currBook} key={key} />
+            ))
+            /*.slice(page - 1, page - 1 + 10)*/
+          }
         </div>
       </Container>
       {/* <Pagination
