@@ -6,6 +6,7 @@ import books from "./tests/books";
 import token from "./tests/token";
 import reviewsList from "./reviews-list";
 import searchList from "./search-list";
+import userBooks from "./user-books";
 
 export default combineReducers({
   books,
@@ -14,4 +15,5 @@ export default combineReducers({
   token,
   reviewsList,
   searchList,
+  userBooks,
 });
