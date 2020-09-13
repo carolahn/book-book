@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { requestReviews } from "../../redux/actions/reviews-list";
+import {
+  requestReviews,
+  requestGoogleInfo,
+} from "../../redux/actions/reviews-list";
 import BookList from "../../components/book-list";
 import { ListContainer } from "./styles";
 
@@ -53,10 +56,14 @@ const Timeline = () => {
   //     return newReturn.filter((currBook) => ret.indexOf(`"${currBook.title}"`) !== -1);
   //   };
 
+  // useEffect(() => {
+  //   dispatch(requestGoogleInfo(booksReviews));
+  // }, [booksReviews, dispatch]);
+
   return (
     <ListContainer>
       {booksReviews && Object.values(booksReviews).length !== 0 ? (
-        <BookList showBooks={Object.values(booksReviews)} />
+        <BookList showBooks={Object.values(booksReviews)} section="timeline" />
       ) : (
         message
       )}

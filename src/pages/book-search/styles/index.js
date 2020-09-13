@@ -23,10 +23,11 @@ export const InputContainer = styled.div`
 `;
 
 export const MainContainer = styled.div`
-  min-width: 515px;
+  /* min-width: 515px; */
+  margin: 0 auto;
   margin-top: 15px;
   display: grid;
-  grid-template-columns: 61% 39%;
+  /* grid-template-columns: 515px 200px; */
 
   @media screen and (max-width: 560px) {
     width: 100%;
@@ -42,7 +43,7 @@ export const ResultsContainer = styled.div`
   min-width: 315px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
 
   @media screen and (max-width: 560px) {
     width: 100%;
@@ -54,7 +55,7 @@ export const MostPopularContainer = styled.div`
   height: 200px;
   background-color: pink;
   grid-column: 2;
-  min-width: 200px;
+  width: 200px;
 
   @media screen and (max-width: 560px) {
     display: none;

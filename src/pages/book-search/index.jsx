@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams, useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Input } from "antd";
 import { executeSearch } from "../../redux/actions/search-list";
@@ -20,35 +20,29 @@ const BookSearch = () => {
   const searchResults = useSelector((state) => state.searchList);
 
   const history = useHistory();
-  const { page } = useParams();
   const { Search } = Input;
   const [typedInput, setTypedInput] = useState("");
   const [message, setMessage] = useState("Loading");
+  const [page, setPage] = useState(1);
 
-  const max = 10;
+  const max = 40;
   const size = useWindowSize();
 
   useEffect(() => {
     if (typedInput) {
-      let start = page * max - max;
+      let start = 0;
       const adaptedInput = typedInput.replace(/\s/g, "+");
-      dispatch(executeSearch(adaptedInput, start, max));
+      dispatch(executeSearch(adaptedInput, max));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [typedInput]);
 
-  useEffect(() => {
-    let start = page * max - max;
-    const adaptedInput = typedInput.replace(/\s/g, "+");
-    if (page > 0) {
-      dispatch(executeSearch(adaptedInput, start, max));
-    } else {
-      history.push("/search/1");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page]);
-
-  console.log("testResult", searchResults);
+  // useEffect(() => {
+  //   let start = page * max - max;
+  //   const adaptedInput = typedInput.replace(/\s/g, "+");
+  //   dispatch(executeSearch(adaptedInput, start, max));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [page]);
 
   return (
     <BookSearchContainer className="book-search">
@@ -70,7 +64,8 @@ const BookSearch = () => {
           {searchResults && Object.values(searchResults).length !== 0 ? (
             <BookList
               showBooks={Object.values(searchResults)}
-              section="mostPopular"
+              section="search"
+              getMorePages={setPage}
             />
           ) : (
             message

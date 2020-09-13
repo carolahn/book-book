@@ -6,7 +6,7 @@ const searchList = (state = defaultState, { type, payload }) => {
   switch (type) {
     case ADD_TO_LIST:
       const { searchResult } = payload;
-      return searchResult;
+      return { ...state, ...searchResult };
 
     default:
       return state;

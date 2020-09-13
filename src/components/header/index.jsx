@@ -103,7 +103,7 @@ const Header = () => {
               <button
                 className={where === "/search" ? "button here" : "button"}
                 onClick={() => {
-                  history.push("/search/1");
+                  history.push("/search");
                   setMenu(false);
                 }}
               >
@@ -153,7 +153,7 @@ const Header = () => {
                     <button
                       className={where === "/search" ? "little hbtn" : "hbtn"}
                       onClick={() => {
-                        history.push("/search/1");
+                        history.push("/search");
                         setMenu(false);
                       }}
                     >
