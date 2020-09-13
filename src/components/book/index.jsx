@@ -1,12 +1,20 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Select, Rate } from "antd";
 import { DeleteTwoTone } from "@ant-design/icons";
 import "antd/dist/antd.css";
 import { BookContainer } from "./styles";
+import {
+  postUserBook,
+  removeBook,
+  putBookChanges,
+} from "../../redux/actions/user-books";
 
 const Book = ({ bookData, section }) => {
   const { Option } = Select;
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.login);
+  const userBooks = useSelector((state) => state.userBooks);
 
   /* ainda a ser decidido
     const bookData = {
@@ -21,8 +29,29 @@ const Book = ({ bookData, section }) => {
   */
 
   function onChange(value) {
-    console.log(`selected ${value}`);
-    // adicionar o dispatch() aqui
+    if (userBooks[bookData.google_book_id]) {
+      const selectedBook = userBooks[bookData.google_book_id];
+      if (value === "delete") {
+        dispatch(removeBook(user.token, user.id, selectedBook.id));
+      } else {
+        dispatch(putBookChanges(user.token, user.id, selectedBook.id, value));
+      }
+    } else {
+      dispatch(
+        postUserBook(
+          user.token,
+          user.id,
+          bookData.title,
+          bookData.author,
+          value,
+          bookData.image_url,
+          bookData.grade,
+          bookData.categories,
+          "",
+          bookData.google_book_id
+        )
+      );
+    }
   }
 
   function onBlur() {
@@ -95,13 +124,13 @@ const Book = ({ bookData, section }) => {
             option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
           }
         >
-          <Option value="shelf1" style={{ paddingLeft: 37 }}>
+          <Option value="1" style={{ paddingLeft: 37 }}>
             <span>Want to read</span>
           </Option>
-          <Option value="shelf2" style={{ paddingLeft: 37 }}>
+          <Option value="2" style={{ paddingLeft: 37 }}>
             <span>Current reading</span>
           </Option>
-          <Option value="shelf3" style={{ paddingLeft: 37 }}>
+          <Option value="3" style={{ paddingLeft: 37 }}>
             <span>Read</span>
           </Option>
           <Option value="delete" style={{ color: "#dd2e44" }}>

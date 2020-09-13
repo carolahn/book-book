@@ -1,4 +1,9 @@
-import { GET_USER_BOOKS, ADD_TO_SHELF, REMOVE } from "../../actions/user-books";
+import {
+  GET_USER_BOOKS,
+  ADD_TO_SHELF,
+  REMOVE_OF_SHELF,
+  CHANGE_BOOK_DATA,
+} from "../../actions/user-books";
 
 const defaultState = [];
 
@@ -9,13 +14,12 @@ const userBooks = (state = defaultState, { type, payload }) => {
       return userBooks;
 
     case ADD_TO_SHELF:
-      // const { googleInfo } = payload;
-      // return googleInfo;
       return state;
 
-    case REMOVE:
-      // const { googleInfo } = payload;
-      // return googleInfo;
+    case REMOVE_OF_SHELF:
+      return state;
+
+    case CHANGE_BOOK_DATA:
       return state;
 
     default:

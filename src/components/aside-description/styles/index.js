@@ -12,4 +12,9 @@ export const AsideContainer = styled.div`
     margin: 5px;
     width: 300px;
   }
+
+  @media screen and (max-width: 560px) {
+    width: 100%;
+    min-width: 315px;
+  }
 `;

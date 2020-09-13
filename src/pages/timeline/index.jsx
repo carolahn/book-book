@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  requestReviews,
-  requestGoogleInfo,
-} from "../../redux/actions/reviews-list";
+import { requestReviews } from "../../redux/actions/reviews-list";
 import BookList from "../../components/book-list";
 import { ListContainer } from "./styles";
 
@@ -18,27 +15,31 @@ const Timeline = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // CAROL - retirei essa parte e passei para a store
-    // axios
-    //   .get("https://ka-users-api.herokuapp.com/book_reviews", {
-    //     headers: {
-    //       Authorization: `${token}`,
-    //     },
-    //   })
-    //   .then(({ data }) => {
-    //     const normalized = {};
-    //     data.map((currReview) => {
-    //       normalized[currReview.id] = { ...currReview };
-    //     });
-    //     setBooksReviews(normalized);
-    //   })
-    //   .catch((e) => {
-    //     const errorstatus = e.response.status;
-    //     console.log("Erro: ", errorstatus);
-    //   });
-    // dispatch(requestReviews(token)); COLOCAR DE VOLTA!!!
+    dispatch(requestReviews(token));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
+
+  // CAROL - retirei essa parte e passei para a store
+  //useEffect(() => {
+  // axios
+  //   .get("https://ka-users-api.herokuapp.com/book_reviews", {
+  //     headers: {
+  //       Authorization: `${token}`,
+  //     },
+  //   })
+  //   .then(({ data }) => {
+  //     const normalized = {};
+  //     data.map((currReview) => {
+  //       normalized[currReview.id] = { ...currReview };
+  //     });
+  //     setBooksReviews(normalized);
+  //   })
+  //   .catch((e) => {
+  //     const errorstatus = e.response.status;
+  //     console.log("Erro: ", errorstatus);
+  //   });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [token]);
 
   //   const reduce = (arr) => {
   //     // return vvv
