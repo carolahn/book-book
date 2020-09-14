@@ -38,17 +38,6 @@ const Book = ({data}/* props || {bookData: {title, author, image_url, grade, cat
     // adicionar o dispatch() aqui
   }
 
-  function onBlur() {
-    console.log("blur");
-  }
-
-  function onFocus() {
-    console.log("focus");
-  }
-
-  function onSearch(val) {
-    console.log("search:", val);
-  }
 
   return (
     <BookContainer className="book" >
@@ -76,12 +65,7 @@ const Book = ({data}/* props || {bookData: {title, author, image_url, grade, cat
           placeholder="SHELF"
           optionFilterProp="children"
           onChange={onChange}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          onSearch={onSearch}
-          filterOption={(input, option) =>
-            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-          }
+         
         >
           <Option value="shelf1" style={{ paddingLeft: 37 }}>
             <span>Want to read</span>

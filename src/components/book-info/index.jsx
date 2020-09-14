@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import StyledBookInfo from './styles/'
 import { Button, Rate, Select} from 'antd'
 import Feedback from '../feedback';
 import { DeleteTwoTone } from '@ant-design/icons'
+import FeedbackForm from '../feedback-form';
 
 
 
 const BookInfo = ({ category, title, image, description, addFeedback, feedbackList, grading}) => {
 
+
+  const [feedbackForm, setFeedbackForm] = useState(false)
 
   const { Option } = Select;
 
@@ -16,18 +19,18 @@ const BookInfo = ({ category, title, image, description, addFeedback, feedbackLi
     // adicionar o dispatch() aqui
   }
 
-  function onBlur() {
-    console.log("blur");
+  const onFinish = (event) => {
+    console.log(event)
   }
 
-  function onFocus() {
-    console.log("focus");
+  const handleNewFeedback = () => {
+    if (feedbackForm === false) {
+      setFeedbackForm(true)
+    }
+    else {
+      setFeedbackForm(false)
+    }
   }
-
-  function onSearch(val) {
-    console.log("search:", val);
-  }
-
 
   return(
     <StyledBookInfo>
@@ -40,23 +43,16 @@ const BookInfo = ({ category, title, image, description, addFeedback, feedbackLi
             defaultValue={grading}
             style={{ fontSize: 15, display: "revert" }}
             className='bookGrade'
-          />
+      />
       
-      <p className='bookDescription' > {description}</p>
+      <p className='bookDescription' >{description}</p>
       <Select
-          showSearch
           className='addToShelf'
           style={{ width: '100%'}}
           size={"small"}
           placeholder="SHELF"
           optionFilterProp="children"
           onChange={onChange}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          onSearch={onSearch}
-          filterOption={(input, option) =>
-            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-          }
         >
           <Option value="shelf1" style={{ paddingLeft: 37 }}>
             <span>Want to read</span>
@@ -74,8 +70,10 @@ const BookInfo = ({ category, title, image, description, addFeedback, feedbackLi
         </Select>
       {/* { addFeedback.required && <Button className='bookNewFeedback' onClick={addFeedback.handleFeedback}>New Feedback</Button>} */}
       </div>
-      <div className='feedbackList' >
-        {/* {feedbackList.map(feedback => <Feedback // passar por props as infos />)} */}
+      <div className='feedbackContainer' >
+        {feedbackForm ? <FeedbackForm  handleFinish={onFinish}/> :  feedbackList.map(feedback => <Feedback  user='' comment='' grading='' />)
+        } 
+       
       </div>
     </StyledBookInfo>
   )

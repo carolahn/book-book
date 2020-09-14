@@ -76,7 +76,7 @@ const StyledBookInfo = styled.div`
     }
   }
 
-  .feedbackList {
+  .feedbackContainer {
     grid-column-start:4;
     grid-column-end: 4;
     grid-row-start:2;
@@ -145,7 +145,7 @@ const StyledBookInfo = styled.div`
 
     }
   
-    .feedbackList {
+    .feedbackContainer {
       overflow: auto;
       grid-column-start:2;
       grid-column-end: 2;
@@ -189,7 +189,7 @@ const StyledBookInfo = styled.div`
       }
     }
   
-    .feedbackList {
+    .feedbackContainer {
       overflow:auto;
       grid-column-start:2;
       grid-column-end: 2;
@@ -232,7 +232,7 @@ const StyledBookInfo = styled.div`
       }
     }
   
-    .feedbackList {
+    .feedbackContainer {
       overflow:auto;
       grid-column-start:2;
       grid-column-end: 2;

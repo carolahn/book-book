@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useHistory } from 'react-router-dom'
+
 
 export const REGISTER_SUCESS = 'REGISTER_SUCESS'
 export const REGISTER_FAILED = 'REGISTER_FAILED'
