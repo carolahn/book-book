@@ -17,10 +17,6 @@ const Header = () => {
 
     const size = useWindowSize();
 
-    useEffect(() => {
-        
-    }, [where]);
-
     return (
         <StyledHeader >
             <div className="logo-holder" />
