@@ -21,7 +21,7 @@ const Routes = () => {
         <Register />
       </Route>
 
-      {tokenInfo.token && tokenInfo.login_status ? (
+      {tokenInfo.token ? (
         <>
           <Route path="/my-shelves/">
             <Shelves />

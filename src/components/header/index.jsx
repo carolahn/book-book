@@ -17,12 +17,16 @@ const Header = () => {
 
     const size = useWindowSize();
 
+    useEffect(() => {
+        
+    }, [where]);
+
     return (
         <StyledHeader >
             <div className="logo-holder" />
             {(where === '/' || where === '/register') ? 
             <>
-                {size.width > 560 ?
+                {size.width > 744 ?
                 <div className="button-holder" >
                 <button className={where === '/' ? "login button here" : "login button"}
                     onClick={() => history.push("/")} >Login</button>
@@ -56,13 +60,13 @@ const Header = () => {
             
             : 
 
-            (tokenInfo.token && tokenInfo.login_status && 
+            (tokenInfo.token && 
                 (where === '/timeline' || where === '/search' || where === '/my-shelves' ||
-                    where === '/my-shelves/whishlist' || where === '/my-shelves/reading' || 
-                        where === '/my-shelves/read')) ? 
+                    where === '/my-shelves/' || where === '/my-shelves/whishlist' || 
+                    where === '/my-shelves/reading' || where === '/my-shelves/read')) ? 
                 
             <>
-                {size.width > 560 ?
+                {size.width > 744 ?
                 <div className="button-holder" >
                     <button className={where === '/my-shelves' ? "button here" : "button"}
                     onClick={() => {
@@ -124,7 +128,7 @@ const Header = () => {
             : 
             
             <>
-                {size.width > 560 ?
+                {size.width > 744 ?
                 <div className="button-holder" >
                 <button className={where === '/' ? "login button here" : "login button"}
                     onClick={() => history.push("/")} >Login</button>
