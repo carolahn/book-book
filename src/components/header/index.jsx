@@ -78,7 +78,7 @@ const Header = () => {
             </div>
           )}
         </>
-      ) : tokenInfo.token &&
+      ) : tokenInfo.token ||
         tokenInfo.login_status &&
         (where === "/timeline" ||
           where === "/search" ||

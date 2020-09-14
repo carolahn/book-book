@@ -18,6 +18,7 @@ const BookList = ({ showBooks, getMorePages, type }) => {
   const size = useWindowSize();
 
   const handleOnChange = (pag) => {
+    console.log(showBooks);
     setPage(pag);
     if (type.includes("search")) {
       getMorePages(pag);
@@ -28,6 +29,8 @@ const BookList = ({ showBooks, getMorePages, type }) => {
     console.log("teste");
     console.log(showBooks);
   };
+
+
   return (
     <>
       <Pagination
@@ -41,7 +44,7 @@ const BookList = ({ showBooks, getMorePages, type }) => {
         {size.width < 560 && (
           <div>
             {
-              showBooks.slice(page - 1, page - 1 + 10).map((currBook) => (
+              showBooks.slice((page - 1) * 10, (page - 1 + 10) * 10).map((currBook) => (
                 <WrapBook>
                   <Book
                     bookData={currBook}
@@ -58,7 +61,7 @@ const BookList = ({ showBooks, getMorePages, type }) => {
         {size.width >= 560 && (
           <div>
             {
-              showBooks.slice(page - 1, page - 1 + 10).map((currBook, key) => (
+              showBooks.slice((page - 1) * 10, (page - 1) * 10 + 10).map((currBook, key) => (
                 <WrapBook>
                   <Book
                     bookData={currBook}

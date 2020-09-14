@@ -1,5 +1,6 @@
 import React from "react";
 import { AsideContainer } from "./styles";
+import {Link} from "react-router-dom";
 
 const AsideDescription = ({ description, review, bookData, type }) => {
   return (
@@ -12,7 +13,7 @@ const AsideDescription = ({ description, review, bookData, type }) => {
         <span className="aside-content">
           {review ? review : ""}
           {bookData.creator.user ? (
-            <button className="creator">{bookData.creator.user}</button>
+            <Link className="creator" to={`/perfil/${bookData.creator.id}`}>{bookData.creator.user}</Link>
           ) : (
             ""
           )}
