@@ -28,12 +28,14 @@ const Login = () => {
             <LoginBox>
                 <h1>Login</h1>
                 <Form
+                    
                     name="normal_login"
                     className="login-form"
                     initialValues={{
                         remember: true,
                     }}
                     onFinish={onFinish}
+                    
                 >
                     <Form.Item
                         name="username"
@@ -69,7 +71,7 @@ const Login = () => {
                         </Form.Item>
                     </Form.Item>
 
-                    <Form.Item>
+                    <Form.Item className='button-item'>
                         <Button type="primary" htmlType="submit" className="login-form-button login-button">
                             Log in
                         </Button>
