@@ -20,9 +20,7 @@ const Header = () => {
     return (
         <StyledHeader >
             <div className="logo-holder" />
-
-            {(where === '/' || where === '/register') ?
-            
+            {(where === '/' || where === '/register') ? 
             <>
                 {size.width > 560 ?
                 <div className="button-holder" >
@@ -58,7 +56,7 @@ const Header = () => {
             
             : 
 
-            (tokenInfo.token /* && tokenInfo.login_status */ && 
+            (tokenInfo.token && tokenInfo.login_status && 
                 (where === '/timeline' || where === '/search' || where === '/my-shelves' ||
                     where === '/my-shelves/whishlist' || where === '/my-shelves/reading' || 
                         where === '/my-shelves/read')) ? 
@@ -84,7 +82,6 @@ const Header = () => {
                     <button className="button logout"
                         onClick={() => {
                             dispatch(logout());
-                            localStorage.removeItem('book-book-token');
                             history.push("/");
                             setMenu(false);
                         }} >Logout</button>
@@ -114,7 +111,6 @@ const Header = () => {
                                 <button className={where === '/' ? "little-logout hbtn" : "hbtn"}
                                         onClick={() => {
                                             dispatch(logout());
-                                            localStorage.removeItem('book-book-token');
                                             history.push("/");
                                             setMenu(false);
                                         }} >Logout</button>
