@@ -1,13 +1,9 @@
 import axios from "axios";
-import { useSelector } from "react-redux";
-import normalizator from "../../../normalizator";
 
 export const ADD_TO_REVIEWS_LIST = "ADD_TO_REVIEWS_LIST";
 export const ADD_GOOGLE_INFO = "ADD_GOOGLE_INFO";
 
 export const requestReviews = (token) => (dispatch) => {
-  // const token = useSelector((state) => state.login.token);
-
   axios
     .get("https://ka-users-api.herokuapp.com/book_reviews", {
       headers: {

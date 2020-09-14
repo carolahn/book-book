@@ -50,10 +50,10 @@ const BookList = ({ showBooks, /*, getMorePages*/ type }) => {
         {size.width < 560 && (
           <div>
             {showBooks.slice(page * 10 - 10, page * 10).map((currBook) => (
-              <WrapBook>
+              <WrapBook key={currBook.id}>
                 <Book
                   bookData={currBook}
-                  key={currBook.id}
+                  key={currBook.title}
                   type={type.concat("-mobile")}
                 />
               </WrapBook>
@@ -63,11 +63,11 @@ const BookList = ({ showBooks, /*, getMorePages*/ type }) => {
 
         {size.width >= 560 && (
           <div>
-            {showBooks.slice(page * 10 - 10, page * 10).map((currBook, key) => (
-              <WrapBook>
+            {showBooks.slice(page * 10 - 10, page * 10).map((currBook) => (
+              <WrapBook key={currBook.id}>
                 <Book
                   bookData={currBook}
-                  key={key}
+                  key={currBook.title}
                   type={type.concat("-desktop")}
                 />
                 <AsideDescription
@@ -75,6 +75,7 @@ const BookList = ({ showBooks, /*, getMorePages*/ type }) => {
                   description={currBook.description}
                   review={currBook.review}
                   bookData={currBook}
+                  key={currBook.author}
                 />
               </WrapBook>
             ))}
