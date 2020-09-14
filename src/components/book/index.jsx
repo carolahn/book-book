@@ -1,11 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Select, Rate} from "antd";
-import { DeleteTwoTone } from '@ant-design/icons'
+import { Select, Rate } from "antd";
+import { DeleteTwoTone } from "@ant-design/icons";
 import "antd/dist/antd.css";
-import { BookContainer } from "./styles";
+import { BookContainer } from "./styles.js";
 
-const Book = ({data}) => {
+const Book = ({ data }) => {
   const { Option } = Select;
 
   // exemplo de data
@@ -39,7 +39,7 @@ const Book = ({data}) => {
   }
 
   return (
-    <BookContainer className="book" >
+    <BookContainer className="book">
       <img src={bookData.image_url} alt="cover" />
       <div className="book-info">
         <div className="title">{bookData.title}</div>

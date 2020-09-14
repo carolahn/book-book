@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Container } from "./styles";
+import { Container } from "./styles.js";
 // import { Pagination } from "antd";
 import Book from "../book";
 
@@ -12,15 +12,13 @@ import Book from "../book";
     
 */
 
-
 const BookList = ({ showBooks }) => {
-//   const [page, setPage] = useState(1);
+  //   const [page, setPage] = useState(1);
 
-
-const handleClick = () => {
-  console.log('teste')
-  console.log(showBooks)
-}
+  const handleClick = () => {
+    console.log("teste");
+    console.log(showBooks);
+  };
   return (
     <>
       {/* <Pagination
@@ -32,9 +30,12 @@ const handleClick = () => {
       /> */}
       <Container>
         <div>
-          {showBooks
-            .map((currBook, key) => <Book data={currBook} key={key} handleClick={handleClick}/>)
-            /*.slice(page - 1, page - 1 + 10)*/}
+          {
+            showBooks.map((currBook, key) => (
+              <Book data={currBook} key={key} handleClick={handleClick} />
+            ))
+            /*.slice(page - 1, page - 1 + 10)*/
+          }
         </div>
       </Container>
       {/* <Pagination
