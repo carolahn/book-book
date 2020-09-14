@@ -10,7 +10,7 @@ export const StyledDiv = styled.div`
 
     display: grid;
     grid-template-rows: 1fr 3fr 1fr;
-    grid-template-columns: 20vw 15vw 30vw 15vw 20vw;
+    grid-template-columns: 1fr 1fr 5fr 1fr 1fr;
 
    @media (max-width: 420px) {
        grid-template-columns: 5vw 90vw 5vw;
