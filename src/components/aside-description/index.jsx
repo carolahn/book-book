@@ -1,5 +1,5 @@
 import React from "react";
-import { AsideContainer } from "./styles";
+import { AsideContainer } from "./styles.js";
 import { useSelector } from "react-redux";
 
 const AsideDescription = ({ description, review, bookData, type }) => {
