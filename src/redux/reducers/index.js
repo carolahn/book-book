@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import register from './register';
+import register from './register/register';
 import login from './login/login';
 
 import books from "./tests/books";
