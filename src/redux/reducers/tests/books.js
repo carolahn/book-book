@@ -1,4 +1,5 @@
-import { ADD_TO_SHELF } from "../actions";
+import { ADD_TO_SHELF } from "../../actions/tests";
+import normalizator from "../../../normalizator";
 
 const defaultState = {};
 
@@ -7,8 +8,7 @@ const books = (state = defaultState, { type, payload }) => {
     case ADD_TO_SHELF:
       const { book, shelf } = payload;
       const id = Object.keys(state).length;
-      return { ...state, [id]: { ...book, id, shelf } };
-
+      return { ...state, [id]: { ...normalizator(book), id, shelf, grade: 0 } };
     default:
       return state;
   }

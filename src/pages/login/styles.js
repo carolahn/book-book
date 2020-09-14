@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import background_image from '../../../assets/images/background-image/background-covers.svg';
+import background_image from '../../assets/images/background-image/background-covers.svg';
 
 export const StyledDiv = styled.div`
     width: 100vw;
