@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { Container, WrapBook } from "./styles";
+import { Container, WrapBook } from "./styles.js";
 import { Pagination } from "antd";
 import Book from "../book";
 import AsideDescription from "../aside-description";
@@ -10,6 +10,7 @@ import AsideDescription from "../aside-description";
     Se quiser que apareça a paginação deve descomentar tudo menos esse texto!
 
     Obs: já está responsivo!
+    
 */
 
 const BookList = ({ showBooks, getMorePages, type }) => {
@@ -23,6 +24,10 @@ const BookList = ({ showBooks, getMorePages, type }) => {
     }
   };
 
+  const handleClick = () => {
+    console.log("teste");
+    console.log(showBooks);
+  };
   return (
     <>
       <Pagination

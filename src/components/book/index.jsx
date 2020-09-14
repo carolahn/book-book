@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Select, Rate } from "antd";
 import { DeleteTwoTone } from "@ant-design/icons";
 import "antd/dist/antd.css";
-import { BookContainer } from "./styles";
+import { BookContainer } from "./styles.js";
 import {
   postUserBook,
   removeBook,

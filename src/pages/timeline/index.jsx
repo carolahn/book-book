@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { requestReviews } from "../../redux/actions/reviews-list";
 import BookList from "../../components/book-list";
-import { ListContainer } from "./styles";
+import { ListContainer } from "./styles.js";
 
 /*
     Ainda não está 100% completo, pois falta o componente MostPopular (se for criado)

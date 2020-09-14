@@ -11,7 +11,7 @@ import {
   ResultsContainer,
   MostPopularContainer,
   MostPopularCarousel,
-} from "./styles";
+} from "./styles.js";
 import BookList from "../../components/book-list";
 
 const BookSearch = () => {

@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import logo from "../../../assets/images/header/logo/logo255.svg";
-import menu from "../../../assets/images/header/menu/menu.svg";
+import logo from "../../assets/images/header/logo/logo255.svg";
+import menu from "../../assets/images/header/menu/menu.svg";
 
 export const StyledHeader = styled.div`
   background-color: #545454;
