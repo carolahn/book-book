@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Select, Rate } from "antd";
-import { DeleteTwoTone } from "@ant-design/icons";
+import { Select, Rate} from "antd";
+import { DeleteTwoTone } from '@ant-design/icons'
 import "antd/dist/antd.css";
 import { BookContainer } from "./styles";
 
@@ -39,7 +39,7 @@ const Book = ({data}) => {
   }
 
   return (
-    <BookContainer className="book">
+    <BookContainer className="book" onClick={handleClick}>
       <img src={bookData.image_url} alt="cover" />
       <div className="book-info">
         <div className="title">{bookData.title}</div>

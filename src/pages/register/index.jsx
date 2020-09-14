@@ -58,7 +58,7 @@ const Register = () => {
     <Container>
       <StyledRegister>
       
-      <h2>Register</h2>
+      <h1>Register</h1>
       
       <Form
         onFinish={onFinish}
@@ -68,7 +68,6 @@ const Register = () => {
       >
         <Form.Item
         name='name'
-        label='Name'
         rules={[
           {
             required: true,
@@ -77,12 +76,11 @@ const Register = () => {
         ]}
         className='formItem'
         >
-          <Input className='inputRegister' onChange={handleName}/>
+          <Input className='inputRegister' onChange={handleName} placeholder='Name'/>
         </Form.Item>
 
         <Form.Item
         name='username'
-        label='Username'
         rules={[
           {
             required: true,
@@ -91,12 +89,11 @@ const Register = () => {
         ]}
         className='formItem'
         >
-          <Input className='inputRegister' onChange={handleUsername}/>
+          <Input className='inputRegister' onChange={handleUsername} placeholder='Username' />
         </Form.Item>
 
         <Form.Item
         name='email'
-        label='E-mail'
         rules={[
           {
             type: 'email',
@@ -109,12 +106,11 @@ const Register = () => {
         ]}
         className='formItem'
         >
-          <Input className='inputRegister' onChange={handleEmail}/>
+          <Input className='inputRegister' onChange={handleEmail} placeholder='E-mail' />
         </Form.Item>
 
         <Form.Item
         name='password'
-        label='Password'
         rules={[
           {
             required: true,
@@ -123,12 +119,11 @@ const Register = () => {
         ]}
         className='formItem'
         >
-          <Input.Password className='inputRegister' onChange={handlePassword}/>
+          <Input.Password className='inputRegister' onChange={handlePassword} placeholder='Password' />
         </Form.Item>
 
         <Form.Item
         name='confirmpassword'
-        label='Confirm Password'
         rules={[
           {
             required: true,
@@ -137,7 +132,7 @@ const Register = () => {
         ]}
         className='formItem'
         >
-          <Input.Password className='inputRegister' onChange={handleConfirmPassword}/>
+          <Input.Password className='inputRegister' onChange={handleConfirmPassword} placeholder='Confirm Password'/>
         </Form.Item>
 
         <Button type='primary' htmlType='submit' className='buttonRegister'>
@@ -148,7 +143,7 @@ const Register = () => {
       <div className='serverResponse'>
         {status === false? 
           <div className='error'>
-            <span>{usernameError !== '' && usernameError !== undefined && `User ${usernameError}`}</span>
+            <span>{usernameError !== '' && usernameError !== undefined && `Username ${usernameError}`}</span>
             <span>{emailError !== '' && emailError !==  undefined &&  `Email ${emailError}`}</span>
           </div>
         : status === true?
