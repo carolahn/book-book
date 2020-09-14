@@ -20,7 +20,6 @@ export const requestReviews = (token) => (dispatch) => {
         normalized[currReview.google_book_id] = { ...currReview };
       });
       dispatch(addToReviewsList(normalized));
-      dispatch(requestGoogleInfo(normalized));
     })
     .catch((e) => {
       const errorstatus = e.response.status;
@@ -35,20 +34,21 @@ const addToReviewsList = (booksReviews) => ({
   },
 });
 
-export const requestGoogleInfo = (booksReviews) => (dispatch) => {
+export const requestGoogleInfo = (booksReviews, page) => (dispatch) => {
   let urlRequests = [];
   let booksDescriptions = [];
 
-  Object.keys(booksReviews).map((key) => {
-    if (isNaN(key)) {
-      urlRequests.push(`https://www.googleapis.com/books/v1/volumes/${key}`);
-    }
-  });
+  Object.keys(booksReviews)
+    .slice(page * 10 - 10, page * 10)
+    .map((key) => {
+      if (isNaN(key)) {
+        urlRequests.push(`https://www.googleapis.com/books/v1/volumes/${key}`);
+      }
+    });
 
   if (urlRequests) {
-    console.log(urlRequests);
     let promises = [];
-    urlRequests.slice(0, 50).forEach((item, index) => {
+    urlRequests.forEach((item, index) => {
       promises.push(axios.get(item));
     });
     axios
