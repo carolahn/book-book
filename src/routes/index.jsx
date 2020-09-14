@@ -11,7 +11,7 @@ import styled from "styled-components";
 
 const Routes = () => {
   const tokenInfo = useSelector((state) => state.login);
-
+  
   return (
     <Switch>
       <Route exact path="/">
@@ -21,7 +21,7 @@ const Routes = () => {
         <Register />
       </Route>
 
-      {tokenInfo.token && tokenInfo.login_status ? (
+      {tokenInfo.token /* && tokenInfo.login_status */ ? (
         <>
           <Route path="/my-shelves/">
             <Shelves />
