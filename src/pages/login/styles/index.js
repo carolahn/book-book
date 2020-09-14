@@ -10,17 +10,31 @@ export const StyledDiv = styled.div`
 
     display: grid;
     grid-template-rows: 1fr 3fr 1fr;
-    grid-template-columns: 20vw 15vw 30vw 15vw 20vw;
+    grid-template-columns: 35vw 30vw 35vw;
+
+    @media (max-width: 1024px) {
+        grid-template-columns: 25vw 50vw 25vw;
+    }
+
+    @media (max-width: 768px) {
+        grid-template-columns: 15vw 70vw 15vw;
+    }
+
+    @media (max-width: 540px) {
+        grid-template-columns: 5vw 90vw 5vw;
+    }
 
    @media (max-width: 420px) {
        grid-template-columns: 5vw 90vw 5vw;
    }
+
+   
 `;
 
 export const LoginBox = styled.div`
     box-sizing: border-box;
-    grid-column-start: 3;
-    grid-column-end: 3;
+    grid-column-start: 2;
+    grid-column-end: 2;
     grid-row-start: 2;
     grid-row-end: 2;
     align-self: center;
@@ -56,6 +70,13 @@ export const LoginBox = styled.div`
         font-size: 48px;
         margin:1.25rem;
       }
+
+    @media (max-width: 540px) {
+        .login-form {
+            width: 60%;
+        }
+    }
+   
 
     @media screen and (max-width: 420px) {
         width: 100%;

@@ -5,7 +5,7 @@ import { DeleteTwoTone } from '@ant-design/icons'
 import "antd/dist/antd.css";
 import { BookContainer } from "./styled";
 
-const Book = ({data, handleClick}/* props || {bookData: {title, author, image_url, grade, categories, review, google_book_id}} */) => {
+const Book = ({data}/* props || {bookData: {title, author, image_url, grade, categories, review, google_book_id}} */) => {
   const { Option } = Select;
 
   /* ainda a ser decidido
@@ -51,7 +51,7 @@ const Book = ({data, handleClick}/* props || {bookData: {title, author, image_ur
   }
 
   return (
-    <BookContainer className="book" onClick={handleClick}>
+    <BookContainer className="book" >
       <img src={bookData.image_url} alt="cover" />
       <div className="book-info">
         <div className="title">{bookData.title}</div>
