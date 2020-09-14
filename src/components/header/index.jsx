@@ -3,7 +3,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../redux/actions/login/index';
 
-import { StyledHeader, Menu, LittleMenu, LoggedLittleMenu } from './styled/styles';
+import { StyledHeader, Menu, LittleMenu, LoggedLittleMenu } from './styles.js';
 
 const Header = () => {
 
@@ -58,7 +58,10 @@ const Header = () => {
             
             : 
 
-            (tokenInfo.token && tokenInfo.login_status && (where === '/timeline' || where === '/search' || where === '/my-shelves')) ? 
+            (tokenInfo.token && tokenInfo.login_status && 
+                (where === '/timeline' || where === '/search' || where === '/my-shelves' ||
+                    where === '/my-shelves/whishlist' || where === '/my-shelves/reading' || 
+                        where === '/my-shelves/read')) ? 
                 
             <>
                 {size.width > 560 ?

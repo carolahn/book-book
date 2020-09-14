@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react'
 import { Form, Input, Button } from 'antd'
-import { Container, StyledRegister } from './styles'
+import { Container, StyledRegister } from './styles.js'
 import { useDispatch, useSelector} from 'react-redux'
 import { requestRegisterData } from '../../redux/actions/action-register'
 import { useHistory } from 'react-router-dom'

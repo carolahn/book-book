@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { StyledDiv, LoginBox } from './styles/index';
+import { StyledDiv, LoginBox } from './styles';
 import 'antd/dist/antd.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { login } from '../../redux/actions/login/';
