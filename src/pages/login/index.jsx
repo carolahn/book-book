@@ -13,10 +13,8 @@ const Login = () => {
     const tokenInfo = useSelector(state => state.login);
     const history = useHistory();
 
-    console.log(tokenInfo.login_status)
-
     useEffect(() => {
-        tokenInfo.token && tokenInfo.login_status && history.push('/my-shelves');
+        tokenInfo.token && history.push('/my-shelves');
     }, [tokenInfo]);
 
     const onFinish = values => {
