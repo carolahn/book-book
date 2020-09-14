@@ -39,7 +39,7 @@ const Book = ({data}) => {
   }
 
   return (
-    <BookContainer className="book">
+    <BookContainer className="book" >
       <img src={bookData.image_url} alt="cover" />
       <div className="book-info">
         <div className="title">{bookData.title}</div>

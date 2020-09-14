@@ -10,7 +10,6 @@ export const StyledDiv = styled.div`
 
     display: grid;
     grid-template-rows: 1fr 3fr 1fr;
-    grid-template-columns: 20vw 15vw 30vw 15vw 20vw;
     grid-template-columns: 35vw 30vw 35vw;
 
     @media (max-width: 1024px) {
@@ -34,8 +33,6 @@ export const StyledDiv = styled.div`
 
 export const LoginBox = styled.div`
     box-sizing: border-box;
-    grid-column-start: 3;
-    grid-column-end: 3;
     grid-column-start: 2;
     grid-column-end: 2;
     grid-row-start: 2;
