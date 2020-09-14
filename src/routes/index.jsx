@@ -5,7 +5,8 @@ import { useSelector } from "react-redux";
 import Login from "../pages/login";
 import Register from "../pages/register";
 import Timeline from "../pages/timeline/";
-import Shelves from '../pages/shelves';
+import BookSearch from "../pages/book-search";
+import Shelves from "../pages/shelves";
 
 import styled from "styled-components";
 
@@ -26,7 +27,9 @@ const Routes = () => {
           <Route path="/my-shelves/">
             <Shelves />
           </Route>
-          <Route exact path="/search"></Route>
+          <Route exact path="/search">
+            <BookSearch />
+          </Route>
           <Route exact path="/timeline">
             <Timeline />
           </Route>
