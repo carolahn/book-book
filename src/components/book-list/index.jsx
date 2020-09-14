@@ -36,11 +36,11 @@ const BookList = ({ showBooks, getMorePages, type }) => {
         {size.width < 560 && (
           <div>
             {
-              showBooks.slice(page - 1, page - 1 + 10).map((currBook, key) => (
+              showBooks.slice(page - 1, page - 1 + 10).map((currBook) => (
                 <WrapBook>
                   <Book
                     bookData={currBook}
-                    key={key}
+                    key={currBook.id}
                     type={type.concat("-mobile")}
                   />
                 </WrapBook>
@@ -72,44 +72,6 @@ const BookList = ({ showBooks, getMorePages, type }) => {
             }
           </div>
         )}
-
-        {/* {section === "timeline" ? (
-          <div>
-            {
-              showBooks.slice(page - 1, page - 1 + 10).map((currBook, key) => (
-                <WrapBook>
-                  <Book bookData={currBook} key={key} section={section} />
-                  <AsideDescription
-                    description={currBook.description}
-                    review={currBook.review}
-                    creator={currBook.creator.user}
-                  />
-                </WrapBook>
-              ))
-              
-            }
-          </div>
-        ) : section === "search" ? (
-          <div>
-            {
-              showBooks.slice(page - 1, page - 1 + 10).map((currBook, key) => (
-                <WrapBook>
-                  <Book bookData={currBook} key={key} section={section} />
-                  <AsideDescription
-                    description={currBook.description}
-                    review={currBook.review}
-                  />
-                </WrapBook>
-              ))
-              
-            }
-          </div>
-        ) : (
-          <div>
-            se section for most popular -> não tem aside; se for user -> são os
-            reviews; se for feedback -> formulario de feedbacks
-          </div>
-        )} */}
       </Container>
       <Pagination
         defaultCurrent={page}

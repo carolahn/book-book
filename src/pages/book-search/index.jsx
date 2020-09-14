@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Input } from "antd";
-import { executeSearch } from "../../redux/actions/search-list";
+import { executeSearch, clearList } from "../../redux/actions/search-list";
 import "antd/dist/antd.css";
 import {
   BookSearchContainer,
@@ -11,7 +11,6 @@ import {
   ResultsContainer,
   MostPopularContainer,
   MostPopularCarousel,
-  StyledControl,
 } from "./styles";
 import BookList from "../../components/book-list";
 
@@ -30,19 +29,12 @@ const BookSearch = () => {
 
   useEffect(() => {
     if (typedInput) {
-      let start = 0;
       const adaptedInput = typedInput.replace(/\s/g, "+");
+      dispatch(clearList());
       dispatch(executeSearch(adaptedInput, max));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [typedInput]);
-
-  // useEffect(() => {
-  //   let start = page * max - max;
-  //   const adaptedInput = typedInput.replace(/\s/g, "+");
-  //   dispatch(executeSearch(adaptedInput, start, max));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [page]);
 
   return (
     <BookSearchContainer className="book-search">
@@ -70,15 +62,6 @@ const BookSearch = () => {
           ) : (
             message
           )}
-
-          {/* <StyledControl>
-            <Link to={`/search/${page - 1}`}> {" < "}Anterior</Link>
-            {page}
-            <Link to={`/search/${parseInt(page) + 1}`}>Próximo{" > "}</Link>
-          </StyledControl>
-          {searchResults.map((item, index) => (
-            <Book key={item.id} bookData={item} />
-          ))} */}
         </ResultsContainer>
 
         <MostPopularContainer>Aside Extra</MostPopularContainer>

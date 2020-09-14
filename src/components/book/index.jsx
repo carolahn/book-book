@@ -36,6 +36,8 @@ const Book = ({ bookData, type }) => {
       } else {
         dispatch(putBookChanges(user.token, user.id, selectedBook.id, value));
       }
+    } else if (!userBooks[bookData.google_book_id] && value === "delete") {
+      return;
     } else {
       dispatch(
         postUserBook(
@@ -155,47 +157,6 @@ const Book = ({ bookData, type }) => {
         </>
       )}
 
-      {/* {type === "search" || type === "timeline" ? (
-        <>
-          <img src={bookData.image_url} alt="cover" />
-          <div className="book-info">
-            <div className="title">{bookData.title}</div>
-            <div className="author">{bookData.author}</div>
-            <div className="description">
-              <p>{bookData.categories}</p>
-              <p>{bookData.year}</p>
-            </div>
-            <div className="grade">
-              <Rate
-                disabled
-                allowHalf
-                defaultValue={bookData.grade || 0}
-                style={{ fontSize: 15, display: "revert" }}
-              />
-            </div>
-          </div>
-        </>
-      ) : (
-        <>
-          <img src={bookData.image_url} alt="cover" />
-          <div className="book-info">
-            <div className="title">{bookData.title}</div>
-            <div className="author">{bookData.author}</div>
-            <div className="description">
-              <p>{bookData.review || bookData.description}</p>
-            </div>
-            <div className="grade">
-              <Rate
-                disabled
-                allowHalf
-                defaultValue={bookData.grade || 0}
-                style={{ fontSize: 15, display: "revert" }}
-              />
-            </div>
-          </div>
-        </>
-      )} */}
-
       <div className="select-menu">
         <Select
           showSearch
@@ -212,10 +173,10 @@ const Book = ({ bookData, type }) => {
           }
         >
           <Option value="1" style={{ paddingLeft: 37 }}>
-            <span>Want to read</span>
+            <span>Wish List</span>
           </Option>
           <Option value="2" style={{ paddingLeft: 37 }}>
-            <span>Current reading</span>
+            <span>Reading</span>
           </Option>
           <Option value="3" style={{ paddingLeft: 37 }}>
             <span>Read</span>

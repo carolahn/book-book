@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
 export const AsideContainer = styled.div`
-  min-width: 200px;
-  max-width: 300px;
+  /* min-width: 200px;
+  max-width: 300px; */
+  width: 300px;
   height: 158px;
   overflow-y: scroll;
   background-color: #fafafa;

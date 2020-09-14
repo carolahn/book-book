@@ -72,12 +72,3 @@ export const MostPopularCarousel = styled.div`
   justify-content: center;
   align-items: center;
 `;
-
-export const StyledControl = styled.div`
-  padding: 10px;
-  max-width: 500px;
-  min-width: 315px;
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-`;
