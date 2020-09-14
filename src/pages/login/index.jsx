@@ -14,7 +14,7 @@ const Login = () => {
     const history = useHistory();
 
     useEffect(() => {
-        tokenInfo.token && tokenInfo.login_status && history.push('/my-shelves');
+        tokenInfo.token && history.push('/my-shelves');
     }, [tokenInfo]);
 
     const onFinish = values => {
