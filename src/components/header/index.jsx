@@ -58,7 +58,7 @@ const Header = () => {
             
             : 
 
-            (tokenInfo.token && tokenInfo.login_status && 
+            (tokenInfo.token /* && tokenInfo.login_status */ && 
                 (where === '/timeline' || where === '/search' || where === '/my-shelves' ||
                     where === '/my-shelves/whishlist' || where === '/my-shelves/reading' || 
                         where === '/my-shelves/read')) ? 
