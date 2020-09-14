@@ -31,7 +31,7 @@ const Routes = () => {
             </Route>
             <Route exact path="/search">
             <BookSearch />
-          </Route>
+            </Route>
             <Route exact path="/timeline">
               <Timeline />
             </Route>
