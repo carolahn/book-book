@@ -1,27 +1,15 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Select, Rate } from "antd";
-import { DeleteTwoTone } from "@ant-design/icons";
+import { Select, Rate} from "antd";
+import { DeleteTwoTone } from '@ant-design/icons'
 import "antd/dist/antd.css";
-import { BookContainer } from "./styled";
+import { BookContainer } from "./styles";
 
-const Book = (/* props || {bookData: {title, author, image_url, grade, categories, review, google_book_id}} */}) => {
+const Book = ({data}) => {
   const { Option } = Select;
 
-  /* ainda a ser decidido
-    const bookData = {
-      title = props.title,
-      author: props.author,
-      image_url: props.image_url,
-      grade: props.grade,
-      categories: props.categories,
-      review: props.review,
-      google_book_id: props.google_book_id
-    }
-  */
-
   // exemplo de data
-  const bookData = {
+  const bookData = data || {
     title: "React JS Fundamental",
     author: "Onesinus SPT",
     image_url:
@@ -51,7 +39,7 @@ const Book = (/* props || {bookData: {title, author, image_url, grade, categorie
   }
 
   return (
-    <BookContainer className="book">
+    <BookContainer className="book" onClick={handleClick}>
       <img src={bookData.image_url} alt="cover" />
       <div className="book-info">
         <div className="title">{bookData.title}</div>
@@ -63,7 +51,7 @@ const Book = (/* props || {bookData: {title, author, image_url, grade, categorie
           <Rate
             disabled
             allowHalf
-            defaultValue={2.5}
+            defaultValue={bookData.grade}
             style={{ fontSize: 15, display: "revert" }}
           />
         </div>
