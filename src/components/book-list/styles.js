@@ -4,6 +4,7 @@ import { Layout } from "antd";
 
 export const Container = styled.div`
   margin: 5px;
+
   /* background-color: #fff; */
 
   > div {
@@ -12,6 +13,15 @@ export const Container = styled.div`
 
     align-items: center;
   }
+`;
+
+export const WrapBook = styled.div`
+  display: flex;
+  flex-direction: row;
+  /* flex-basis: 515px; */
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 15px;
 `;
 
 // export const MostPopular = styled(Sider)`

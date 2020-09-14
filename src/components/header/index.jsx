@@ -1,21 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../../redux/actions/login/index';
+import React, { useState, useEffect } from "react";
+import { useHistory, useLocation } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../redux/actions/login/index";
 
-import { StyledHeader, Menu, LittleMenu, LoggedLittleMenu } from './styles.js';
+import { StyledHeader, Menu, LittleMenu, LoggedLittleMenu } from "./styles.js";
 
 const Header = () => {
+  const [menu, setMenu] = useState(false);
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const location = useLocation();
+  const where = location.pathname;
 
-    const [menu, setMenu] = useState(false);
-    const dispatch = useDispatch();
-    const history = useHistory();
-    const location = useLocation();
-    const where = location.pathname;
+  const tokenInfo = useSelector((state) => state.login);
 
-    const tokenInfo = useSelector(state => state.login);
+  const size = useWindowSize();
 
-    const size = useWindowSize();
+  return (
+    <StyledHeader>
+      <div className="logo-holder" />
 
     useEffect(() => {
         
@@ -72,14 +75,22 @@ const Header = () => {
                     onClick={() => {
                         history.push("/my-shelves");
                         setMenu(false);
-                    }} >My Shelves</button>
-                    <button className={where === '/search' ? "button here" : "button"}
-                    onClick={() => {
+                      }}
+                    >
+                      My Shelves
+                    </button>
+                    <button
+                      className={where === "/search" ? "little hbtn" : "hbtn"}
+                      onClick={() => {
                         history.push("/search");
                         setMenu(false);
-                    }} >Search</button>
-                    <button className={where === '/timeline' ? "button here" : "button"}
-                    onClick={() => {
+                      }}
+                    >
+                      Search
+                    </button>
+                    <button
+                      className={where === "/timeline" ? "little hbtn" : "hbtn"}
+                      onClick={() => {
                         history.push("/timeline");
                         setMenu(false);
                     }} >Timeline</button>
@@ -168,27 +179,25 @@ const Header = () => {
 export default Header;
 
 function useWindowSize() {
-  
-    const [windowSize, setWindowSize] = useState({
-      width: undefined,
-      height: undefined,
-    });
-  
-    useEffect(() => {  
-      function handleResize() {
-        setWindowSize({
-          width: window.innerWidth,
-          height: window.innerHeight,
-        });
-      }
+  const [windowSize, setWindowSize] = useState({
+    width: undefined,
+    height: undefined,
+  });
 
-      window.addEventListener("resize", handleResize);
+  useEffect(() => {
+    function handleResize() {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    }
 
-      handleResize();
+    window.addEventListener("resize", handleResize);
 
-      return () => window.removeEventListener("resize", handleResize);
-  
-    }, []);
-  
-    return windowSize;
-  }
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return windowSize;
+}
