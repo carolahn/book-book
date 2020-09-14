@@ -1,73 +1,41 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import axios from "axios";
-
+import { useSelector, useDispatch } from "react-redux";
+import { requestReviews } from "../../redux/actions/reviews-list";
 import BookList from "../../components/book-list";
-
-import { ListContainer } from "./styles";
+import { ListContainer } from "./styles.js";
 
 /*
     Ainda não está 100% completo, pois falta o componente MostPopular (se for criado)
 */
 
 const Timeline = () => {
-  const [booksReviews, setBooksReviews] = useState({});
   const [message, setMessage] = useState("Loading");
   const token = useSelector((state) => state.login.token);
+  const booksReviews = useSelector((state) => state.reviewsList);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    axios
-      .get("https://ka-users-api.herokuapp.com/book_reviews", {
-        headers: {
-          Authorization: `${token}`,
-        },
-      })
-      .then(({ data }) => {
-        const normalized = {};
-        data.map((currReview) => {
-          normalized[currReview.id] = { ...currReview };
-        });
-        setBooksReviews(normalized);
-      })
-      .catch((e) => {
-        const errorstatus = e.response.status;
-        console.log("Erro: ", errorstatus);
-      });
-  }, []);
-
-  //   const reduce = (arr) => {
-  //     // return vvv
-  //     let ret = {};
-  //     let newReturn = [];
-  //     arr.forEach((currBook, _, arr) => {
-  //       if (!ret[JSON.stringify(currBook.title)]) {
-  //         ret[JSON.stringify(currBook.title)] = 1;
-  //         newReturn.push({ ...currBook });
-  //       } else ret[JSON.stringify(currBook.title)]++;
-  //     });
-  //
-  //     ret = Object.keys(ret).filter((currBook) => ret[currBook] > 1);
-  //
-  //     return newReturn.filter((currBook) => ret.indexOf(`"${currBook.title}"`) !== -1);
-  //   };
+    dispatch(requestReviews(token));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token]);
 
   return (
     <ListContainer>
-      {Object.values(booksReviews).length !== 0 ? (
-        <BookList showBooks={Object.values(booksReviews)} />
+      {booksReviews && Object.values(booksReviews).length !== 0 ? (
+        <BookList showBooks={Object.values(booksReviews)} type="timeline" />
       ) : (
         message
       )}
       {/* <MostPopular>
-        {showScreen(
-          reduce(
-            showBooks.filter((currBook) => {
-              if (!currBook.grade || currBook.grade !== 5) return false;
-              return true;
-            })
-          )
-        )}
-      </MostPopular> */}
+      {showScreen(
+        reduce(
+          showBooks.filter((currBook) => {
+            if (!currBook.grade || currBook.grade !== 5) return false;
+            return true;
+          })
+        )
+      )}
+    </MostPopular> */}
     </ListContainer>
   );
 };

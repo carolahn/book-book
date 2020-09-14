@@ -82,7 +82,15 @@
 
 const normalizator = ({
   id,
-  volumeInfo: { title, authors, imageLinks, categories },
+  volumeInfo: {
+    title,
+    authors,
+    imageLinks,
+    categories,
+    publishedDate,
+    description,
+    averageRating,
+  },
 }) => ({
   title: title ? title : "No title!",
   author: authors ? authors.join(",") : "No author!",
@@ -90,7 +98,10 @@ const normalizator = ({
     ? imageLinks.smallThumbnail || imageLinks.thumbnail
     : "",
   categories: categories ? categories.join(", ") : "No categories!",
+  year: publishedDate ? publishedDate : "No published date!",
   google_book_id: id,
+  description: description ? description : "No description!",
+  grade: averageRating ? averageRating : null,
 });
 
 export default normalizator;

@@ -34,8 +34,6 @@ const Perfil = () => {
       });
   }, [user]);
 
-  console.log(user.name);
-
   return (
     user.name !== undefined && (
       <PerfilContainer>
@@ -43,7 +41,7 @@ const Perfil = () => {
         <h3>Email: {user.email}</h3>
         <div>
             <h3>Books read</h3>
-            {user.books && (user.books.length > 0 ? <BookList showBooks={user.books} /> : "User has not finished reading any books")}
+            {user.books && (user.books.length > 0 ? <BookList showBooks={user.books} type="timeline"/> : "User has not finished reading any books")}
         </div>
       </PerfilContainer>
     )
