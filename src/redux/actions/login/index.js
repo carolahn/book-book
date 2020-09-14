@@ -8,10 +8,10 @@ const login_successeful = (username = '', token = '') => {
     }
 }
 
-const login_unssuccessfull = (error) => {
+const login_unssuccessfull = (error_message) => {
     return {
         type: LOGIN_ACTIONS.LOGIN_UNSUCCESSFUL,
-        error
+        error_message
     }
 }
 
@@ -25,7 +25,7 @@ export const login = (username, password) => async (dispatch) => {
         }
     })
     .then(response => dispatch(login_successeful(username, response.data.auth_token)))
-    .catch(err => dispatch(login_unssuccessfull(err)));
+    .catch(err => dispatch(login_unssuccessfull('Invalid credentials')));
 }
 
 const login_logout = ()  => {

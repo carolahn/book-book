@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, Link } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import Login from "../pages/login";
@@ -24,13 +24,13 @@ const Routes = () => {
           <Register />
         </Route>
 
-        {tokenInfo.token || tokenInfo.login_status ? (
+        {tokenInfo.token ? (
           <>
             <Route path="/my-shelves/">
               <Shelves />
             </Route>
             <Route exact path="/search">
-            <BookSearch />
+              <BookSearch />
             </Route>
             <Route exact path="/timeline">
               <Timeline />

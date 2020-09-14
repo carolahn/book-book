@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Checkbox, Alert } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { StyledDiv, LoginBox } from './styles';
 import 'antd/dist/antd.css';
@@ -62,6 +62,17 @@ const Login = () => {
                             placeholder="Password"
                         />
                     </Form.Item>
+
+                   
+                    {tokenInfo.error && (
+                         <Form.Item >
+                            <Alert
+                                message={tokenInfo.error_message}
+                                type="error"
+                                showIcon
+                            />
+                        </Form.Item>
+                    )}
 
                     <Form.Item>
                         <Form.Item name="remember" valuePropName="checked" noStyle>
