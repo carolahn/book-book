@@ -13,15 +13,15 @@ import AsideDescription from "../aside-description";
     
 */
 
-const BookList = ({ showBooks, getMorePages, type }) => {
+const BookList = ({ showBooks, /*, getMorePages*/ type }) => {
   const [page, setPage] = useState(1);
   const size = useWindowSize();
 
-  const handleOnChange = (pag) => {
-    setPage(pag);
-    if (type.includes("search")) {
-      getMorePages(pag);
-    }
+  const handleOnChange = (page) => {
+    setPage(page);
+    // if (type.includes("search")) {
+    //   getMorePages(pag);
+    // }
   };
 
   const handleClick = () => {
@@ -34,47 +34,41 @@ const BookList = ({ showBooks, getMorePages, type }) => {
         defaultCurrent={page}
         current={page}
         total={showBooks.length}
-        onChange={(pag) => handleOnChange(pag)}
+        onChange={(page) => handleOnChange(page)}
         showSizeChanger={false}
       />
       <Container>
         {size.width < 560 && (
           <div>
-            {
-              showBooks.slice(page - 1, page - 1 + 10).map((currBook) => (
-                <WrapBook>
-                  <Book
-                    bookData={currBook}
-                    key={currBook.id}
-                    type={type.concat("-mobile")}
-                  />
-                </WrapBook>
-              ))
-              /*.slice(page - 1, page - 1 + 10)*/
-            }
+            {showBooks.slice(page * 10 - 10, page * 10).map((currBook) => (
+              <WrapBook>
+                <Book
+                  bookData={currBook}
+                  key={currBook.id}
+                  type={type.concat("-mobile")}
+                />
+              </WrapBook>
+            ))}
           </div>
         )}
 
         {size.width >= 560 && (
           <div>
-            {
-              showBooks.slice(page - 1, page - 1 + 10).map((currBook, key) => (
-                <WrapBook>
-                  <Book
-                    bookData={currBook}
-                    key={key}
-                    type={type.concat("-desktop")}
-                  />
-                  <AsideDescription
-                    type={type.concat("-desktop")}
-                    description={currBook.description}
-                    review={currBook.review}
-                    bookData={currBook}
-                  />
-                </WrapBook>
-              ))
-              /*.slice(page - 1, page - 1 + 10)*/
-            }
+            {showBooks.slice(page * 10 - 10, page * 10).map((currBook, key) => (
+              <WrapBook>
+                <Book
+                  bookData={currBook}
+                  key={key}
+                  type={type.concat("-desktop")}
+                />
+                <AsideDescription
+                  type={type.concat("-desktop")}
+                  description={currBook.description}
+                  review={currBook.review}
+                  bookData={currBook}
+                />
+              </WrapBook>
+            ))}
           </div>
         )}
       </Container>

@@ -20,6 +20,7 @@ export const requestReviews = (token) => (dispatch) => {
         normalized[currReview.google_book_id] = { ...currReview };
       });
       dispatch(addToReviewsList(normalized));
+      dispatch(requestGoogleInfo(normalized));
     })
     .catch((e) => {
       const errorstatus = e.response.status;
@@ -34,31 +35,39 @@ const addToReviewsList = (booksReviews) => ({
   },
 });
 
-// export const requestGoogleInfo = (booksReviews) => (dispatch) => {
-//   Object.keys(booksReviews).map((key) => {
-//     if (isNaN(key)) {
-//       axios
-//         .get(`https://www.googleapis.com/books/v1/volumes/${key}`)
-//         .then((res) => res.data)
-//         .then((res) => {
-//           const normalized = {};
-//           res.items.map((item, index) => {
-//             normalized[item.id] = normalizator(item);
-//           });
-//           dispatch(addGoogleInfo(normalized));
-//         })
-//         .catch((e) => {
-//           const errorstatus = e.response.status;
-//           console.log("Erro: ", errorstatus);
-//         });
-//     }
-//   });
+export const requestGoogleInfo = (booksReviews) => (dispatch) => {
+  let urlRequests = [];
+  let booksDescriptions = [];
 
-// };
-// https://www.googleapis.com/books/v1/volumes?q=+intitle:${bookTitle}
-// const addGoogleInfo = (googleInfo) => ({
-//   type: ADD_GOOGLE_INFO,
-//   payload: {
-//     googleInfo,
-//   },
-// });
+  Object.keys(booksReviews).map((key) => {
+    if (isNaN(key)) {
+      urlRequests.push(`https://www.googleapis.com/books/v1/volumes/${key}`);
+    }
+  });
+
+  if (urlRequests) {
+    console.log(urlRequests);
+    let promises = [];
+    urlRequests.slice(0, 50).forEach((item, index) => {
+      promises.push(axios.get(item));
+    });
+    axios
+      .all(promises)
+      .then((res) => {
+        res.map((item, index) => {
+          booksDescriptions[item.data.id] = item.data.volumeInfo.description;
+        });
+        return booksDescriptions;
+      })
+      .then((res) => {
+        dispatch(addGoogleInfo(res));
+      });
+  }
+};
+
+const addGoogleInfo = (googleInfo) => ({
+  type: ADD_GOOGLE_INFO,
+  payload: {
+    googleInfo,
+  },
+});
