@@ -5,7 +5,7 @@ export const AsideContainer = styled.div`
   max-width: 300px;
   height: 158px;
   overflow-y: scroll;
-  background-color: #fff0f0;
+  background-color: #fafafa;
   margin-left: 5px;
 
   .aside-content {
@@ -14,7 +14,8 @@ export const AsideContainer = styled.div`
   }
 
   @media screen and (max-width: 560px) {
-    width: 100%;
-    min-width: 315px;
+    display: none;
+    /* width: 100%;
+    min-width: 315px; */
   }
 `;

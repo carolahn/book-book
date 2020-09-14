@@ -10,7 +10,7 @@ import {
   putBookChanges,
 } from "../../redux/actions/user-books";
 
-const Book = ({ bookData, section }) => {
+const Book = ({ bookData, type }) => {
   const { Option } = Select;
   const dispatch = useDispatch();
   const user = useSelector((state) => state.login);
@@ -68,7 +68,94 @@ const Book = ({ bookData, section }) => {
 
   return (
     <BookContainer className="book">
-      {section === "search" || section === "timeline" ? (
+      {type === "search-desktop" && (
+        <>
+          <img src={bookData.image_url} alt="cover" />
+          <div className="book-info">
+            <div className="title">{bookData.title}</div>
+            <div className="author">{bookData.author}</div>
+            <div className="description">
+              <p>{bookData.categories}</p>
+              <p>{bookData.year}</p>
+            </div>
+            <div className="grade">
+              <Rate
+                disabled
+                allowHalf
+                defaultValue={bookData.grade || 0}
+                style={{ fontSize: 15, display: "revert" }}
+              />
+            </div>
+          </div>
+        </>
+      )}
+
+      {type === "search-mobile" && (
+        <>
+          <img src={bookData.image_url} alt="cover" />
+          <div className="book-info">
+            <div className="title">{bookData.title}</div>
+            <div className="author">{bookData.author}</div>
+            <div className="description">
+              <p>{bookData.description}</p>
+            </div>
+            <div className="grade">
+              <Rate
+                disabled
+                allowHalf
+                defaultValue={bookData.grade || 0}
+                style={{ fontSize: 15, display: "revert" }}
+              />
+            </div>
+          </div>
+        </>
+      )}
+
+      {type === "timeline-desktop" && (
+        <>
+          <img src={bookData.image_url} alt="cover" />
+          <div className="book-info">
+            <div className="title">{bookData.title}</div>
+            <div className="author">{bookData.author}</div>
+            <div className="description">
+              <p>{bookData.categories}</p>
+              <p>{bookData.creator.user} read it.</p>
+            </div>
+            <div className="grade">
+              <Rate
+                disabled
+                allowHalf
+                defaultValue={bookData.grade || 0}
+                style={{ fontSize: 15, display: "revert" }}
+              />
+            </div>
+          </div>
+        </>
+      )}
+
+      {type === "timeline-mobile" && (
+        <>
+          <img src={bookData.image_url} alt="cover" />
+          <div className="book-info">
+            <div className="title">{bookData.title}</div>
+            <div className="author">{bookData.author}</div>
+            <div className="description">
+              <p>{bookData.review}</p>
+              <p>{bookData.creator.user}</p>
+            </div>
+            <div className="grade">
+              <Rate
+                disabled
+                allowHalf
+                defaultValue={bookData.grade || 0}
+                style={{ fontSize: 15, display: "revert" }}
+              />
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* {type === "search" || type === "timeline" ? (
         <>
           <img src={bookData.image_url} alt="cover" />
           <div className="book-info">
@@ -107,7 +194,7 @@ const Book = ({ bookData, section }) => {
             </div>
           </div>
         </>
-      )}
+      )} */}
 
       <div className="select-menu">
         <Select

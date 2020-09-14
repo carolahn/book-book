@@ -64,7 +64,7 @@ const Timeline = () => {
   return (
     <ListContainer>
       {booksReviews && Object.values(booksReviews).length !== 0 ? (
-        <BookList showBooks={Object.values(booksReviews)} section="timeline" />
+        <BookList showBooks={Object.values(booksReviews)} type="timeline" />
       ) : (
         message
       )}

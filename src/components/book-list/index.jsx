@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { Container, WrapBook } from "./styles";
 import { Pagination } from "antd";
@@ -12,12 +12,13 @@ import AsideDescription from "../aside-description";
     Obs: já está responsivo!
 */
 
-const BookList = ({ showBooks, section, getMorePages }) => {
+const BookList = ({ showBooks, getMorePages, type }) => {
   const [page, setPage] = useState(1);
+  const size = useWindowSize();
 
   const handleOnChange = (pag) => {
     setPage(pag);
-    if (section === "search") {
+    if (type.includes("search")) {
       getMorePages(pag);
     }
   };
@@ -32,7 +33,47 @@ const BookList = ({ showBooks, section, getMorePages }) => {
         showSizeChanger={false}
       />
       <Container>
-        {section === "timeline" ? (
+        {size.width < 560 && (
+          <div>
+            {
+              showBooks.slice(page - 1, page - 1 + 10).map((currBook, key) => (
+                <WrapBook>
+                  <Book
+                    bookData={currBook}
+                    key={key}
+                    type={type.concat("-mobile")}
+                  />
+                </WrapBook>
+              ))
+              /*.slice(page - 1, page - 1 + 10)*/
+            }
+          </div>
+        )}
+
+        {size.width >= 560 && (
+          <div>
+            {
+              showBooks.slice(page - 1, page - 1 + 10).map((currBook, key) => (
+                <WrapBook>
+                  <Book
+                    bookData={currBook}
+                    key={key}
+                    type={type.concat("-desktop")}
+                  />
+                  <AsideDescription
+                    type={type.concat("-desktop")}
+                    description={currBook.description}
+                    review={currBook.review}
+                    bookData={currBook}
+                  />
+                </WrapBook>
+              ))
+              /*.slice(page - 1, page - 1 + 10)*/
+            }
+          </div>
+        )}
+
+        {/* {section === "timeline" ? (
           <div>
             {
               showBooks.slice(page - 1, page - 1 + 10).map((currBook, key) => (
@@ -41,10 +82,11 @@ const BookList = ({ showBooks, section, getMorePages }) => {
                   <AsideDescription
                     description={currBook.description}
                     review={currBook.review}
+                    creator={currBook.creator.user}
                   />
                 </WrapBook>
               ))
-              /*.slice(page - 1, page - 1 + 10)*/
+              
             }
           </div>
         ) : section === "search" ? (
@@ -59,7 +101,7 @@ const BookList = ({ showBooks, section, getMorePages }) => {
                   />
                 </WrapBook>
               ))
-              /*.slice(page - 1, page - 1 + 10)*/
+              
             }
           </div>
         ) : (
@@ -67,7 +109,7 @@ const BookList = ({ showBooks, section, getMorePages }) => {
             se section for most popular -> não tem aside; se for user -> são os
             reviews; se for feedback -> formulario de feedbacks
           </div>
-        )}
+        )} */}
       </Container>
       <Pagination
         defaultCurrent={page}
@@ -81,3 +123,27 @@ const BookList = ({ showBooks, section, getMorePages }) => {
 };
 
 export default BookList;
+
+function useWindowSize() {
+  const [windowSize, setWindowSize] = useState({
+    width: undefined,
+    height: undefined,
+  });
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    }
+
+    window.addEventListener("resize", handleResize);
+
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return windowSize;
+}

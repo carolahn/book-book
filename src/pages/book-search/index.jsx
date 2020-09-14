@@ -64,7 +64,7 @@ const BookSearch = () => {
           {searchResults && Object.values(searchResults).length !== 0 ? (
             <BookList
               showBooks={Object.values(searchResults)}
-              section="search"
+              type="search"
               getMorePages={setPage}
             />
           ) : (

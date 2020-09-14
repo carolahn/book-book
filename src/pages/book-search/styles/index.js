@@ -38,7 +38,7 @@ export const MainContainer = styled.div`
 `;
 
 export const ResultsContainer = styled.div`
-  background-color: red;
+  /* background-color: red; */
   grid-column: 1;
   min-width: 315px;
   display: flex;
