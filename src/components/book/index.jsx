@@ -15,6 +15,7 @@ const Book = ({ bookData, type }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.login);
   const userBooks = useSelector((state) => state.userBooks);
+  const googleInfo = useSelector((state) => state.reviewsList.googleInfo);
 
   /* ainda a ser decidido
     const bookData = {
@@ -47,7 +48,7 @@ const Book = ({ bookData, type }) => {
           bookData.author,
           value,
           bookData.image_url,
-          bookData.grade,
+          bookData.grade, // MUDAR
           bookData.categories,
           "",
           bookData.google_book_id
@@ -76,7 +77,7 @@ const Book = ({ bookData, type }) => {
           <div className="book-info">
             <div className="title">{bookData.title}</div>
             <div className="author">{bookData.author}</div>
-            <div className="description">
+            <div className="description description-search-desktop">
               <p>{bookData.categories}</p>
               <p>{bookData.year}</p>
             </div>
@@ -98,7 +99,7 @@ const Book = ({ bookData, type }) => {
           <div className="book-info">
             <div className="title">{bookData.title}</div>
             <div className="author">{bookData.author}</div>
-            <div className="description">
+            <div className="description description-search-mobile">
               <p>{bookData.description}</p>
             </div>
             <div className="grade">
@@ -119,9 +120,11 @@ const Book = ({ bookData, type }) => {
           <div className="book-info">
             <div className="title">{bookData.title}</div>
             <div className="author">{bookData.author}</div>
-            <div className="description">
-              <p>{bookData.categories}</p>
-              <p>{bookData.creator.user} read it.</p>
+            <div className="description description-timeline">
+              {bookData.review ? <p>{bookData.review}</p> : <p>No review</p>}
+              <p>
+                By <a href="">{bookData.creator.user}</a>
+              </p>
             </div>
             <div className="grade">
               <Rate
@@ -141,9 +144,11 @@ const Book = ({ bookData, type }) => {
           <div className="book-info">
             <div className="title">{bookData.title}</div>
             <div className="author">{bookData.author}</div>
-            <div className="description">
-              <p>{bookData.review}</p>
-              <p>{bookData.creator.user}</p>
+            <div className="description description-timeline">
+              {bookData.review ? <p>{bookData.review}</p> : <p>No review</p>}
+              <p>
+                By <a href="">{bookData.creator.user}</a>
+              </p>
             </div>
             <div className="grade">
               <Rate

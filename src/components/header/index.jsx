@@ -15,8 +15,6 @@ const Header = () => {
 
     const tokenInfo = useSelector(state => state.login);
 
-    
-
     const size = useWindowSize();
 
     return (

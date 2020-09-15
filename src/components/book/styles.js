@@ -47,8 +47,34 @@ export const BookContainer = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 12px;
-    line-height: 15px;
+    /* line-height: 15px; */
     color: #777777;
+  }
+
+  div.description p {
+    /* line-height: 12px; */
+    padding: 0;
+    margin: 0;
+  }
+
+  div.description-search-desktop {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  div.description-search-mobile {
+    line-height: 15px;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center; */
+  }
+
+  div.description-timeline {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   div.grade {
