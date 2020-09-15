@@ -16,7 +16,7 @@ const defaultState = {
 
 const reducer = (state = defaultState, action) => {
     switch (action.type) {
-        case LOGIN_ACTIONS.LOGIN_SUCCESSFUL: 
+        case LOGIN_ACTIONS.LOGIN_SUCCESSFUL:
             localStorage.setItem('book-book-token', JSON.stringify({token: `${action.token}`, id: `${action.userId}`, username: `${action.username}`}));
             return { ...state, error: "", error_message: "", id: action.userId, username: action.username, token: action.token};
 
