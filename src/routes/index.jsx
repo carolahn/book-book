@@ -18,7 +18,7 @@ const Routes = () => {
 
 
   useEffect(() => {
-       dispatch(requestUserBooks(tokenInfo.token, tokenInfo.id));
+      tokenInfo.id && dispatch(requestUserBooks(tokenInfo.token, tokenInfo.id));
   }, [tokenInfo.id]);
   
   return (
