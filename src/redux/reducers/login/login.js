@@ -3,6 +3,7 @@ import LOGIN_ACTIONS from '../../actions/login/login-action-types';
 const defaultState = {
     error: '',
     error_message: '',
+    userId: localStorage.getItem('book-book-token') ? JSON.parse(localStorage.getItem('book-book-token')).userId : "",
     username: localStorage.getItem('book-book-token') ? JSON.parse(localStorage.getItem('book-book-token')).username : "",
     token: localStorage.getItem('book-book-token') ? JSON.parse(localStorage.getItem('book-book-token')).token : "",
     login_status: localStorage.getItem('book-book-token') ? true : false,
@@ -11,15 +12,15 @@ const defaultState = {
 const reducer = (state = defaultState, action) => {
     switch (action.type) {
         case LOGIN_ACTIONS.LOGIN_SUCCESSFUL: 
-            localStorage.setItem('book-book-token', JSON.stringify({token: `${action.token}`, username: `${action.username}`}));
-            return { ...state, error: "", error_message: "", username: action.username, token: action.token, login_status: true};
+            localStorage.setItem('book-book-token', JSON.stringify({token: `${action.token}`, userId: `${action.userId}`, username: `${action.username}`}));
+            return { ...state, error: "", error_message: "", userId: action.userId, username: action.username, token: action.token, login_status: true};
 
         case LOGIN_ACTIONS.LOGIN_UNSUCCESSFUL:
-            return { ...state, error: 401, error_message: action.error_message, login_status: false, token: ''};
+            return { ...state, error: 401, error_message: action.error_message, login_status: false, token: '', userId: '', username: ''};
 
         case LOGIN_ACTIONS.LOGOUT:
             localStorage.getItem('book-book-token') && localStorage.removeItem('book-book-token');
-            return { ...state, error: '', error_message: '', username: '', token: '', login_status: false};
+            return { ...state, error: '', error_message: '', userId: '', username: '', token: '', login_status: false};
 
         default:
             return state;
