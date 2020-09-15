@@ -5,49 +5,58 @@ import { useSelector } from "react-redux";
 import Login from "../pages/login";
 import Register from "../pages/register";
 import Timeline from "../pages/timeline/";
-import BookSearch from "../pages/book-search";
 import Shelves from "../pages/shelves";
+import Perfil from "../pages/perfil";
+import BookSearch from "../pages/book-search";
 
 import styled from "styled-components";
 
 const Routes = () => {
   const tokenInfo = useSelector((state) => state.login);
-
+  
   return (
-    <Switch>
-      <Route exact path="/">
-        <Login />
-      </Route>
-      <Route exact path="/register">
-        <Register />
-      </Route>
+    <>
+      <Switch>
+        <Route exact path="/">
+          <Login />
+        </Route>
+        <Route exact path="/register">
+          <Register />
+        </Route>
 
-      {tokenInfo.token && tokenInfo.login_status ? (
-        <>
-          <Route path="/my-shelves/">
-            <Shelves />
-          </Route>
-          <Route exact path="/search">
-            <BookSearch />
-          </Route>
-          <Route exact path="/timeline">
-            <Timeline />
-          </Route>
-        </>
-      ) : (
-        <>
-          <Route exact path="/my-shelves">
-            <NotAuthorized>NOT Authorized</NotAuthorized>
-          </Route>
-          <Route exact path="/search">
-            <NotAuthorized>NOT Authorized</NotAuthorized>
-          </Route>
-          <Route exact path="/timeline">
-            <NotAuthorized>NOT Authorized</NotAuthorized>
-          </Route>
-        </>
-      )}
-    </Switch>
+        {tokenInfo.token ? (
+          <>
+            <Route path="/my-shelves/">
+              <Shelves />
+            </Route>
+            <Route exact path="/search">
+              <BookSearch />
+            </Route>
+            <Route exact path="/timeline">
+              <Timeline />
+            </Route>
+            <Route path="/perfil/:id">
+              <Perfil />
+            </Route>
+          </>
+        ) : (
+          <>
+            <Route exact path="/my-shelves">
+              <NotAuthorized>NOT Authorized</NotAuthorized>
+            </Route>
+            <Route exact path="/search">
+              <NotAuthorized>NOT Authorized</NotAuthorized>
+            </Route>
+            <Route exact path="/timeline">
+              <NotAuthorized>NOT Authorized</NotAuthorized>
+            </Route>
+            <Route path="/perfil">
+              <NotAuthorized>NOT Authorized</NotAuthorized>
+            </Route>
+          </>
+        )}
+      </Switch>
+    </>
   );
 };
 

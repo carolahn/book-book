@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
 import { StyledShelf, ShelvesButtons, BookShelf, Book } from './styles';
 

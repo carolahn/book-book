@@ -1,7 +1,9 @@
 import styled from 'styled-components';
+import background_image from '../../assets/images/background-image/background-covers.png';
 
 export const StyledShelf = styled.div`
-    margin: 75px auto;
+    margin: 0 auto;
+    padding: 75px 0 0 0;
     widows: 90vw;
     display: flex;
     flex-flow: column nowrap;
