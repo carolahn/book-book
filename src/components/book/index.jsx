@@ -32,6 +32,7 @@ const Book = ({ bookData, type }) => {
   */
 
   function onChange(value) {
+    console.log(value)
     if (userBooks[bookData.google_book_id]) {
       const selectedBook = userBooks[bookData.google_book_id];
       if (value === "delete") {
@@ -70,15 +71,15 @@ const Book = ({ bookData, type }) => {
   }
 
   const handleModal = (event) => {
-
-    if (event.target.className.includes('modal-container')) {
+    
+    if (event.target.id === 'modal-container') {
       setBookInfoClicked(false)
     }
   }
-  console.log(userBooks)
+  
   return (
     <div>
-      <BookContainer className="book" onClick={handleBookInfo}>
+      <BookContainer className="book" onClick={handleBookInfo} >
       {type === "search-desktop" && (
         <>
           <img src={bookData.image_url} alt="cover" />
@@ -192,7 +193,15 @@ const Book = ({ bookData, type }) => {
         </Select>
       </div>
     </BookContainer>
-    {bookInfoClicked &&  <BookInfo title={bookData.title} image={bookData.image_url}  description={bookData.description} grading={bookData.grade} handleModal={handleModal} /> }
+    {bookInfoClicked &&  <BookInfo 
+      title={bookData.title} 
+      image={bookData.image_url}  
+      description={bookData.description} 
+      grading={bookData.grade} 
+      handleModal={handleModal} 
+      onChange={onChange}
+      addFeedback={true}
+      /> }
     </div>
   );
 };

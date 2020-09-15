@@ -77,6 +77,7 @@ export const StyledBookInfo = styled.div`
   }
 
   .feedbackContainer {
+    overflow: auto;
     grid-column-start:4;
     grid-column-end: 4;
     grid-row-start:2;
@@ -246,7 +247,6 @@ export const StyledBookInfo = styled.div`
 
 `
 
-
 export const ModalContainer = styled.div`
   width:100vw;
   height:100vh;
@@ -257,6 +257,6 @@ export const ModalContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2000;
+  z-index: 1;
 `
 

@@ -45,10 +45,9 @@ const BookList = ({ showBooks, getMorePages, type }) => {
           <div>
             {
               showBooks.slice((page - 1) * 10, (page - 1 + 10) * 10).map((currBook) => (
-                <WrapBook>
+                <WrapBook key={currBook.id}>
                   <Book
                     bookData={currBook}
-                    key={currBook.id}
                     type={type.concat("-mobile")}
                   />
                 </WrapBook>
@@ -62,10 +61,9 @@ const BookList = ({ showBooks, getMorePages, type }) => {
           <div>
             {
               showBooks.slice((page - 1) * 10, (page - 1) * 10 + 10).map((currBook, key) => (
-                <WrapBook>
+                <WrapBook key={key}>
                   <Book
                     bookData={currBook}
-                    key={key}
                     type={type.concat("-desktop")}
                   />
                   <AsideDescription
