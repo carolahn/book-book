@@ -18,7 +18,6 @@ const BookList = ({ showBooks, getMorePages, type }) => {
   const size = useWindowSize();
 
   const handleOnChange = (pag) => {
-    console.log(showBooks);
     setPage(pag);
     if (type.includes("search")) {
       getMorePages(pag);
@@ -41,14 +40,13 @@ const BookList = ({ showBooks, getMorePages, type }) => {
         showSizeChanger={false}
       />
       <Container>
-        {size.width < 560 && (
+        {size.width < 745 && (
           <div>
             {
-              showBooks.slice((page - 1) * 10, (page - 1 + 10) * 10).map((currBook) => (
-                <WrapBook>
+              showBooks.slice((page - 1) * 10, (page - 1 + 10) * 10).map((currBook, key) => (
+                <WrapBook key={key}>
                   <Book
                     bookData={currBook}
-                    key={currBook.id}
                     type={type.concat("-mobile")}
                   />
                 </WrapBook>
@@ -58,14 +56,13 @@ const BookList = ({ showBooks, getMorePages, type }) => {
           </div>
         )}
 
-        {size.width >= 560 && (
+        {size.width >= 745 && (
           <div>
             {
               showBooks.slice((page - 1) * 10, (page - 1) * 10 + 10).map((currBook, key) => (
-                <WrapBook>
+                <WrapBook key={key}>
                   <Book
                     bookData={currBook}
-                    key={key}
                     type={type.concat("-desktop")}
                   />
                   <AsideDescription

@@ -5,7 +5,7 @@ import axios from "axios";
 
 import BookList from "../../components/book-list";
 
-import {PerfilContainer} from "./styled";
+import { PerfilContainer } from "./styled";
 
 const Perfil = () => {
   const { id } = useParams();
@@ -37,12 +37,15 @@ const Perfil = () => {
   return (
     user.name !== undefined && (
       <PerfilContainer>
-        <h2>Name: {user.name}</h2>
-        <h3>Email: {user.email}</h3>
-        <div>
-            <h3>Books read</h3>
-            {user.books && (user.books.length > 0 ? <BookList showBooks={user.books} type="timeline"/> : "User has not finished reading any books")}
-        </div>
+        <h1>
+          Books read by {user.name} ({user.user})
+        </h1>
+        {user.books &&
+          (user.books.length > 0 ? (
+            <BookList showBooks={user.books} type="timeline" />
+          ) : (
+            "User has not finished reading any books"
+          ))}
       </PerfilContainer>
     )
   );

@@ -3,10 +3,9 @@ import styled from "styled-components";
 export const PerfilContainer = styled.div`
   margin: 75px;
   padding: 20px;
-  background-color: white;
   border-radius: 10px;
 
-  h3 {
+  h1 {
     text-align: center;
   }
 
