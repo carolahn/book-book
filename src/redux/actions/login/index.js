@@ -1,5 +1,6 @@
 import axios from 'axios';
 import LOGIN_ACTIONS from './login-action-types';
+import { requestUserBooks } from "../user-books";
 
 const login_successeful = (userId = '', username = '', token = '') => {
     return {
@@ -24,7 +25,10 @@ export const login = (username, password) => async (dispatch) => {
             password: password
         }
     })
-    .then(response => dispatch(login_successeful(response.data.user.id, username, response.data.auth_token)))
+    .then(response => {
+        dispatch(login_successeful(response.data.user.id, username, response.data.auth_token));
+        dispatch(requestUserBooks(response.data.auth_token, response.data.user.id));
+    })
     .catch(err => dispatch(login_unssuccessfull('Invalid credentials')));
 }
 
