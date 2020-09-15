@@ -3,7 +3,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../redux/actions/login/index';
 
-import { StyledHeader, Menu, LittleMenu, LoggedLittleMenu } from './styled/styles';
+import { StyledHeader, Menu, LittleMenu, LoggedLittleMenu } from './styles.js';
 
 const Header = () => {
 
@@ -20,11 +20,9 @@ const Header = () => {
     return (
         <StyledHeader >
             <div className="logo-holder" />
-
-            {(where === '/' || where === '/register') ?
-            
+            {(where === '/' || where === '/register') ? 
             <>
-                {size.width > 560 ?
+                {size.width > 744 ?
                 <div className="button-holder" >
                 <button className={where === '/' ? "login button here" : "login button"}
                     onClick={() => history.push("/")} >Login</button>
@@ -58,10 +56,13 @@ const Header = () => {
             
             : 
 
-            (tokenInfo.token && tokenInfo.login_status && (where === '/timeline' || where === '/search' || where === '/my-shelves')) ? 
+            (tokenInfo.token && 
+                (where === '/timeline' || where === '/search' || where === '/my-shelves' ||
+                    where === '/my-shelves/' || where === '/my-shelves/whishlist' || 
+                    where === '/my-shelves/reading' || where === '/my-shelves/read')) ? 
                 
             <>
-                {size.width > 560 ?
+                {size.width > 744 ?
                 <div className="button-holder" >
                     <button className={where === '/my-shelves' ? "button here" : "button"}
                     onClick={() => {
@@ -81,7 +82,6 @@ const Header = () => {
                     <button className="button logout"
                         onClick={() => {
                             dispatch(logout());
-                            localStorage.removeItem('book-book-token');
                             history.push("/");
                             setMenu(false);
                         }} >Logout</button>
@@ -111,7 +111,6 @@ const Header = () => {
                                 <button className={where === '/' ? "little-logout hbtn" : "hbtn"}
                                         onClick={() => {
                                             dispatch(logout());
-                                            localStorage.removeItem('book-book-token');
                                             history.push("/");
                                             setMenu(false);
                                         }} >Logout</button>
@@ -125,7 +124,7 @@ const Header = () => {
             : 
             
             <>
-                {size.width > 560 ?
+                {size.width > 744 ?
                 <div className="button-holder" >
                 <button className={where === '/' ? "login button here" : "login button"}
                     onClick={() => history.push("/")} >Login</button>

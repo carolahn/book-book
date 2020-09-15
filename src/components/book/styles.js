@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const BookContainer = styled.div`
   margin: 0;
-  /* padding: 0; */
+  margin-bottom: 10px;
   padding: 4px;
   width: 312px;
   background-color: white;
@@ -24,8 +24,9 @@ export const BookContainer = styled.div`
     grid-column: 2;
     grid-row: 1;
     height: 30px;
-    font-size: 16px;
-    line-height: 30px;
+    font-size: 14px;
+    line-height: 15px;
+    overflow: hidden;
   }
   div.author {
     grid-column: 2;
@@ -35,6 +36,7 @@ export const BookContainer = styled.div`
     font-style: italic;
     line-height: 16px;
     margin: 0;
+    overflow: hidden;
   }
   div.description {
     grid-column: 2;
@@ -57,6 +59,7 @@ export const BookContainer = styled.div`
     text-align: right;
     margin: 0;
     padding: 0;
+    pointer-events: none;
   }
 
   div.grade .ant-rate {

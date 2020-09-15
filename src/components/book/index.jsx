@@ -1,12 +1,23 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { Select, Rate} from "antd";
-import { DeleteTwoTone } from '@ant-design/icons'
+import React, {useState} from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Select, Rate } from "antd";
+import { DeleteTwoTone } from "@ant-design/icons";
 import "antd/dist/antd.css";
-import { BookContainer } from "./styled";
+import { BookContainer } from "./styles.js";
+import BookInfo from '../book-info'
+import {
+  postUserBook,
+  removeBook,
+  putBookChanges,
+} from "../../redux/actions/user-books";
 
-const Book = ({data}/* props || {bookData: {title, author, image_url, grade, categories, review, google_book_id}} */) => {
+const Book = ({ bookData, type }) => {
   const { Option } = Select;
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.login);
+  const userBooks = useSelector((state) => state.userBooks);
+  
+  const [bookInfoClicked, setBookInfoClicked] = useState(false)
 
   /* ainda a ser decidido
     const bookData = {
@@ -20,69 +31,169 @@ const Book = ({data}/* props || {bookData: {title, author, image_url, grade, cat
     }
   */
 
-  // exemplo de data
-  const bookData = data || {
-    title: "React JS Fundamental",
-    author: "Onesinus SPT",
-    image_url:
-      "http://books.google.com/books/content?id=Rhl1CgAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
-    grade: 0,
-    categories: "Computers",
-    review:
-      "In this ebooks we will learn basic Single Page Application with React JS 1. How to Install React JS with create-react-app 2. Fetching data from API 3. Using Global Context with useContext 4. Unit Testing with JEST [Ongoing]",
-    google_book_id: "u1CsDwAAQBAJ",
-  };
-
   function onChange(value) {
-    console.log(`selected ${value}`);
-    // adicionar o dispatch() aqui
+    if (userBooks[bookData.google_book_id]) {
+      const selectedBook = userBooks[bookData.google_book_id];
+      if (value === "delete") {
+        dispatch(removeBook(user.token, user.id, selectedBook.id));
+      } else {
+        dispatch(putBookChanges(user.token, user.id, selectedBook.id, value));
+      }
+    } else if (!userBooks[bookData.google_book_id] && value === "delete") {
+      return;
+    } else {
+      dispatch(
+        postUserBook(
+          user.token,
+          user.id,
+          bookData.title,
+          bookData.author,
+          value,
+          bookData.image_url,
+          bookData.grade,
+          bookData.categories,
+          "",
+          bookData.google_book_id
+        )
+      );
+    }
   }
 
+  const handleBookInfo = (event) => {
+    
+    if (bookInfoClicked === false && !event.target.className.includes('ant-select')  && !event.target.className.includes('spanSelect') ) {
+      setBookInfoClicked(true)
 
+    }else {
+      setBookInfoClicked(false)
+    }
+  }
+
+  const handleModal = (event) => {
+
+    if (event.target.className.includes('modal-container')) {
+      setBookInfoClicked(false)
+    }
+  }
+  console.log(userBooks)
   return (
-    <BookContainer className="book" >
-      <img src={bookData.image_url} alt="cover" />
-      <div className="book-info">
-        <div className="title">{bookData.title}</div>
-        <div className="author">{bookData.author}</div>
-        <div className="description">
-          <p>{bookData.review}</p>
-        </div>
-        <div className="grade">
-          <Rate
-            disabled
-            allowHalf
-            defaultValue={bookData.grade}
-            style={{ fontSize: 15, display: "revert" }}
-          />
-        </div>
-      </div>
+    <div>
+      <BookContainer className="book" onClick={handleBookInfo}>
+      {type === "search-desktop" && (
+        <>
+          <img src={bookData.image_url} alt="cover" />
+          <div className="book-info">
+            <div className="title">{bookData.title}</div>
+            <div className="author">{bookData.author}</div>
+            <div className="description">
+              <p>{bookData.categories}</p>
+              <p>{bookData.year}</p>
+            </div>
+            <div className="grade">
+              <Rate
+                disabled
+                allowHalf
+                defaultValue={bookData.grade || 0}
+                style={{ fontSize: 15, display: "revert" }}
+              />
+            </div>
+          </div>
+        </>
+      )}
+
+      {type === "search-mobile" && (
+        <>
+          <img src={bookData.image_url} alt="cover" />
+          <div className="book-info">
+            <div className="title">{bookData.title}</div>
+            <div className="author">{bookData.author}</div>
+            <div className="description">
+              <p>{bookData.description}</p>
+            </div>
+            <div className="grade">
+              <Rate
+                disabled
+                allowHalf
+                defaultValue={bookData.grade || 0}
+                style={{ fontSize: 15, display: "revert" }}
+              />
+            </div>
+          </div>
+        </>
+      )}
+
+      {type === "timeline-desktop" && (
+        <>
+          <img src={bookData.image_url} alt="cover" />
+          <div className="book-info">
+            <div className="title">{bookData.title}</div>
+            <div className="author">{bookData.author}</div>
+            <div className="description">
+              <p>{bookData.categories}</p>
+              <p>{bookData.creator.user} read it.</p>
+            </div>
+            <div className="grade">
+              <Rate
+                disabled
+                allowHalf
+                defaultValue={bookData.grade || 0}
+                style={{ fontSize: 15, display: "revert" }}
+              />
+            </div>
+          </div>
+        </>
+      )}
+
+      {type === "timeline-mobile" && (
+        <>
+          <img src={bookData.image_url} alt="cover" />
+          <div className="book-info">
+            <div className="title">{bookData.title}</div>
+            <div className="author">{bookData.author}</div>
+            <div className="description">
+              <p>{bookData.review}</p>
+              <p>{bookData.creator.user}</p>
+            </div>
+            <div className="grade">
+              <Rate
+                disabled
+                allowHalf
+                defaultValue={bookData.grade || 0}
+                style={{ fontSize: 15, display: "revert" }}
+              />
+            </div>
+          </div>
+        </>
+      )}
+
       <div className="select-menu">
         <Select
-          showSearch
+          
           style={{ width: 200 }}
           size={"small"}
           placeholder="SHELF"
           optionFilterProp="children"
           onChange={onChange}
-         
+          
         >
-          <Option value="shelf1" style={{ paddingLeft: 37 }}>
-            <span>Want to read</span>
+          <Option value="1" style={{ paddingLeft: 37 }} >
+            <span className='spanSelect'>Wish List</span>
           </Option>
-          <Option value="shelf2" style={{ paddingLeft: 37 }}>
-            <span>Current reading</span>
+          <Option value="2" style={{ paddingLeft: 37 }}>
+            <span className='spanSelect'>Reading</span>
           </Option>
-          <Option value="shelf3" style={{ paddingLeft: 37 }}>
-            <span>Read</span>
+          <Option value="3" style={{ paddingLeft: 37 }}>
+            <span className='spanSelect'>Read</span>
           </Option>
           <Option value="delete" style={{ color: "#dd2e44" }}>
             <DeleteTwoTone twoToneColor="#dd2e44" style={{ marginRight: 10 }} />
-            <span>Remove</span>
+            <span className='spanSelect'>Remove</span>
           </Option>
         </Select>
       </div>
     </BookContainer>
+    {bookInfoClicked &&  <BookInfo title={bookData.title} image={bookData.image_url}  description={bookData.description} grading={bookData.grade} handleModal={handleModal} /> }
+    </div>
   );
 };
 

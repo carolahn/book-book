@@ -1,7 +1,10 @@
 import React from 'react'
-import { Button, Form, Rate} from 'antd'
+import { Button, Form, Rate, Input} from 'antd'
 
 const FeedbackForm = ({ handleFinish }) => {
+
+
+  const {TextArea} = Input
   return(
     <Form className='feedbackForm' onFinish={handleFinish}>
             <Form.Item

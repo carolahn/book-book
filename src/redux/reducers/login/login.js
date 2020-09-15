@@ -5,7 +5,7 @@ const defaultState = {
     error_message: '',
     username: '',
     token: localStorage.getItem('book-book-token') ? localStorage.getItem('book-book-token') : "",
-    login_status: false
+    login_status: localStorage.getItem('book-book-token') ? true : false,
 }
 
 const reducer = (state = defaultState, action) => {
@@ -19,7 +19,7 @@ const reducer = (state = defaultState, action) => {
 
         case LOGIN_ACTIONS.LOGOUT:
             localStorage.getItem('book-book-token') && localStorage.removeItem('book-book-token');
-            return { ...defaultState};
+            return { ...state, error: '', error_message: '', username: '', token: '', login_status: false};
 
         default:
             return state;
