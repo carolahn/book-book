@@ -11,7 +11,7 @@ import { ListContainer } from "./styles.js";
 const Timeline = () => {
   const [message, setMessage] = useState("Loading");
   const token = useSelector((state) => state.login.token);
-  const booksReviews = useSelector((state) => state.reviewsList);
+  const booksReviews = useSelector((state) => state.reviewsList.booksReviews);
   const dispatch = useDispatch();
 
   useEffect(() => {
