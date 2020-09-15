@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
 import { StyledShelf, ShelvesButtons, BookShelf, Book } from './styles';
 

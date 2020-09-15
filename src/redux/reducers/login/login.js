@@ -3,7 +3,7 @@ import LOGIN_ACTIONS from '../../actions/login/login-action-types';
 const defaultState = {
     error: '',
     error_message: '',
-    id: localStorage.getItem('book-book-token') ? JSON.parse(localStorage.getItem('book-book-token')).userId : "",
+    id: localStorage.getItem('book-book-token') ? parseInt(JSON.parse(localStorage.getItem('book-book-token')).id) : "",
     username: localStorage.getItem('book-book-token') ? JSON.parse(localStorage.getItem('book-book-token')).username : "",
     token: localStorage.getItem('book-book-token') ? JSON.parse(localStorage.getItem('book-book-token')).token : "",
     login_status: localStorage.getItem('book-book-token') ? true : false,
