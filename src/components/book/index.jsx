@@ -46,11 +46,11 @@ const Book = ({ bookData, type }) => {
           user.id,
           bookData.title,
           bookData.author,
-          value,
+          value, // shelf -> 1, 2 ou 3
           bookData.image_url,
-          bookData.grade, // MUDAR
+          0, // grade
           bookData.categories,
-          "",
+          "", // review
           bookData.google_book_id
         )
       );
