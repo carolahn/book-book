@@ -1,17 +1,13 @@
 import LOGIN_ACTIONS from '../../actions/login/login-action-types';
 
+// localStorage.setItem('book-book-token', JSON.stringify({error: '', error_message: '', id: '', username: '', token: ''}));
+
 const defaultState = {
     error: '',
     error_message: '',
-    id: localStorage.getItem('book-book-token') ? 
-        JSON.parse(localStorage.getItem('book-book-token')).id ? 
-        parseInt(JSON.parse(localStorage.getItem('book-book-token')).id) : "" : "",
-    username: localStorage.getItem('book-book-token') ? 
-              JSON.parse(localStorage.getItem('book-book-token')).username ?
-              JSON.parse(localStorage.getItem('book-book-token')).username : "" : "",
-    token: localStorage.getItem('book-book-token') ? 
-           JSON.parse(localStorage.getItem('book-book-token')).token ?
-           JSON.parse(localStorage.getItem('book-book-token')).token : "" : "",
+    id: localStorage.getItem('book-book-token') ? parseInt(JSON.parse(localStorage.getItem('book-book-token')).id) : "",
+    username: localStorage.getItem('book-book-token') ? JSON.parse(localStorage.getItem('book-book-token')).username : "",
+    token: localStorage.getItem('book-book-token') ? JSON.parse(localStorage.getItem('book-book-token')).token : "",
 }
 
 const reducer = (state = defaultState, action) => {
