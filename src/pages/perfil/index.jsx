@@ -5,12 +5,13 @@ import axios from "axios";
 
 import BookList from "../../components/book-list";
 
-import { PerfilContainer } from "./styled";
+import { PerfilContainer, SvgContainer } from "./styled";
 
 const Perfil = () => {
   const { id } = useParams();
   const token = useSelector((state) => state.login.token);
   const [user, setUser] = useState({});
+  const size = useWindowSize();
 
   useEffect(() => {
     axios
@@ -37,18 +38,48 @@ const Perfil = () => {
   return (
     user.name !== undefined && (
       <PerfilContainer>
-        <h1>
-          Books read by {user.name} ({user.user})
-        </h1>
-        {user.books &&
-          (user.books.length > 0 ? (
-            <BookList showBooks={user.books} type="timeline" />
-          ) : (
-            "User has not finished reading any books"
-          ))}
+        <SvgContainer>
+          {size.width > 680 && <svg height="100" width="100" />}
+          <h1 className="title">
+            <div>{user.name}'s shelf</div>
+            <div>({user.user})</div>
+          </h1>
+        </SvgContainer>
+        <div>
+          {user.books &&
+            (user.books.length > 0 ? (
+              <BookList showBooks={user.books} type="timeline" />
+            ) : (
+              "User has not finished reading any books"
+            ))}
+        </div>
       </PerfilContainer>
     )
   );
 };
 
 export default Perfil;
+
+function useWindowSize() {
+  const [windowSize, setWindowSize] = useState({
+    width: undefined,
+    height: undefined,
+  });
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    }
+
+    window.addEventListener("resize", handleResize);
+
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return windowSize;
+}

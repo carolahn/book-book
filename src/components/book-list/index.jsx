@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import { Container, WrapBook } from "./styles.js";
 import { Pagination } from "antd";
 import Book from "../book";
 import AsideDescription from "../aside-description";
+import { requestGoogleInfo } from "../../redux/actions/reviews-list";
 
 /*
     Para utilizar este componente, deve-se passar um ARRAY com os ítens já normalizados!
@@ -13,22 +15,27 @@ import AsideDescription from "../aside-description";
     
 */
 
-const BookList = ({ showBooks, getMorePages, type }) => {
+const BookList = ({ showBooks, /* getMorePages*/ type }) => {
+  const dispatch = useDispatch();
+  const booksReviews = useSelector((state) => state.reviewsList.booksReviews);
   const [page, setPage] = useState(1);
   const size = useWindowSize();
 
-  const handleOnChange = (pag) => {
-    setPage(pag);
-    if (type.includes("search")) {
-      getMorePages(pag);
-    }
+  const handleOnChange = (page) => {
+    setPage(page);
   };
+
+  useEffect(() => {
+    if (type.includes("timeline")) {
+      dispatch(requestGoogleInfo(booksReviews, page));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page]);
 
   const handleClick = () => {
     console.log("teste");
     console.log(showBooks);
   };
-
 
   return (
     <>
@@ -36,45 +43,39 @@ const BookList = ({ showBooks, getMorePages, type }) => {
         defaultCurrent={page}
         current={page}
         total={showBooks.length}
-        onChange={(pag) => handleOnChange(pag)}
+        onChange={(page) => handleOnChange(page)}
         showSizeChanger={false}
       />
       <Container>
         {size.width < 745 && (
           <div>
-            {
-              showBooks.slice((page - 1) * 10, (page - 1 + 10) * 10).map((currBook, key) => (
-                <WrapBook key={key}>
-                  <Book
-                    bookData={currBook}
-                    type={type.concat("-mobile")}
-                  />
-                </WrapBook>
-              ))
-              /*.slice(page - 1, page - 1 + 10)*/
-            }
+            {showBooks.slice(page * 10 - 10, page * 10).map((currBook) => (
+              <WrapBook key={currBook.id}>
+                <Book
+                  bookData={currBook}
+                  type={type.concat("-mobile")}
+                />
+              </WrapBook>
+            ))}
           </div>
         )}
 
         {size.width >= 745 && (
           <div>
-            {
-              showBooks.slice((page - 1) * 10, (page - 1) * 10 + 10).map((currBook, key) => (
-                <WrapBook key={key}>
-                  <Book
-                    bookData={currBook}
-                    type={type.concat("-desktop")}
-                  />
-                  <AsideDescription
-                    type={type.concat("-desktop")}
-                    description={currBook.description}
-                    review={currBook.review}
-                    bookData={currBook}
-                  />
-                </WrapBook>
-              ))
-              /*.slice(page - 1, page - 1 + 10)*/
-            }
+            {showBooks.slice(page * 10 - 10, page * 10).map((currBook) => (
+              <WrapBook key={currBook.id}>
+                <Book
+                  bookData={currBook}
+                  type={type.concat("-desktop")}
+                />
+                <AsideDescription
+                  type={type.concat("-desktop")}
+                  description={currBook.description}
+                  review={currBook.review}
+                  bookData={currBook}
+                />
+              </WrapBook>
+            ))}
           </div>
         )}
       </Container>

@@ -3,18 +3,17 @@ import {
   ADD_GOOGLE_INFO,
 } from "../../actions/reviews-list";
 
-const defaultState = [];
+const defaultState = { booksReviews: {} };
 
 const reviewsList = (state = defaultState, { type, payload }) => {
   switch (type) {
     case ADD_TO_REVIEWS_LIST:
       const { booksReviews } = payload;
-      return booksReviews;
+      return { ...state, booksReviews };
 
     case ADD_GOOGLE_INFO:
       const { googleInfo } = payload;
-      return googleInfo;
-
+      return { ...state, googleInfo: { ...googleInfo } };
     default:
       return state;
   }
