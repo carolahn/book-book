@@ -33,7 +33,7 @@ const BookSearch = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [typedInput]);
-
+  
   return (
     <BookSearchContainer className="book-search">
       <InputContainer>
