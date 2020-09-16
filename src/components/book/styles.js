@@ -14,7 +14,13 @@ export const BookContainer = styled.div`
   text-align: left;
   column-gap: 4px;
 
+
   img {
+    width:128px;
+    height: 144px;
+  }
+
+  .bookImage {
     grid-column: 1;
     grid-row: 1/6;
     width: 100%;
@@ -85,6 +91,7 @@ export const BookContainer = styled.div`
     text-align: right;
     margin: 0;
     padding: 0;
+    pointer-events: none;
   }
 
   div.grade .ant-rate {
