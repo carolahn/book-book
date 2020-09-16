@@ -34,5 +34,9 @@ export const SvgContainer = styled.div`
       padding: 0;
       text-align: center;
     }
+
+    svg {
+      display: none;
+    }
   }
 `;
