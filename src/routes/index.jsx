@@ -1,4 +1,5 @@
-import React, {useEffect} from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -8,7 +9,7 @@ import Timeline from "../pages/timeline/";
 import Shelves from "../pages/shelves";
 import Perfil from "../pages/perfil";
 import BookSearch from "../pages/book-search";
-import {requestUserBooks} from '../redux/actions/user-books';
+import { requestUserBooks } from "../redux/actions/user-books";
 
 import styled from "styled-components";
 
@@ -16,11 +17,10 @@ const Routes = () => {
   const tokenInfo = useSelector((state) => state.login);
   const dispatch = useDispatch();
 
-
   useEffect(() => {
-      tokenInfo.id && dispatch(requestUserBooks(tokenInfo.token, tokenInfo.id));
+    tokenInfo.id && dispatch(requestUserBooks(tokenInfo.token, tokenInfo.id));
   }, [tokenInfo.id]);
-  
+
   return (
     <>
       <Switch>
