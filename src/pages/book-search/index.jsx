@@ -12,13 +12,12 @@ import {
   MostPopularContainer,
   MostPopularCarousel,
 } from "./styles.js";
-import BookList from "../../components/book-list";
+import BookListPaginated from "../../containers/book-list-paginated";
 
 const BookSearch = () => {
   const dispatch = useDispatch();
   const searchResults = useSelector((state) => state.searchList);
-
-  const history = useHistory();
+  
   const { Search } = Input;
   const [typedInput, setTypedInput] = useState("");
   const [message, setMessage] = useState("Loading");
@@ -53,7 +52,7 @@ const BookSearch = () => {
         )}
         <ResultsContainer>
           {searchResults && Object.values(searchResults).length !== 0 ? (
-            <BookList showBooks={Object.values(searchResults)} type="search" />
+            <BookListPaginated showBooks={Object.values(searchResults)} type="search" />
           ) : (
             message
           )}

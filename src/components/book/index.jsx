@@ -10,6 +10,8 @@ import {
   removeBook,
   putBookChanges,
 } from "../../redux/actions/user-books";
+import {Link} from "react-router-dom";
+
 
 const Book = ({ bookData, type }) => {
   const { Option } = Select;
@@ -158,7 +160,7 @@ const Book = ({ bookData, type }) => {
             <div className="description description-timeline">
               {bookData.review ? <p>{bookData.review}</p> : <p>No review</p>}
               <p>
-                By <a href="">{bookData.creator.user}</a>
+                By <Link to={`/perfil/${bookData.creator.id}`}>{bookData.creator.user}</Link>
               </p>
             </div>
             <div className="grade">
@@ -194,7 +196,7 @@ const Book = ({ bookData, type }) => {
             <div className="description description-timeline">
               {bookData.review ? <p>{bookData.review}</p> : <p>No review</p>}
               <p>
-                By <a href="">{bookData.creator.user}</a>
+                By <Link to={`/perfil/${bookData.creator.id}`}>{bookData.creator.user}</Link>
               </p>
             </div>
             <div className="grade">

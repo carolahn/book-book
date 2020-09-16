@@ -3,7 +3,7 @@ import {
   ADD_GOOGLE_INFO,
 } from "../../actions/reviews-list";
 
-const defaultState = [];
+const defaultState = { booksReviews: {} };
 
 const reviewsList = (state = defaultState, { type, payload }) => {
   switch (type) {
