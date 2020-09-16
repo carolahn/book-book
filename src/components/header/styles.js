@@ -3,8 +3,8 @@ import logo from '../../assets/images/header/logo/logo255.svg';
 import menu from '../../assets/images/header/menu/menu.svg';
 
 export const StyledHeader = styled.div`
-
-    background-color: #545454;
+    background-color: #2f3942;
+    /* background-color: #545454; */
     position: absolute;
     top: 0;
     width: 100%;
@@ -35,7 +35,7 @@ export const StyledHeader = styled.div`
 
     .button {
         height: 100%;
-        background: #545454;
+        background: transparent;
         margin-right: 1rem;
         border: none;
         color: #FFF;
