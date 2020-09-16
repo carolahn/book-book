@@ -13,11 +13,12 @@ import {
   MostPopularCarousel,
 } from "./styles.js";
 import BookListPaginated from "../../containers/book-list-paginated";
+import AsideMostPopular from "../../components/aside-most-popular";
 
 const BookSearch = () => {
   const dispatch = useDispatch();
   const searchResults = useSelector((state) => state.searchList);
-  
+
   const { Search } = Input;
   const [typedInput, setTypedInput] = useState("");
   const [message, setMessage] = useState("Loading");
@@ -33,7 +34,7 @@ const BookSearch = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [typedInput]);
-  
+
   return (
     <BookSearchContainer className="book-search">
       <InputContainer>
@@ -45,20 +46,25 @@ const BookSearch = () => {
         />
       </InputContainer>
       <MainContainer>
-        {size.width < 560 ? (
+        {size.width < 940 ? (
           <MostPopularCarousel>Carousel Extra</MostPopularCarousel>
         ) : (
           ""
         )}
         <ResultsContainer>
           {searchResults && Object.values(searchResults).length !== 0 ? (
-            <BookListPaginated showBooks={Object.values(searchResults)} type="search" />
+            <BookListPaginated
+              showBooks={Object.values(searchResults)}
+              type="search"
+            />
           ) : (
             message
           )}
         </ResultsContainer>
 
-        <MostPopularContainer>Aside Extra</MostPopularContainer>
+        <MostPopularContainer>
+          <AsideMostPopular />
+        </MostPopularContainer>
       </MainContainer>
     </BookSearchContainer>
   );

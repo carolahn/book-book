@@ -14,9 +14,8 @@ export const BookContainer = styled.div`
   text-align: left;
   column-gap: 4px;
 
-
   img {
-    width:128px;
+    width: 128px;
     height: 144px;
   }
 
@@ -81,6 +80,23 @@ export const BookContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+
+  div.book-info-aside {
+    grid-column: 2;
+    grid-row: 1/4;
+    font-size: 12px;
+    line-height: 13px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    /* justify-content: center; */
+  }
+
+  div.book-info-aside p {
+    margin: 0;
+    padding: 0;
   }
 
   div.grade {

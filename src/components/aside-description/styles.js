@@ -34,7 +34,7 @@ export const AsideContainer = styled.div`
     background: linear-gradient(transparent 88px, white);
   }
 
-  @media screen and (max-width: 560px) {
+  @media screen and (max-width: 627px) {
     display: none;
     /* width: 100%;
     min-width: 315px; */

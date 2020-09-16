@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const StyledBookInfo = styled.div`
   width:50vw;
@@ -257,18 +257,17 @@ export const StyledBookInfo = styled.div`
  
   
 
-`
+`;
 
 export const ModalContainer = styled.div`
-  width:100vw;
-  height:100vh;
-  background-color: rgba(0,0,0,.5);
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   top: 0px;
   left: 0px;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1;
-`
-
+  z-index: 11;
+`;
