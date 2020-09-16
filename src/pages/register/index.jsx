@@ -69,9 +69,6 @@ const Register = () => {
                 required: true,
                 message: "Please input your Name!",
                 pattern: /^[a-zA-Z\u00C0-\u017F´]+\s+[a-zA-Z\u00C0-\u017F´]{0,}$/
-
-
-
               },
             ]}
             className="formItem"
