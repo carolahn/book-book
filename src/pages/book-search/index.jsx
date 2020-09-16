@@ -22,7 +22,6 @@ const BookSearch = () => {
   const { Search } = Input;
   const [typedInput, setTypedInput] = useState("");
   const [message, setMessage] = useState("Loading");
-  const [page, setPage] = useState(1);
 
   const max = 40;
   const size = useWindowSize();
@@ -54,11 +53,7 @@ const BookSearch = () => {
         )}
         <ResultsContainer>
           {searchResults && Object.values(searchResults).length !== 0 ? (
-            <BookList
-              showBooks={Object.values(searchResults)}
-              type="search"
-              getMorePages={setPage}
-            />
+            <BookList showBooks={Object.values(searchResults)} type="search" />
           ) : (
             message
           )}

@@ -6,47 +6,34 @@ import Feedback from '../feedback';
 import { DeleteTwoTone } from '@ant-design/icons'
 import FeedbackForm from '../feedback-form';
 import { requestReviews } from '../../redux/actions/reviews-list'
+import { putBookChanges } from '../../redux/actions/user-books'
 import axios from 'axios'
 
 
-const BookInfo = ({  title, image, description, addFeedback, grading, handleModal, onChange}) => {
+const BookInfo = ({  title, image, description, addFeedback, grading, handleModal, onChange, type ,google_book_id}) => {
   
   const dispatch = useDispatch()
   
 
   const [feedbackForm, setFeedbackForm] = useState(false)
-  const booksReviews = useSelector((state) => state.reviewsList);
+  const booksReviews = useSelector((state) => state.reviewsList.booksReviews);
   const token = useSelector((state) => state.login.token);
-  const user = useSelector((state) => state.login.username)
-
+  const userId = useSelector((state) => state.login.id)
+  const googleInfo = useSelector((state) => state.reviewsList.googleInfo);
+ 
   useEffect(() => {
     dispatch(requestReviews(token))
-    
+  
   }, [])
 
   const { Option } = Select;
   
   const onFinish = (event) => {
-    
+
+    const bookId = Object.values(booksReviews).filter(book => book.title === title)
+    console.log(bookId)
     setFeedbackForm(false)
-    
-    axios({
-      url: `https://ka-users-api.herokuapp.com/users/:user_id/books/`,
-      method:'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: token
-      },
-      
-      "feedback": {
-        "name": "Feedback 1 on 1",
-        "comment": event.comment,
-        "grade": event.grading
-      }
-      
-      
-      
-    })
+    dispatch(putBookChanges(token, userId, bookId[0].id ,3, event.grade, event.comment))
   }
 
   const handleNewFeedback = () => {
@@ -72,7 +59,7 @@ const BookInfo = ({  title, image, description, addFeedback, grading, handleModa
               className='bookGrade'
         />
         
-        <p className='bookDescription' >{description}</p>
+        <p className='bookDescription' >{type === 'search' ? description : type === 'timeline' ? googleInfo[google_book_id] : 'No'}</p>
         <Select
             className='addToShelf'
             style={{ width: '100%'}}

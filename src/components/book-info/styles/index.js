@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 export const StyledBookInfo = styled.div`
-  margin: 50px auto;
   width:50vw;
   height: 80vh;
   background-color: #fff;
@@ -28,9 +27,9 @@ export const StyledBookInfo = styled.div`
     grid-template-columns: 1fr 1fr;
     grid-template-rows: repeat(20, 1fr);
 
-
-
     .bookCover {
+      width: 128px;
+      height: 170px;
       grid-column-start:1;
       grid-column-end:1;
       grid-row-start:1;
@@ -82,6 +81,19 @@ export const StyledBookInfo = styled.div`
     grid-column-end: 4;
     grid-row-start:2;
     grid-row-end:2;
+  }
+
+
+  @media (max-width: 1700px) {
+    width:60vw;
+  }
+
+  @media (max-width: 1366px) {
+    width:70vw;
+  }
+
+  @media (max-width: 1280px) {
+    width: 75vw;
   }
 
   @media (max-width: 1024px) {

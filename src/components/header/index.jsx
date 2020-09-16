@@ -64,7 +64,11 @@ const Header = () => {
             <>
                 {size.width > 744 ?
                 <div className="button-holder" >
-                    <button className={where === '/my-shelves' ? "button here" : "button"}
+                    <button className={where === '/my-shelves' ||
+                                       where === '/my-shelves/' ||
+                                       where === '/my-shelves/read' ||
+                                       where === '/my-shelves/reading' ||
+                                       where === '/my-shelves/whishlist' ? "button here" : "button"}
                     onClick={() => {
                         history.push("/my-shelves");
                         setMenu(false);

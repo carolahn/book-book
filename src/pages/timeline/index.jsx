@@ -11,14 +11,14 @@ import { ListContainer } from "./styles.js";
 const Timeline = () => {
   const [message, setMessage] = useState("Loading");
   const token = useSelector((state) => state.login.token);
-  const booksReviews = useSelector((state) => state.reviewsList);
+  const booksReviews = useSelector((state) => state.reviewsList.booksReviews);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(requestReviews(token));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
-
+  
   return (
     <ListContainer>
       {booksReviews && Object.values(booksReviews).length !== 0 ? (

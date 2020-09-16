@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Select, Rate } from "antd";
 import { DeleteTwoTone } from "@ant-design/icons";
@@ -18,7 +18,8 @@ const Book = ({ bookData, type }) => {
   const userBooks = useSelector((state) => state.userBooks);
   
   const [bookInfoClicked, setBookInfoClicked] = useState(false)
-
+  const googleInfo = useSelector((state) => state.reviewsList.googleInfo);
+  
   /* ainda a ser decidido
     const bookData = {
       title = props.title,
@@ -30,9 +31,12 @@ const Book = ({ bookData, type }) => {
       google_book_id: props.google_book_id
     }
   */
+  useEffect(() => {
 
+  }, [bookInfoClicked])
+ 
   function onChange(value) {
-    console.log(value)
+    
     if (userBooks[bookData.google_book_id]) {
       const selectedBook = userBooks[bookData.google_book_id];
       if (value === "delete") {
@@ -51,7 +55,7 @@ const Book = ({ bookData, type }) => {
           bookData.author,
           value,
           bookData.image_url,
-          bookData.grade,
+          bookData.grade, // MUDAR
           bookData.categories,
           "",
           bookData.google_book_id
@@ -63,11 +67,11 @@ const Book = ({ bookData, type }) => {
   const handleBookInfo = (event) => {
     
     if (bookInfoClicked === false && !event.target.className.includes('ant-select')  && !event.target.className.includes('spanSelect') ) {
+      
       setBookInfoClicked(true)
 
-    }else {
-      setBookInfoClicked(false)
     }
+    
   }
 
   const handleModal = (event) => {
@@ -82,11 +86,11 @@ const Book = ({ bookData, type }) => {
       <BookContainer className="book" onClick={handleBookInfo} >
       {type === "search-desktop" && (
         <>
-          <img src={bookData.image_url} alt="cover" />
+          <img src={bookData.image_url} alt="cover" className='bookImage' />
           <div className="book-info">
             <div className="title">{bookData.title}</div>
             <div className="author">{bookData.author}</div>
-            <div className="description">
+            <div className="description description-search-desktop">
               <p>{bookData.categories}</p>
               <p>{bookData.year}</p>
             </div>
@@ -99,16 +103,27 @@ const Book = ({ bookData, type }) => {
               />
             </div>
           </div>
+          {bookInfoClicked &&  <BookInfo
+            type='search'
+            title={bookData.title} 
+            image={bookData.image_url}  
+            description={bookData.description} 
+            grading={bookData.grade} 
+            handleModal={handleModal} 
+            onChange={onChange}
+            addFeedback={true}
+            bookId={bookData.id}
+          /> }
         </>
       )}
 
       {type === "search-mobile" && (
         <>
-          <img src={bookData.image_url} alt="cover" />
+          <img src={bookData.image_url} alt="cover" className='bookImage'/>
           <div className="book-info">
             <div className="title">{bookData.title}</div>
             <div className="author">{bookData.author}</div>
-            <div className="description">
+            <div className="description description-search-mobile">
               <p>{bookData.description}</p>
             </div>
             <div className="grade">
@@ -120,18 +135,31 @@ const Book = ({ bookData, type }) => {
               />
             </div>
           </div>
+          {bookInfoClicked &&  <BookInfo
+            type='search' 
+            title={bookData.title} 
+            image={bookData.image_url}  
+            description={bookData.description} 
+            grading={bookData.grade} 
+            handleModal={handleModal} 
+            onChange={onChange}
+            addFeedback={true}
+            bookId={bookData.id}
+          /> }
         </>
       )}
 
       {type === "timeline-desktop" && (
         <>
-          <img src={bookData.image_url} alt="cover" />
+          <img src={bookData.image_url} alt="cover" className='bookImage'/>
           <div className="book-info">
             <div className="title">{bookData.title}</div>
             <div className="author">{bookData.author}</div>
-            <div className="description">
-              <p>{bookData.categories}</p>
-              <p>{bookData.creator.user} read it.</p>
+            <div className="description description-timeline">
+              {bookData.review ? <p>{bookData.review}</p> : <p>No review</p>}
+              <p>
+                By <a href="">{bookData.creator.user}</a>
+              </p>
             </div>
             <div className="grade">
               <Rate
@@ -142,18 +170,32 @@ const Book = ({ bookData, type }) => {
               />
             </div>
           </div>
+          {bookInfoClicked &&  <BookInfo
+            type='timeline' 
+            title={bookData.title} 
+            image={bookData.image_url}  
+            description={googleInfo} 
+            grading={bookData.grade} 
+            handleModal={handleModal} 
+            onChange={onChange}
+            addFeedback={true}
+            bookId={bookData.id}
+            google_book_id={bookData.google_book_id}
+          /> }
         </>
       )}
 
       {type === "timeline-mobile" && (
         <>
-          <img src={bookData.image_url} alt="cover" />
+          <img src={bookData.image_url} alt="cover" className='bookImage' />
           <div className="book-info">
             <div className="title">{bookData.title}</div>
             <div className="author">{bookData.author}</div>
-            <div className="description">
-              <p>{bookData.review}</p>
-              <p>{bookData.creator.user}</p>
+            <div className="description description-timeline">
+              {bookData.review ? <p>{bookData.review}</p> : <p>No review</p>}
+              <p>
+                By <a href="">{bookData.creator.user}</a>
+              </p>
             </div>
             <div className="grade">
               <Rate
@@ -164,6 +206,18 @@ const Book = ({ bookData, type }) => {
               />
             </div>
           </div>
+          {bookInfoClicked &&  <BookInfo
+            type='timeline' 
+            title={bookData.title} 
+            image={bookData.image_url}  
+            description={googleInfo} 
+            grading={bookData.grade} 
+            handleModal={handleModal} 
+            onChange={onChange}
+            addFeedback={true}
+            bookId={bookData.id}
+            google_book_id={bookData.google_book_id}
+          /> }
         </>
       )}
 
@@ -193,15 +247,7 @@ const Book = ({ bookData, type }) => {
         </Select>
       </div>
     </BookContainer>
-    {bookInfoClicked &&  <BookInfo 
-      title={bookData.title} 
-      image={bookData.image_url}  
-      description={bookData.description} 
-      grading={bookData.grade} 
-      handleModal={handleModal} 
-      onChange={onChange}
-      addFeedback={true}
-      /> }
+    
     </div>
   );
 };

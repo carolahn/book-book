@@ -1,6 +1,6 @@
-import React from "react";
-import { Switch, Route, Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import React, {useEffect} from "react";
+import { Switch, Route } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 import Login from "../pages/login";
 import Register from "../pages/register";
@@ -8,11 +8,18 @@ import Timeline from "../pages/timeline/";
 import Shelves from "../pages/shelves";
 import Perfil from "../pages/perfil";
 import BookSearch from "../pages/book-search";
+import {requestUserBooks} from '../redux/actions/user-books';
 
 import styled from "styled-components";
 
 const Routes = () => {
   const tokenInfo = useSelector((state) => state.login);
+  const dispatch = useDispatch();
+
+
+  useEffect(() => {
+       dispatch(requestUserBooks(tokenInfo.token, tokenInfo.id));
+  }, [tokenInfo.id]);
   
   return (
     <>
@@ -24,13 +31,13 @@ const Routes = () => {
           <Register />
         </Route>
 
-        {tokenInfo.token || tokenInfo.login_status ? (
+        {tokenInfo.token ? (
           <>
             <Route path="/my-shelves/">
               <Shelves />
             </Route>
             <Route exact path="/search">
-            <BookSearch />
+              <BookSearch />
             </Route>
             <Route exact path="/timeline">
               <Timeline />
