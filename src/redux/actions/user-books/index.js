@@ -100,7 +100,7 @@ const removeOfShelf = () => {
   };
 };
 
-export const putBookChanges = (token, id, bookToChange, value) => (
+export const putBookChanges = (token, id, bookToChange, value, grade, review) => (
   dispatch
 ) => {
   axios({
@@ -112,6 +112,9 @@ export const putBookChanges = (token, id, bookToChange, value) => (
     data: {
       book: {
         shelf: value,
+        review: review,
+        grade: grade
+
       },
     },
   }).then(() => {

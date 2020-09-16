@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
-const StyledBookInfo = styled.div`
-  margin: 50px auto;
+export const StyledBookInfo = styled.div`
   width:50vw;
   height: 80vh;
   background-color: #fff;
@@ -28,9 +27,9 @@ const StyledBookInfo = styled.div`
     grid-template-columns: 1fr 1fr;
     grid-template-rows: repeat(20, 1fr);
 
-
-
     .bookCover {
+      width: 128px;
+      height: 170px;
       grid-column-start:1;
       grid-column-end:1;
       grid-row-start:1;
@@ -76,11 +75,25 @@ const StyledBookInfo = styled.div`
     }
   }
 
-  .feedbackList {
+  .feedbackContainer {
+    overflow: auto;
     grid-column-start:4;
     grid-column-end: 4;
     grid-row-start:2;
     grid-row-end:2;
+  }
+
+
+  @media (max-width: 1700px) {
+    width:60vw;
+  }
+
+  @media (max-width: 1366px) {
+    width:70vw;
+  }
+
+  @media (max-width: 1280px) {
+    width: 75vw;
   }
 
   @media (max-width: 1024px) {
@@ -145,7 +158,7 @@ const StyledBookInfo = styled.div`
 
     }
   
-    .feedbackList {
+    .feedbackContainer {
       overflow: auto;
       grid-column-start:2;
       grid-column-end: 2;
@@ -189,7 +202,7 @@ const StyledBookInfo = styled.div`
       }
     }
   
-    .feedbackList {
+    .feedbackContainer {
       overflow:auto;
       grid-column-start:2;
       grid-column-end: 2;
@@ -232,7 +245,7 @@ const StyledBookInfo = styled.div`
       }
     }
   
-    .feedbackList {
+    .feedbackContainer {
       overflow:auto;
       grid-column-start:2;
       grid-column-end: 2;
@@ -246,4 +259,16 @@ const StyledBookInfo = styled.div`
 
 `
 
-export default StyledBookInfo
+export const ModalContainer = styled.div`
+  width:100vw;
+  height:100vh;
+  background-color: rgba(0,0,0,.5);
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+`
+

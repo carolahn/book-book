@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const StyledFeedback  = styled.div`
   width: 100%;
-  
+  overflow: auto;
   text-align: left;
   padding: 0.625rem;
   border-radius: 10px;

@@ -17,7 +17,7 @@ const Timeline = () => {
   useEffect(() => {
     dispatch(requestReviews(token));
   }, [token]);
-
+  
   return (
     <ListContainer>
       <Title>Timeline</Title>

@@ -49,36 +49,39 @@ const BookList = ({ showBooks, /*, getMorePages*/ type }) => {
       <Container>
         {size.width < 745 && (
           <div>
-            {showBooks.slice(page * 10 - 10, page * 10).map((currBook) => (
-              <WrapBook key={currBook.id}>
-                <Book
-                  bookData={currBook}
-                  key={currBook.title}
-                  type={type.concat("-mobile")}
-                />
-              </WrapBook>
-            ))}
+            {
+              showBooks.slice((page - 1) * 10, (page - 1 + 10) * 10).map((currBook) => (
+                <WrapBook key={currBook.id}>
+                  <Book
+                    bookData={currBook}
+                    type={type.concat("-mobile")}
+                  />
+                </WrapBook>
+              ))
+              /*.slice(page - 1, page - 1 + 10)*/
+            }
           </div>
         )}
 
         {size.width >= 745 && (
           <div>
-            {showBooks.slice(page * 10 - 10, page * 10).map((currBook) => (
-              <WrapBook key={currBook.id}>
-                <Book
-                  bookData={currBook}
-                  key={currBook.title}
-                  type={type.concat("-desktop")}
-                />
-                <AsideDescription
-                  type={type.concat("-desktop")}
-                  description={currBook.description}
-                  review={currBook.review}
-                  bookData={currBook}
-                  key={currBook.author}
-                />
-              </WrapBook>
-            ))}
+            {
+              showBooks.slice((page - 1) * 10, (page - 1) * 10 + 10).map((currBook, key) => (
+                <WrapBook key={key}>
+                  <Book
+                    bookData={currBook}
+                    type={type.concat("-desktop")}
+                  />
+                  <AsideDescription
+                    type={type.concat("-desktop")}
+                    description={currBook.description}
+                    review={currBook.review}
+                    bookData={currBook}
+                  />
+                </WrapBook>
+              ))
+              /*.slice(page - 1, page - 1 + 10)*/
+            }
           </div>
         )}
       </Container>
