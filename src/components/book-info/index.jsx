@@ -39,7 +39,6 @@ const BookInfo = ({
     const bookId = Object.values(booksReviews).filter(
       (book) => book.title === title
     );
-    console.log(bookId);
     setFeedbackForm(false);
     dispatch(
       putBookChanges(token, userId, bookId, 3, event.grade, event.comment)
