@@ -18,6 +18,7 @@ const Shelves = () => {
     const dispatch = useDispatch();
 
     const userBooks = useSelector(state => Object.values(state.userBooks));
+    const userBooksObj = useSelector(state => state.userBooks);
 
     const bookDescription = useSelector(state => state.bookDescription.description);
 
@@ -40,14 +41,14 @@ const Shelves = () => {
     };
 
     function sendChanges(value) {
-        if (userBooks[uniqueBook.googleBookId]) {
-          const selectedBook = userBooks[uniqueBook.googleBookId];
+        if (userBooksObj[uniqueBook.googleBookId]) {
+          const selectedBook = userBooksObj[uniqueBook.googleBookId];
           if (value === "delete") {
             dispatch(removeBook(tokenInfo.token, tokenInfo.id, selectedBook.id));
           } else {
             dispatch(putBookChanges(tokenInfo.token, tokenInfo.id, selectedBook.id, value));
           }
-        } else if (!userBooks[uniqueBook.googleBookId] && value === "delete") {
+        } else if (!userBooksObj[uniqueBook.googleBookId] && value === "delete") {
           return;
         } else {
           dispatch(

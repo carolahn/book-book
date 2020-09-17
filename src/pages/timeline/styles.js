@@ -41,7 +41,7 @@ export const MostPopularContainer = styled.div`
 `;
 
 export const MostPopularCarousel = styled.div`
-  background-color: pink;
+  /* background-color: pink; */
   width: 100%;
   min-width: 315px;
   display: flex;
