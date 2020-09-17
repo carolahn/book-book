@@ -4,6 +4,7 @@ import { requestGoogleInfo } from "../../redux/actions/reviews-list";
 
 import { Pagination } from "antd";
 
+import { Container } from "./styled";
 import BookList from "../../components/book-list";
 /*
     Para utilizar este componente, deve-se passar um ARRAY com os ítens já normalizados!
@@ -31,7 +32,7 @@ const BookListPaginated = ({ showBooks, type }) => {
   }, [page]);
 
   return (
-    <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+    <Container>
       <Pagination
         defaultCurrent={page}
         current={page}
@@ -49,7 +50,7 @@ const BookListPaginated = ({ showBooks, type }) => {
         showSizeChanger={false}
         size={size.width < 745 ? "small" : "default"}
       />
-    </div>
+    </Container>
   );
 };
 
