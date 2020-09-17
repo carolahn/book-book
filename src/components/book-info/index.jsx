@@ -18,7 +18,8 @@ const BookInfo = ({
   handleModal,
   onChange,
   type,
-  google_book_id,
+  googleBookId,
+  bookId
 }) => {
   const dispatch = useDispatch();
 
@@ -27,7 +28,7 @@ const BookInfo = ({
   const token = useSelector((state) => state.login.token);
   const userId = useSelector((state) => state.login.id);
   const googleInfo = useSelector((state) => state.reviewsList.googleInfo);
-
+  
   useEffect(() => {
     dispatch(requestReviews(token));
   }, [dispatch, token]);
@@ -41,7 +42,7 @@ const BookInfo = ({
     console.log(bookId);
     setFeedbackForm(false);
     dispatch(
-      putBookChanges(token, userId, bookId[0].id, 3, event.grade, event.comment)
+      putBookChanges(token, userId, bookId, 3, event.grade, event.comment)
     );
   };
 
@@ -75,8 +76,8 @@ const BookInfo = ({
             {type === "search"
               ? description
               : type === "timeline"
-              ? googleInfo[google_book_id]
-              : "No"}
+              ? googleInfo[googleBookId]
+              : type === 'shelf' ? description : 'No description'}
           </p>
           <Select
             className="addToShelf"
