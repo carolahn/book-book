@@ -70,9 +70,22 @@ export const BookContainer = styled.div`
 
   div.description-search-mobile {
     line-height: 15px;
-    /* display: flex;
-    flex-direction: column;
-    justify-content: center; */
+    width: 150px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  div.description-search-mobile p {
+    line-height: 15px;
+    width: 150px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
   }
 
   div.description-timeline {
@@ -91,7 +104,7 @@ export const BookContainer = styled.div`
     display: flex;
     flex-direction: column;
     text-align: center;
-    /* justify-content: center; */
+    justify-content: center;
   }
 
   div.book-info-aside p {

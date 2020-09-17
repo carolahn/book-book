@@ -6,6 +6,9 @@ export const BookSearchContainer = styled.div`
   place-items: center;
   padding-top: 65px;
   min-width: 315px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 export const InputContainer = styled.div`
@@ -14,13 +17,6 @@ export const InputContainer = styled.div`
   .ant-btn-primary {
     background: #68c866;
     border-color: #68c866;
-  }
-
-  @media screen and (max-width: 940px) {
-    width: 627px;
-  }
-  @media screen and (max-width: 627px) {
-    width: 315px;
   }
 `;
 
@@ -32,17 +28,25 @@ export const MainContainer = styled.div`
 
   @media screen and (max-width: 940px) {
     width: 627px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
   @media screen and (max-width: 627px) {
     width: 315px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 `;
 
 export const ResultsContainer = styled.div`
   grid-column: 1;
-  min-width: 627px;
+  width: 627px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
   @media screen and (max-width: 627px) {
     width: 315px;

@@ -23,7 +23,7 @@ const CarouselMostPopular = () => {
           <div style={contentStyle}>
             <WrapBook
               key={Object.values(mostPopular)[0].id}
-              className="carousel-1-pop"
+              className="carousel-0-pop"
             >
               <Book
                 bookData={Object.values(mostPopular)[0]}
@@ -51,7 +51,7 @@ const CarouselMostPopular = () => {
           <div style={contentStyle}>
             <WrapBook
               key={Object.values(mostPopular)[2].id}
-              className="carousel-1-pop"
+              className="carousel-2-pop"
             >
               <Book
                 bookData={Object.values(mostPopular)[2]}
@@ -65,7 +65,7 @@ const CarouselMostPopular = () => {
           <div style={contentStyle}>
             <WrapBook
               key={Object.values(mostPopular)[3].id}
-              className="carousel-1-pop"
+              className="carousel-3-pop"
             >
               <Book
                 bookData={Object.values(mostPopular)[3]}
