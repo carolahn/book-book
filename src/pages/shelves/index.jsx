@@ -23,6 +23,7 @@ const Shelves = () => {
 
     const [bookInfoClicked, setBookInfoClicked] = useState(false);
     const [uniqueBook, setUniqueBook] = useState({});
+    const [shelfValue, setShelfValue] = useState();
     
     const tokenInfo = useSelector(state => state.login);
 
@@ -38,7 +39,7 @@ const Shelves = () => {
         }
     };
 
-    function onChange(value) {
+    function sendChanges(value) {
         if (userBooks[uniqueBook.googleBookId]) {
           const selectedBook = userBooks[uniqueBook.googleBookId];
           if (value === "delete") {
@@ -66,8 +67,14 @@ const Shelves = () => {
         }
     }
 
+    function onChange(value) { setShelfValue(value) }
+
+    useEffect(() => {
+        if(bookInfoClicked === false && shelfValue !== undefined) sendChanges(shelfValue);
+    }, [bookInfoClicked]);
+
     return (
-        <StyledShelf className="shelf"> {console.log(bookDescription)}
+        <StyledShelf className="shelf">
             {bookInfoClicked ? <>
                 <BookInfo
                     title={uniqueBook.title} 
@@ -79,7 +86,7 @@ const Shelves = () => {
                     onChange={onChange} 
                     type="shelf" 
                     googleBookId={uniqueBook.googleBookId}
-                    bookId={uniqueBook.id} /> {console.log("Unique: " + uniqueBook.description)} </>
+                    bookId={uniqueBook.id} /> </>
                 :
                 <></>}
             <ShelvesButtons>
@@ -93,8 +100,9 @@ const Shelves = () => {
             <Switch>
                 <Route path="/my-shelves/whishlist">    
                     <BookShelf>
-                        {whishlistShelf.map(e => (<div>
-                            <Book colour="darkred" 
+                        {whishlistShelf.map((e, i) => (<div>
+                            <Book
+                                  colour="darkred" 
                                   alt={e.title} src={e.image_url} 
                                   onClick={() => {
                                     dispatch(requestUsersBookDescription(e.google_book_id));
@@ -117,8 +125,9 @@ const Shelves = () => {
                 </Route>
                 <Route path="/my-shelves/reading" >
                     <BookShelf>
-                        {readingShelf.map(e => (<div>
-                            <Book colour="darkred" 
+                        {readingShelf.map((e, i) => (<div>
+                            <Book 
+                                  colour="darkred"  
                                   alt={e.title} src={e.image_url} 
                                   onClick={() => {
                                     dispatch(requestUsersBookDescription(e.google_book_id));
@@ -141,8 +150,9 @@ const Shelves = () => {
                 </Route>
                 <Route path="/my-shelves/read" >
                     <BookShelf>
-                        {readShelf.map(e => (<div>
-                            <Book colour="darkred" 
+                        {readShelf.map((e, i) => (<div>
+                            <Book
+                                  colour="darkred"  
                                   alt={e.title} src={e.image_url} 
                                   onClick={() => {
                                     dispatch(requestUsersBookDescription(e.google_book_id));
