@@ -19,7 +19,7 @@ const BookInfo = ({
   onChange,
   type,
   googleBookId,
-  bookId
+  bookId,
 }) => {
   const dispatch = useDispatch();
 
@@ -28,7 +28,7 @@ const BookInfo = ({
   const token = useSelector((state) => state.login.token);
   const userId = useSelector((state) => state.login.id);
   const googleInfo = useSelector((state) => state.reviewsList.googleInfo);
-  
+
   useEffect(() => {
     dispatch(requestReviews(token));
   }, [dispatch, token]);
@@ -77,7 +77,9 @@ const BookInfo = ({
               ? description
               : type === "timeline"
               ? googleInfo[googleBookId]
-              : type === 'shelf' ? description : 'No description'}
+              : type === "shelf"
+              ? description
+              : "No description"}
           </p>
           <Select
             className="addToShelf"

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -29,6 +30,7 @@ const Shelves = () => {
 
   const [bookInfoClicked, setBookInfoClicked] = useState(false);
   const [uniqueBook, setUniqueBook] = useState({});
+  const [shelfValue, setShelfValue] = useState(); // adicionei
 
   const tokenInfo = useSelector((state) => state.login);
 
@@ -45,9 +47,46 @@ const Shelves = () => {
     }
   };
 
+  //   function onChange(value) {
+  //     if (userBooks[uniqueBook.googleBookId]) {
+  //       const selectedBook = userBooks[uniqueBook.googleBookId];
+  //       if (value === "delete") {
+  //         dispatch(removeBook(tokenInfo.token, tokenInfo.id, selectedBook.id)); // There are bugs!!
+  //       } else {
+  //         dispatch(
+  //           putBookChanges(tokenInfo.token, tokenInfo.id, selectedBook.id, value)
+  //         );
+  //       }
+  //     } else if (!userBooks[uniqueBook.googleBookId] && value === "delete") {
+  //       return;
+  //     } else {
+  //       dispatch(
+  //         postUserBook(
+  //           tokenInfo.token,
+  //           tokenInfo.id,
+  //           uniqueBook.title,
+  //           uniqueBook.author,
+  //           value,
+  //           uniqueBook.image,
+  //           0, //uniqueBook.grade,
+  //           uniqueBook.categories,
+  //           "", //uniqueBook.review,
+  //           uniqueBook.googleBookId
+  //         )
+  //       );
+  //     }
+  //   }
+
   function onChange(value) {
-    if (userBooks[uniqueBook.google_book_id]) {
-      const selectedBook = userBooks[uniqueBook.google_book_id];
+    // adicionei
+    setShelfValue(value);
+    console.log("value", value);
+  }
+
+  function sendChanges(value) {
+    // adicionei - igual antigo onChange
+    if (userBooks[uniqueBook.googleBookId]) {
+      const selectedBook = userBooks[uniqueBook.googleBookId];
       if (value === "delete") {
         dispatch(removeBook(tokenInfo.token, tokenInfo.id, selectedBook.id)); // There are bugs!!
       } else {
@@ -55,7 +94,7 @@ const Shelves = () => {
           putBookChanges(tokenInfo.token, tokenInfo.id, selectedBook.id, value)
         );
       }
-    } else if (!userBooks[uniqueBook.google_book_id] && value === "delete") {
+    } else if (!userBooks[uniqueBook.googleBookId] && value === "delete") {
       return;
     } else {
       dispatch(
@@ -66,25 +105,32 @@ const Shelves = () => {
           uniqueBook.author,
           value,
           uniqueBook.image,
-          uniqueBook.grade,
+          0, //uniqueBook.grade,
           uniqueBook.categories,
-          uniqueBook.review,
+          "", //uniqueBook.review,
           uniqueBook.googleBookId
         )
       );
     }
   }
 
+  useEffect(() => {
+    // adicionei
+    if (bookInfoClicked === false && shelfValue !== undefined) {
+      console.log("clicou fora");
+      sendChanges(shelfValue);
+    }
+  }, [bookInfoClicked]);
+
   return (
     <StyledShelf className="shelf">
-      {" "}
-      {console.log(bookDescription)}
       {bookInfoClicked ? (
         <>
           <BookInfo
             title={uniqueBook.title}
             image={uniqueBook.image}
-            description={uniqueBook.description}
+            // description={uniqueBook.description}
+            description={bookDescription}
             addFeedback={false}
             grading={uniqueBook.grade}
             handleModal={handleModal}
@@ -130,7 +176,6 @@ const Shelves = () => {
                   src={e.image_url}
                   onClick={() => {
                     dispatch(requestUsersBookDescription(e.google_book_id));
-                    setBookInfoClicked(true);
                     setUniqueBook({
                       author: e.author,
                       title: e.title,
@@ -138,10 +183,11 @@ const Shelves = () => {
                       grade: (e.grade = 0),
                       googleBookId: e.google_book_id,
                       id: e.id,
-                      description: bookDescription,
+                      description: bookDescription && bookDescription,
                       review: e.review,
                       categories: e.categories,
                     });
+                    setBookInfoClicked(true);
                   }}
                 />
               </div>
@@ -194,7 +240,7 @@ const Shelves = () => {
                       grade: (e.grade = 0),
                       googleBookId: e.google_book_id,
                       id: e.id,
-                      description: bookDescription,
+                      description: bookDescription && bookDescription,
                       review: e.review,
                       categories: e.categories,
                     });
