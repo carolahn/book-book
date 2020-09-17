@@ -22,7 +22,7 @@ const Header = () => {
             <div className="logo-holder" />
             {(where === '/' || where === '/register') ? 
             <>
-                {size.width > 885 ?
+                {size.width > 895 ?
                 <div className="button-holder" >
                 <button className={where === '/' ? "login button here" : "login button"}
                     onClick={() => history.push("/")} >Login</button>
@@ -62,7 +62,7 @@ const Header = () => {
                     where === '/my-shelves/reading' || where === '/my-shelves/read' || where.startsWith('/perfil'))) ? 
                 
             <>
-                {size.width > 885 ?
+                {size.width > 895 ?
                 <div className="button-holder" >
                     <button className={where === '/timeline' ? "button here" : "button"}
                     onClick={() => {
@@ -142,7 +142,7 @@ const Header = () => {
             : 
             
             <>
-                {size.width > 885 ?
+                {size.width > 895 ?
                 <div className="button-holder" >
                 <button className={where === '/' ? "login button here" : "login button"}
                     onClick={() => history.push("/")} >Login</button>
