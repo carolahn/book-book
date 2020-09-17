@@ -253,7 +253,7 @@ const Book = ({ bookData, type }) => {
             onChange={onChange}
           >
             <Option value="1" style={{ paddingLeft: 37 }}>
-              <span className="spanSelect">Wish List</span>
+              <span className="spanSelect">Wishlist</span>
             </Option>
             <Option value="2" style={{ paddingLeft: 37 }}>
               <span className="spanSelect">Reading</span>

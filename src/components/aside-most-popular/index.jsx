@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { addToMostPopular } from "../../redux/actions/reviews-list"; //adicionei
 
 import Book from "../book";
 import { Container, WrapBook } from "./styles";
@@ -8,9 +9,10 @@ const AsideMostPopular = () => {
   const [mostPopBooks, setMostPopBooks] = useState([]);
   const booksReviews = useSelector((state) => state.reviewsList.booksReviews);
   const user = useSelector((state) => state.login);
+  const dispatch = useDispatch(); //adicionei
 
   useEffect(() => {
-    if (JSON.stringify(booksReviews) !== '{}') {
+    if (JSON.stringify(booksReviews) !== "{}") {
       const initialPopList = Object.values(booksReviews).filter(
         (item) => item.grade >= 3
       );
@@ -33,15 +35,16 @@ const AsideMostPopular = () => {
       let popList = {};
       filteredPopList.map((item) => (popList[item.google_book_id] = item));
       setMostPopBooks(popList);
+      dispatch(addToMostPopular(popList)); //adicionei
     }
-  }, [booksReviews, user]);
+  }, [booksReviews]); // tirei user
 
   function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min)) + min;
   }
-  
+
   return (
     <Container className="aside-most-popular">
       <div className="featured-books">FEATURED BOOKS</div>

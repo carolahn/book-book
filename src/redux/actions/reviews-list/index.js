@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const ADD_TO_REVIEWS_LIST = "ADD_TO_REVIEWS_LIST";
 export const ADD_GOOGLE_INFO = "ADD_GOOGLE_INFO";
+export const ADD_TO_MOST_POPULAR = "ADD_TO_MOST_POPULAR"; //adicionei
 
 export const requestReviews = (token) => (dispatch) => {
   axios
@@ -11,11 +12,13 @@ export const requestReviews = (token) => (dispatch) => {
       },
     })
     .then(({ data }) => {
-      const normalized = {};
+      const normalized = {}; // normalisado pelo google_book_id
+      const normalizedByReviewId = {}; // normalizado pelo review id
       data.map((currReview) => {
         normalized[currReview.google_book_id] = { ...currReview };
+        normalizedByReviewId[currReview.id] = { ...currReview };
       });
-      dispatch(addToReviewsList(normalized));
+      dispatch(addToReviewsList(normalized, normalizedByReviewId));
     })
     .catch((e) => {
       const errorstatus = e.response.status;
@@ -23,10 +26,11 @@ export const requestReviews = (token) => (dispatch) => {
     });
 };
 
-const addToReviewsList = (booksReviews) => ({
+const addToReviewsList = (booksReviews, booksReviewsById) => ({
   type: ADD_TO_REVIEWS_LIST,
   payload: {
     booksReviews,
+    booksReviewsById,
   },
 });
 
@@ -65,5 +69,12 @@ const addGoogleInfo = (googleInfo) => ({
   type: ADD_GOOGLE_INFO,
   payload: {
     googleInfo,
+  },
+});
+
+export const addToMostPopular = (mostPopular) => ({
+  type: ADD_TO_MOST_POPULAR,
+  payload: {
+    mostPopular,
   },
 });
