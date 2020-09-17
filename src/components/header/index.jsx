@@ -22,7 +22,7 @@ const Header = () => {
             <div className="logo-holder" />
             {(where === '/' || where === '/register') ? 
             <>
-                {size.width > 744 ?
+                {size.width > 885 ?
                 <div className="button-holder" >
                 <button className={where === '/' ? "login button here" : "login button"}
                     onClick={() => history.push("/")} >Login</button>
@@ -59,30 +59,35 @@ const Header = () => {
             (tokenInfo.token && 
                 (where === '/timeline' || where === '/search' || where === '/my-shelves' ||
                     where === '/my-shelves/' || where === '/my-shelves/whishlist' || 
-                    where === '/my-shelves/reading' || where === '/my-shelves/read')) ? 
+                    where === '/my-shelves/reading' || where === '/my-shelves/read' || where === '/profile')) ? 
                 
             <>
-                {size.width > 744 ?
+                {size.width > 885 ?
                 <div className="button-holder" >
+                    <button className={where === '/timeline' ? "button here" : "button"}
+                    onClick={() => {
+                        history.push("/timeline");
+                        setMenu(false);
+                    }} >Timeline</button>
+                    <button className={where === '/search' ? "button here" : "button"}
+                    onClick={() => {
+                        history.push("/search");
+                        setMenu(false);
+                    }} >Search</button>
                     <button className={where === '/my-shelves' ||
                                        where === '/my-shelves/' ||
                                        where === '/my-shelves/read' ||
                                        where === '/my-shelves/reading' ||
                                        where === '/my-shelves/whishlist' ? "button here" : "button"}
                     onClick={() => {
-                        history.push("/my-shelves");
+                        history.push("/my-shelves/reading");
                         setMenu(false);
                     }} >My Shelves</button>
-                    <button className={where === '/search' ? "button here" : "button"}
+                    <button className={where === '/profile' ? "button here" : "button"}
                     onClick={() => {
-                        history.push("/search");
+                        history.push("/profile");
                         setMenu(false);
-                    }} >Search</button>
-                    <button className={where === '/timeline' ? "button here" : "button"}
-                    onClick={() => {
-                        history.push("/timeline");
-                        setMenu(false);
-                    }} >Timeline</button>
+                    }} >Profile</button>
                     <button className="button logout"
                         onClick={() => {
                             dispatch(logout());
@@ -97,21 +102,30 @@ const Header = () => {
                     {menu ?
                         <Menu>
                             <LoggedLittleMenu className="little-menu">
-                                <button className={where === '/my-shelves' ? "little hbtn" : "hbtn"}
-                                        onClick={() => {
-                                            history.push("/my-shelves");
-                                            setMenu(false);
-                                        }} >My Shelves</button>
-                                <button className={where === '/search' ? "little hbtn" : "hbtn"}
-                                        onClick={() => {
-                                            history.push("/search");
-                                            setMenu(false);
-                                        }} >Search</button>
                                 <button className={where === '/timeline' ? "little hbtn" : "hbtn"}
                                         onClick={() => {
                                             history.push("/timeline");
                                             setMenu(false);
                                         }} >Timeline</button>
+                                <button className={where === '/search' ? "little hbtn" : "hbtn"}
+                                        onClick={() => {
+                                            history.push("/search");
+                                            setMenu(false);
+                                        }} >Search</button>        
+                                <button className={where === '/my-shelves' ||
+                                                   where === '/my-shelves/' ||
+                                                   where === '/my-shelves/read' ||
+                                                   where === '/my-shelves/reading' ||
+                                                   where === '/my-shelves/whishlist' ? "little hbtn" : "hbtn"}
+                                        onClick={() => {
+                                            history.push("/my-shelves/reading");
+                                            setMenu(false);
+                                        }} >My Shelves</button>
+                                <button className={where === '/profile' ? "little hbtn" : "hbtn"}
+                                        onClick={() => {
+                                            history.push("/profile");
+                                            setMenu(false);
+                                        }} >Profile</button>
                                 <button className={where === '/' ? "little-logout hbtn" : "hbtn"}
                                         onClick={() => {
                                             dispatch(logout());
@@ -128,7 +142,7 @@ const Header = () => {
             : 
             
             <>
-                {size.width > 744 ?
+                {size.width > 885 ?
                 <div className="button-holder" >
                 <button className={where === '/' ? "login button here" : "login button"}
                     onClick={() => history.push("/")} >Login</button>

@@ -19,7 +19,7 @@ export const requestReviews = (token) => (dispatch) => {
     })
     .catch((e) => {
       const errorstatus = e.response.status;
-      console.log("Erro: ", errorstatus);
+      console.log("Erro: ", errorstatus); //RETIRAR DEPOIS
     });
 };
 

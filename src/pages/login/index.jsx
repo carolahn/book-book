@@ -15,7 +15,7 @@ const Login = () => {
   const history = useHistory();
 
   useEffect(() => {
-    tokenInfo.token && history.push("/my-shelves");
+    tokenInfo.token && history.push("/timeline");
     tokenInfo.token &&
       dispatch(requestUserBooks(tokenInfo.token, tokenInfo.id));
   }, [tokenInfo]);

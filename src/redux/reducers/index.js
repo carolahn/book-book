@@ -5,6 +5,7 @@ import login from "./login/login";
 import reviewsList from "./reviews-list";
 import searchList from "./search-list";
 import userBooks from "./user-books";
+import bookDescription from './book-description';
 
 export default combineReducers({
   // books,
@@ -13,4 +14,5 @@ export default combineReducers({
   reviewsList,
   searchList,
   userBooks,
+  bookDescription,
 });

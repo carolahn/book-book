@@ -70,15 +70,16 @@ const BookSearch = () => {
   );
 };
 
-export default BookSearch;
+export default BookSearch
 
 function useWindowSize() {
+  
   const [windowSize, setWindowSize] = useState({
     width: undefined,
     height: undefined,
   });
 
-  useEffect(() => {
+  useEffect(() => {  
     function handleResize() {
       setWindowSize({
         width: window.innerWidth,
@@ -91,6 +92,7 @@ function useWindowSize() {
     handleResize();
 
     return () => window.removeEventListener("resize", handleResize);
+
   }, []);
 
   return windowSize;

@@ -10,7 +10,7 @@ const AsideMostPopular = () => {
   const user = useSelector((state) => state.login);
 
   useEffect(() => {
-    if (booksReviews) {
+    if (JSON.stringify(booksReviews) !== '{}') {
       const initialPopList = Object.values(booksReviews).filter(
         (item) => item.grade >= 3
       );
@@ -41,7 +41,7 @@ const AsideMostPopular = () => {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min)) + min;
   }
-
+  
   return (
     <Container className="aside-most-popular">
       <div className="featured-books">FEATURED BOOKS</div>

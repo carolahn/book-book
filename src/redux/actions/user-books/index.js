@@ -128,3 +128,18 @@ const changeBookData = () => {
     type: CHANGE_BOOK_DATA,
   };
 };
+
+export const BOOK_DESCRIPTION = 'BOOK_DESCRIPTION';
+
+const addUserBookDescription = (description) => {
+  return {
+    type: BOOK_DESCRIPTION,
+    description
+  }
+}
+
+export const requestUsersBookDescription = (google_book_id) => async (dispatch) => {
+  await axios.get(`https://www.googleapis.com/books/v1/volumes/${google_book_id}`)
+      .then((res)=> res.data.volumeInfo.description)
+      .then((res) => dispatch(addUserBookDescription(res)))
+}
