@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const ADD_TO_REVIEWS_LIST = "ADD_TO_REVIEWS_LIST";
 export const ADD_GOOGLE_INFO = "ADD_GOOGLE_INFO";
+export const ADD_TO_MOST_POPULAR = "ADD_TO_MOST_POPULAR";
 
 export const requestReviews = (token) => (dispatch) => {
   axios
@@ -65,5 +66,12 @@ const addGoogleInfo = (googleInfo) => ({
   type: ADD_GOOGLE_INFO,
   payload: {
     googleInfo,
+  },
+});
+
+export const addToMostPopular = (mostPopular) => ({
+  type: ADD_TO_MOST_POPULAR,
+  payload: {
+    mostPopular,
   },
 });
