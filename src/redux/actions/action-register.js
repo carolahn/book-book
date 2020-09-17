@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom'
 
 export const REGISTER_SUCESS = 'REGISTER_SUCESS'
 export const REGISTER_FAILED = 'REGISTER_FAILED'
+export const REGISTER_RESET = 'REGISTER_RESET'
 
  const registerSucess = (sucess) => ({
   type: REGISTER_SUCESS,
@@ -16,6 +17,10 @@ const registerFailed = (failed, userError, emailError) => ({
   emailError
 })
 
+export const resetRegisterScreen = (status) => ({
+  type: REGISTER_RESET,
+  status
+})
 
 
 export const requestRegisterData = (name, username, email, password, confirmPassword) => async (dispatch) => {
