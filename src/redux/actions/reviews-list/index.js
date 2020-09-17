@@ -12,22 +12,25 @@ export const requestReviews = (token) => (dispatch) => {
       },
     })
     .then(({ data }) => {
-      const normalized = {};
+      const normalized = {}; // normalisado pelo google_book_id
+      const normalizedByReviewId = {}; // normalizado pelo review id
       data.map((currReview) => {
         normalized[currReview.google_book_id] = { ...currReview };
+        normalizedByReviewId[currReview.id] = { ...currReview };
       });
-      dispatch(addToReviewsList(normalized));
+      dispatch(addToReviewsList(normalized, normalizedByReviewId));
     })
     .catch((e) => {
       const errorstatus = e.response.status;
-      console.log("Erro: ", errorstatus); //RETIRAR DEPOIS
+      console.log("Erro: ", errorstatus);
     });
 };
 
-const addToReviewsList = (booksReviews) => ({
+const addToReviewsList = (booksReviews, booksReviewsById) => ({
   type: ADD_TO_REVIEWS_LIST,
   payload: {
     booksReviews,
+    booksReviewsById,
   },
 });
 
