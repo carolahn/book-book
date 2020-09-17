@@ -16,6 +16,7 @@ const Shelves = () => {
   const dispatch = useDispatch();
 
   const userBooks = useSelector((state) => Object.values(state.userBooks));
+  const userBooksObj = useSelector((state) => state.userBooks);
 
   const bookDescription = useSelector(
     (state) => state.bookDescription.description
@@ -34,17 +35,21 @@ const Shelves = () => {
   const where = location.pathname;
 
   const handleModal = (event) => {
-    event.preventDefault(); //adicionei
+    event.preventDefault();
     if (event.target.id === "modal-container") {
       setBookInfoClicked(false);
     }
   };
 
+  function onChange(value) {
+    setShelfValue(value);
+  }
+
   function sendChanges(value) {
-    if (userBooks[uniqueBook.googleBookId]) {
-      const selectedBook = userBooks[uniqueBook.googleBookId];
+    if (userBooksObj[uniqueBook.googleBookId]) {
+      const selectedBook = userBooksObj[uniqueBook.googleBookId];
       if (value === "delete") {
-        dispatch(removeBook(tokenInfo.token, tokenInfo.id, selectedBook.id));
+        dispatch(removeBook(tokenInfo.token, tokenInfo.id, selectedBook.id)); // There are bugs!!
       } else {
         dispatch(
           putBookChanges(tokenInfo.token, tokenInfo.id, selectedBook.id, value)
@@ -61,23 +66,17 @@ const Shelves = () => {
           uniqueBook.author,
           value,
           uniqueBook.image,
-          0,
+          0, //uniqueBook.grade,
           uniqueBook.categories,
-          "",
+          "", //uniqueBook.review,
           uniqueBook.googleBookId
         )
       );
     }
   }
 
-  function onChange(value) {
-    setShelfValue(value);
-    console.log("value", value); //adicionei
-  }
-
   useEffect(() => {
     if (bookInfoClicked === false && shelfValue !== undefined) {
-      console.log("clicou fora");
       sendChanges(shelfValue);
     }
   }, [bookInfoClicked]);
@@ -97,7 +96,7 @@ const Shelves = () => {
             type="shelf"
             googleBookId={uniqueBook.googleBookId}
             bookId={uniqueBook.id}
-          />{" "}
+          />
         </>
       ) : (
         <></>
@@ -126,7 +125,7 @@ const Shelves = () => {
       <Switch>
         <Route path="/my-shelves/whishlist">
           <BookShelf>
-            {whishlistShelf.map((e, i) => (
+            {whishlistShelf.map((e) => (
               <div>
                 <Book
                   colour="darkred"
@@ -134,7 +133,6 @@ const Shelves = () => {
                   src={e.image_url}
                   onClick={() => {
                     dispatch(requestUsersBookDescription(e.google_book_id));
-                    setBookInfoClicked(true);
                     setUniqueBook({
                       author: e.author,
                       title: e.title,
@@ -142,10 +140,11 @@ const Shelves = () => {
                       grade: (e.grade = 0),
                       googleBookId: e.google_book_id,
                       id: e.id,
-                      description: bookDescription,
+                      description: bookDescription && bookDescription,
                       review: e.review,
                       categories: e.categories,
                     });
+                    setBookInfoClicked(true);
                   }}
                 />
               </div>
@@ -154,7 +153,7 @@ const Shelves = () => {
         </Route>
         <Route path="/my-shelves/reading">
           <BookShelf>
-            {readingShelf.map((e, i) => (
+            {readingShelf.map((e) => (
               <div>
                 <Book
                   colour="darkred"
@@ -182,7 +181,7 @@ const Shelves = () => {
         </Route>
         <Route path="/my-shelves/read">
           <BookShelf>
-            {readShelf.map((e, i) => (
+            {readShelf.map((e) => (
               <div>
                 <Book
                   colour="darkred"

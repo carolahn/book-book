@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addToMostPopular } from "../../redux/actions/reviews-list"; //adicionei
+import { addToMostPopular } from "../../redux/actions/reviews-list";
 
 import Book from "../book";
 import { Container, WrapBook } from "./styles";
@@ -9,7 +10,7 @@ const AsideMostPopular = () => {
   const [mostPopBooks, setMostPopBooks] = useState([]);
   const booksReviews = useSelector((state) => state.reviewsList.booksReviews);
   const user = useSelector((state) => state.login);
-  const dispatch = useDispatch(); //adicionei
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (JSON.stringify(booksReviews) !== "{}") {
@@ -35,9 +36,9 @@ const AsideMostPopular = () => {
       let popList = {};
       filteredPopList.map((item) => (popList[item.google_book_id] = item));
       setMostPopBooks(popList);
-      dispatch(addToMostPopular(popList)); //adicionei
+      dispatch(addToMostPopular(popList));
     }
-  }, [booksReviews]); // tirei user
+  }, [booksReviews]);
 
   function getRandomInt(min, max) {
     min = Math.ceil(min);

@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const ADD_TO_REVIEWS_LIST = "ADD_TO_REVIEWS_LIST";
 export const ADD_GOOGLE_INFO = "ADD_GOOGLE_INFO";
-export const ADD_TO_MOST_POPULAR = "ADD_TO_MOST_POPULAR"; //adicionei
+export const ADD_TO_MOST_POPULAR = "ADD_TO_MOST_POPULAR";
 
 export const requestReviews = (token) => (dispatch) => {
   axios
@@ -22,7 +22,7 @@ export const requestReviews = (token) => (dispatch) => {
     })
     .catch((e) => {
       const errorstatus = e.response.status;
-      console.log("Erro: ", errorstatus); //RETIRAR DEPOIS
+      console.log("Erro: ", errorstatus);
     });
 };
 

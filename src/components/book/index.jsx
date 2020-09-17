@@ -112,7 +112,15 @@ const Book = ({ bookData, type }) => {
               <div className="title">{bookData.title}</div>
               <div className="author">{bookData.author}</div>
               <div className="description description-search-mobile">
-                <p>{bookData.description}</p>
+                {bookData.description ? (
+                  bookData.description.length > 80 ? (
+                    <p>{bookData.description.slice(0, 80)}...</p>
+                  ) : (
+                    <p>{bookData.description}</p>
+                  )
+                ) : (
+                  <p>No review</p>
+                )}
               </div>
               <div className="grade">
                 <Rate
@@ -146,7 +154,15 @@ const Book = ({ bookData, type }) => {
               <div className="title">{bookData.title}</div>
               <div className="author">{bookData.author}</div>
               <div className="description description-timeline">
-                {bookData.review ? <p>{bookData.review}</p> : <p>No review</p>}
+                {bookData.review ? (
+                  bookData.review.length > 65 ? (
+                    <p>{bookData.review.slice(0, 65)}...</p>
+                  ) : (
+                    <p>{bookData.review}</p>
+                  )
+                ) : (
+                  <p>No review</p>
+                )}
                 <p>
                   By{" "}
                   <Link to={`/perfil/${bookData.creator.id}`}>
@@ -187,7 +203,15 @@ const Book = ({ bookData, type }) => {
               <div className="title">{bookData.title}</div>
               <div className="author">{bookData.author}</div>
               <div className="description description-timeline">
-                {bookData.review ? <p>{bookData.review}</p> : <p>No review</p>}
+                {bookData.review ? (
+                  bookData.review.length > 65 ? (
+                    <p>{bookData.review.slice(0, 65)}...</p>
+                  ) : (
+                    <p>{bookData.review}</p>
+                  )
+                ) : (
+                  <p>No review</p>
+                )}
                 <p>
                   By{" "}
                   <Link to={`/perfil/${bookData.creator.id}`}>
@@ -225,7 +249,15 @@ const Book = ({ bookData, type }) => {
           <>
             <img src={bookData.image_url} alt="cover" className="bookImage" />
             <div className="book-info-aside">
-              {bookData.review ? <p>{bookData.review}</p> : <p>No review</p>}
+              {bookData.review ? (
+                bookData.review.length > 240 ? (
+                  <p>{bookData.review.slice(0, 240)}...</p>
+                ) : (
+                  <p>{bookData.review}</p>
+                )
+              ) : (
+                <p>No review</p>
+              )}
               <p>
                 By{" "}
                 <Link to={`/perfil/${bookData.creator.id}`}>
