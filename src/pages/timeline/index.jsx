@@ -51,9 +51,9 @@ const Timeline = () => {
           )}
         </ResultsContainer>
 
-        <MostPopularContainer>
+        {/* <MostPopularContainer>
           <AsideMostPopular />
-        </MostPopularContainer>
+        </MostPopularContainer> */}
       </MainContainer>
     </ListContainer>
   );

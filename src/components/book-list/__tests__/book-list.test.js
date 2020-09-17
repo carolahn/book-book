@@ -28,16 +28,3 @@ describe("Render Test", () => {
     expect(list).toMatchSnapshot();
   });
 });
-
-/*
-{
-  title: title,
-  author: author,
-  shelf: shelf,
-  image_url: image_url,
-  grade: grade,
-  categories: categories,
-  review: review,
-  google_book_id: google_book_id,
-},
-*/

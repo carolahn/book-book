@@ -62,9 +62,9 @@ const BookSearch = () => {
           )}
         </ResultsContainer>
 
-        <MostPopularContainer>
+        {/* <MostPopularContainer>
           <AsideMostPopular />
-        </MostPopularContainer>
+        </MostPopularContainer> */}
       </MainContainer>
     </BookSearchContainer>
   );

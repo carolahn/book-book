@@ -31,7 +31,7 @@ const BookListPaginated = ({ showBooks, type }) => {
   }, [page]);
 
   return (
-    <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+    <div style={{display: "flex", flexDirection: "column", alignItems: "center", margin: "20px 0"}}>
       <Pagination
         defaultCurrent={page}
         current={page}
