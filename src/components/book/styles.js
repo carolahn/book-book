@@ -5,7 +5,7 @@ export const BookContainer = styled.div`
   margin-bottom: 10px;
   padding: 4px;
   width: 312px;
-  background-color: white;
+  /* background-color: white; */
   display: grid;
   grid-template-columns: 100px 200px;
   grid-template-rows: 30px 16px 60px 20px 24px;
