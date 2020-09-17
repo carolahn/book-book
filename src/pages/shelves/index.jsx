@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { requestGoogleInfo, requestReviews } from "../../redux/actions/reviews-list";
 import {
     postUserBook,
     removeBook,
@@ -19,8 +18,6 @@ const Shelves = () => {
     const dispatch = useDispatch();
 
     const userBooks = useSelector(state => Object.values(state.userBooks));
-    // const googleInfo = useSelector((state) => state.reviewsList.googleInfo);
-    // const booksReviews = useSelector((state) => state.reviewsList.booksReviews);
 
     const bookDescription = useSelector(state => state.bookDescription.description);
 
@@ -42,14 +39,14 @@ const Shelves = () => {
     };
 
     function onChange(value) {
-        if (userBooks[uniqueBook.google_book_id]) {
-          const selectedBook = userBooks[uniqueBook.google_book_id];
+        if (userBooks[uniqueBook.googleBookId]) {
+          const selectedBook = userBooks[uniqueBook.googleBookId];
           if (value === "delete") {
-            dispatch(removeBook(tokenInfo.token, tokenInfo.id, selectedBook.id)); // There are bugs!!
+            dispatch(removeBook(tokenInfo.token, tokenInfo.id, selectedBook.id));
           } else {
             dispatch(putBookChanges(tokenInfo.token, tokenInfo.id, selectedBook.id, value));
           }
-        } else if (!userBooks[uniqueBook.google_book_id] && value === "delete") {
+        } else if (!userBooks[uniqueBook.googleBookId] && value === "delete") {
           return;
         } else {
           dispatch(
@@ -60,9 +57,9 @@ const Shelves = () => {
               uniqueBook.author,
               value,
               uniqueBook.image,
-              uniqueBook.grade,
+              0,
               uniqueBook.categories,
-              uniqueBook.review,
+              "",
               uniqueBook.googleBookId
             )
           );
@@ -75,9 +72,9 @@ const Shelves = () => {
                 <BookInfo
                     title={uniqueBook.title} 
                     image={uniqueBook.image} 
-                    description={uniqueBook.description} 
+                    description={bookDescription} 
                     addFeedback={false} 
-                    grading={uniqueBook.grade} 
+                    grading={0} 
                     handleModal={handleModal} 
                     onChange={onChange} 
                     type="shelf" 

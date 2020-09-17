@@ -10,7 +10,7 @@ const reducer = (state = defaultState, {type, description}) => {
             return {description}
 
         default:
-            return {state}
+            return state
     }
 }
 
