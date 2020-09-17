@@ -11,6 +11,7 @@ import {
   ResultsContainer,
 } from "./styles.js";
 import AsideMostPopular from "../../components/aside-most-popular";
+import CarouselMostPopular from "../../components/carousel";
 
 const Timeline = () => {
   const [message, setMessage] = useState("Loading");
@@ -27,7 +28,9 @@ const Timeline = () => {
     <ListContainer>
       <MainContainer>
         {size.width < 940 ? (
-          <MostPopularCarousel>Carousel Extra</MostPopularCarousel>
+          <MostPopularCarousel>
+            <CarouselMostPopular />
+          </MostPopularCarousel>
         ) : (
           ""
         )}
