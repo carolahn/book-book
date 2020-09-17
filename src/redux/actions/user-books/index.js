@@ -100,9 +100,14 @@ const removeOfShelf = () => {
   };
 };
 
-export const putBookChanges = (token, id, bookToChange, value, grade, review) => (
-  dispatch
-) => {
+export const putBookChanges = (
+  token,
+  id,
+  bookToChange,
+  value,
+  grade,
+  review
+) => (dispatch) => {
   axios({
     method: "put",
     url: `https://ka-users-api.herokuapp.com/users/${id}/books/${bookToChange}`,
@@ -113,8 +118,7 @@ export const putBookChanges = (token, id, bookToChange, value, grade, review) =>
       book: {
         shelf: value,
         review: review,
-        grade: grade
-
+        grade: grade,
       },
     },
   }).then(() => {
@@ -129,17 +133,20 @@ const changeBookData = () => {
   };
 };
 
-export const BOOK_DESCRIPTION = 'BOOK_DESCRIPTION';
+export const BOOK_DESCRIPTION = "BOOK_DESCRIPTION";
 
 const addUserBookDescription = (description) => {
   return {
     type: BOOK_DESCRIPTION,
-    description
-  }
-}
+    description,
+  };
+};
 
-export const requestUsersBookDescription = (google_book_id) => async (dispatch) => {
-  await axios.get(`https://www.googleapis.com/books/v1/volumes/${google_book_id}`)
-      .then((res)=> res.data.volumeInfo.description)
-      .then((res) => dispatch(addUserBookDescription(res)))
-}
+export const requestUsersBookDescription = (google_book_id) => async (
+  dispatch
+) => {
+  await axios
+    .get(`https://www.googleapis.com/books/v1/volumes/${google_book_id}`)
+    .then((res) => res.data.volumeInfo.description)
+    .then((res) => dispatch(addUserBookDescription(res)));
+};

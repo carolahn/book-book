@@ -18,7 +18,7 @@ const Shelves = () => {
     const dispatch = useDispatch();
 
     const userBooks = useSelector(state => Object.values(state.userBooks));
-    const userBooksObj = useSelector(state => state.userBooks)
+    const userBooksObj = useSelector(state => state.userBooks);
 
     const bookDescription = useSelector(state => state.bookDescription.description);
 

@@ -14,6 +14,7 @@ import {
 } from "./styles.js";
 import BookListPaginated from "../../containers/book-list-paginated";
 import AsideMostPopular from "../../components/aside-most-popular";
+import CarouselMostPopular from "../../components/carousel";
 
 const BookSearch = () => {
   const dispatch = useDispatch();
@@ -47,7 +48,9 @@ const BookSearch = () => {
       </InputContainer>
       <MainContainer>
         {size.width < 940 ? (
-          <MostPopularCarousel>Carousel Extra</MostPopularCarousel>
+          <MostPopularCarousel>
+            <CarouselMostPopular />
+          </MostPopularCarousel>
         ) : (
           ""
         )}

@@ -19,7 +19,7 @@ const BookInfo = ({
   onChange,
   type,
   googleBookId,
-  bookId
+  bookId,
 }) => {
   const dispatch = useDispatch();
 
@@ -28,7 +28,7 @@ const BookInfo = ({
   const token = useSelector((state) => state.login.token);
   const userId = useSelector((state) => state.login.id);
   const googleInfo = useSelector((state) => state.reviewsList.googleInfo);
-  
+
   useEffect(() => {
     dispatch(requestReviews(token));
   }, [dispatch, token]);
@@ -76,7 +76,9 @@ const BookInfo = ({
               ? description
               : type === "timeline"
               ? googleInfo[googleBookId]
-              : type === 'shelf' ? description : 'No description'}
+              : type === "shelf"
+              ? description
+              : "No description"}
           </p>
           <Select
             className="addToShelf"
@@ -87,10 +89,10 @@ const BookInfo = ({
             onChange={onChange}
           >
             <Option value="1" style={{ paddingLeft: 37 }}>
-              <span>Want to read</span>
+              <span>Wishlist</span>
             </Option>
             <Option value="2" style={{ paddingLeft: 37 }}>
-              <span>Current reading</span>
+              <span>Reading</span>
             </Option>
             <Option value="3" style={{ paddingLeft: 37 }}>
               <span>Read</span>
