@@ -4,6 +4,7 @@ import { Container, StyledRegister } from "./styles.js";
 import { useDispatch, useSelector } from "react-redux";
 import { requestRegisterData } from "../../redux/actions/action-register";
 import { useHistory } from "react-router-dom";
+import { resetRegisterScreen } from '../../redux/actions/action-register'
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const Register = () => {
     if (status === true) {
       setTimeout(() => {
         history.push("/");
+        dispatch(resetRegisterScreen(null))
       }, 1500);
     }
   }, [status]);
@@ -181,7 +183,7 @@ const Register = () => {
               </span>
             </div>
           ) : status === true ? (
-            <span className="sucess">Sucess</span>
+            <div className="sucess">Sucess</div>
           ) : null}
         </div>
       </StyledRegister>
