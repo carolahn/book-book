@@ -1,12 +1,12 @@
 import LOGIN_ACTIONS from "../../actions/login/login-action-types";
 
-localStorage.getItem('book-book-token') === null && localStorage.setItem('book-book-token', JSON.stringify({
+/* localStorage.getItem('book-book-token') === null && localStorage.setItem('book-book-token', JSON.stringify({
   error: '',
   error_messsage: '',
   id: '',
   username: '',
   token: ''
-}))
+})) */
 
  const defaultState = localStorage.getItem("book-book-token") && 
                       /^[\{\[]/.test(localStorage.getItem("book-book-token")) && 

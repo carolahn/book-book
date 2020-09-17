@@ -21,17 +21,6 @@ const Book = ({ bookData, type }) => {
   const [bookInfoClicked, setBookInfoClicked] = useState(false);
   const googleInfo = useSelector((state) => state.reviewsList.googleInfo);
 
-  /* ainda a ser decidido
-    const bookData = {
-      title = props.title,
-      author: props.author,
-      image_url: props.image_url,
-      grade: props.grade,
-      categories: props.categories,
-      review: props.review,
-      google_book_id: props.google_book_id
-    }
-  */
   useEffect(() => {}, [bookInfoClicked]);
 
   function onChange(value) {
