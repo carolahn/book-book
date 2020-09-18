@@ -59,7 +59,7 @@ const Header = () => {
             (tokenInfo.token && 
                 (where === '/timeline' || where === '/search' || where === '/my-shelves' ||
                     where === '/my-shelves/' || where === '/my-shelves/whishlist' || 
-                    where === '/my-shelves/reading' || where === '/my-shelves/read' || where === '/profile')) ? 
+                    where === '/my-shelves/reading' || where === '/my-shelves/read' || where.startsWith('/profile'))) ? 
                 
             <>
                 {size.width > 895 ?
@@ -83,11 +83,6 @@ const Header = () => {
                         history.push("/my-shelves/reading");
                         setMenu(false);
                     }} >My Shelves</button>
-                    <button className={where === '/profile' ? "button here" : "button"}
-                    onClick={() => {
-                        history.push("/profile");
-                        setMenu(false);
-                    }} >Profile</button>
                     <button className="button logout"
                         onClick={() => {
                             dispatch(logout());
@@ -121,11 +116,6 @@ const Header = () => {
                                             history.push("/my-shelves/reading");
                                             setMenu(false);
                                         }} >My Shelves</button>
-                                <button className={where === '/profile' ? "little hbtn" : "hbtn"}
-                                        onClick={() => {
-                                            history.push("/profile");
-                                            setMenu(false);
-                                        }} >Profile</button>
                                 <button className={where === '/' ? "little-logout hbtn" : "hbtn"}
                                         onClick={() => {
                                             dispatch(logout());
