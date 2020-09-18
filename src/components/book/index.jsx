@@ -167,7 +167,7 @@ const Book = ({ bookData, type }) => {
                 )}
                 <p>
                   By{" "}
-                  <Link to={`/perfil/${bookData.creator.id}`}>
+                  <Link to={`/profile/${bookData.creator.id}`}>
                     {bookData.creator.user}
                   </Link>
                 </p>
@@ -216,7 +216,7 @@ const Book = ({ bookData, type }) => {
                 )}
                 <p>
                   By{" "}
-                  <Link to={`/perfil/${bookData.creator.id}`}>
+                  <Link to={`/profile/${bookData.creator.id}`}>
                     {bookData.creator.user}
                   </Link>
                 </p>
@@ -262,7 +262,7 @@ const Book = ({ bookData, type }) => {
               )}
               <p>
                 By{" "}
-                <Link to={`/perfil/${bookData.creator.id}`}>
+                <Link to={`/profile/${bookData.creator.id}`}>
                   {bookData.creator.user}
                 </Link>
               </p>

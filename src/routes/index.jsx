@@ -7,7 +7,7 @@ import Login from "../pages/login";
 import Register from "../pages/register";
 import Timeline from "../pages/timeline/";
 import Shelves from "../pages/shelves";
-import Perfil from "../pages/perfil";
+import Profile from "../pages/profile";
 import BookSearch from "../pages/book-search";
 import { requestUserBooks } from "../redux/actions/user-books";
 
@@ -42,8 +42,8 @@ const Routes = () => {
             <Route exact path="/timeline">
               <Timeline />
             </Route>
-            <Route path="/perfil/:id">
-              <Perfil />
+            <Route path="/profile/:id">
+              <Profile />
             </Route>
           </>
         ) : (
@@ -57,7 +57,7 @@ const Routes = () => {
             <Route exact path="/timeline">
               <NotAuthorized>NOT Authorized</NotAuthorized>
             </Route>
-            <Route path="/perfil">
+            <Route path="/profile">
               <NotAuthorized>NOT Authorized</NotAuthorized>
             </Route>
           </>

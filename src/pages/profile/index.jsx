@@ -7,7 +7,7 @@ import BookListPaginated from "../../containers/book-list-paginated";
 
 import { PerfilContainer, SvgContainer } from "./styled";
 
-const Perfil = () => {
+const Profile = () => {
   const { id } = useParams();
   const token = useSelector((state) => state.login.token);
   const [user, setUser] = useState({});
@@ -33,7 +33,7 @@ const Perfil = () => {
         setUser({ ...user, books: data });
       });
   }, [user]);
-  console.log(user.books)
+  
   return (
     user.name !== undefined && (
       <PerfilContainer>
@@ -57,4 +57,4 @@ const Perfil = () => {
   );
 };
 
-export default Perfil;
+export default Profile;
