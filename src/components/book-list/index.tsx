@@ -16,12 +16,12 @@ interface DisplayProps {
   size: { width: number };
 }
 
-const BookList: React.FC<DisplayProps> = ({ showBooks, type, page, size }) => {
+const BookList: React.FC<DisplayProps> = ({ showBooks, type, page = 1, size }) => {
   return (
     <Container>
-      <div>
-        {showBooks &&
-          showBooks
+      {showBooks.length !== 0 ? (
+        <div>
+          {showBooks
             .slice((page - 1) * 10, (page - 1) * 10 + 10)
             .map((currBook, key: number) => (
               <WrapBook key={key}>
@@ -40,7 +40,8 @@ const BookList: React.FC<DisplayProps> = ({ showBooks, type, page, size }) => {
                 )}
               </WrapBook>
             ))}
-      </div>
+        </div>
+      ) : "This page has no books!"}
     </Container>
   );
 };
