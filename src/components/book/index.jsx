@@ -50,7 +50,7 @@ const Book = ({ bookData, type }) => {
       );
     }
   }
-
+  
   const handleBookInfo = (event) => {
     if (
       bookInfoClicked === false &&
@@ -98,8 +98,9 @@ const Book = ({ bookData, type }) => {
                 grading={bookData.grade}
                 handleModal={handleModal}
                 onChange={onChange}
-                addFeedback={true}
+                addFeedback={false}
                 bookId={bookData.id}
+                
               />
             )}
           </>
@@ -140,8 +141,9 @@ const Book = ({ bookData, type }) => {
                 grading={bookData.grade}
                 handleModal={handleModal}
                 onChange={onChange}
-                addFeedback={true}
+                addFeedback={false}
                 bookId={bookData.id}
+                
               />
             )}
           </>
@@ -188,9 +190,9 @@ const Book = ({ bookData, type }) => {
                 grading={bookData.grade}
                 handleModal={handleModal}
                 onChange={onChange}
-                addFeedback={true}
+                addFeedback={false}
                 bookId={bookData.id}
-                google_book_id={bookData.google_book_id}
+                googleBookId={bookData.google_book_id}
               />
             )}
           </>
@@ -237,9 +239,9 @@ const Book = ({ bookData, type }) => {
                 grading={bookData.grade}
                 handleModal={handleModal}
                 onChange={onChange}
-                addFeedback={true}
+                addFeedback={false}
                 bookId={bookData.id}
-                google_book_id={bookData.google_book_id}
+                googleBookId={bookData.google_book_id}
               />
             )}
           </>

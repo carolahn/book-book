@@ -7,7 +7,7 @@ import { DeleteTwoTone } from "@ant-design/icons";
 import FeedbackForm from "../feedback-form";
 import { requestReviews } from "../../redux/actions/reviews-list";
 import { putBookChanges } from "../../redux/actions/user-books";
-import axios from "axios";
+
 
 const BookInfo = ({
   title,
@@ -22,13 +22,13 @@ const BookInfo = ({
   bookId,
 }) => {
   const dispatch = useDispatch();
-
   const [feedbackForm, setFeedbackForm] = useState(false);
-  const booksReviews = useSelector((state) => state.reviewsList.booksReviews);
+  console.log(googleBookId)
   const token = useSelector((state) => state.login.token);
   const userId = useSelector((state) => state.login.id);
   const googleInfo = useSelector((state) => state.reviewsList.googleInfo);
-
+  const booksReviewsById= useSelector((state) => state.reviewsList.booksReviewsById)
+  
   useEffect(() => {
     dispatch(requestReviews(token));
   }, [dispatch, token]);
@@ -36,15 +36,13 @@ const BookInfo = ({
   const { Option } = Select;
 
   const onFinish = (event) => {
-    const bookId = Object.values(booksReviews).filter(
-      (book) => book.title === title
-    );
+    
     setFeedbackForm(false);
     dispatch(
       putBookChanges(token, userId, bookId, 3, event.grade, event.comment)
     );
   };
-
+  console.log(googleInfo)
   const handleNewFeedback = () => {
     if (feedbackForm === false) {
       setFeedbackForm(true);
@@ -52,7 +50,7 @@ const BookInfo = ({
       setFeedbackForm(false);
     }
   };
-
+  
   return (
     <ModalContainer
       className="modal-container"
@@ -112,12 +110,13 @@ const BookInfo = ({
             </Button>
           )}
         </div>
-
+           
         <div className="feedbackContainer">
           {feedbackForm ? (
             <FeedbackForm handleFinish={onFinish} />
+            
           ) : (
-            Object.values(booksReviews).map((bookReview) =>
+            Object.values(booksReviewsById).map((bookReview) =>
               bookReview.title === title ? (
                 <Feedback
                   key={bookReview.id}
