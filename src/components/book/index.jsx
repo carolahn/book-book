@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Select, Rate } from "antd";
+import { Select, Rate, notification } from "antd";
 import { DeleteTwoTone } from "@ant-design/icons";
 import "antd/dist/antd.css";
 import { BookContainer } from "./styles.js";
@@ -9,6 +9,7 @@ import {
   postUserBook,
   removeBook,
   putBookChanges,
+  requestUsersBookDescription
 } from "../../redux/actions/user-books";
 import { Link } from "react-router-dom";
 
@@ -20,18 +21,39 @@ const Book = ({ bookData, type }) => {
 
   const [bookInfoClicked, setBookInfoClicked] = useState(false);
   const googleInfo = useSelector((state) => state.reviewsList.googleInfo);
+  const bookDescription = useSelector((state) => state.bookDescription.description)
+  
 
+  
   useEffect(() => {}, [bookInfoClicked]);
 
   function onChange(value) {
+
+   
+    
     if (userBooks[bookData.google_book_id]) {
       const selectedBook = userBooks[bookData.google_book_id];
       if (value === "delete") {
         dispatch(removeBook(user.token, user.id, selectedBook.id));
+        notification.info({
+          key: user.id,
+          message: "Done:",
+          description: "The book has been removed!",
+        });
       } else {
         dispatch(putBookChanges(user.token, user.id, selectedBook.id, value));
+        notification.success({
+          key: user.id,
+          message: "Done:",
+          description: "Shelf change completed!",
+        });
       }
     } else if (!userBooks[bookData.google_book_id] && value === "delete") {
+      return notification.error({
+        key: user.id,
+        message: "Error:",
+        description: "This book are not in your shelves!",
+      });
       return;
     } else {
       dispatch(
@@ -48,17 +70,27 @@ const Book = ({ bookData, type }) => {
           bookData.google_book_id
         )
       );
+      notification.success({
+        key: user.id,
+        message: "Done:",
+        description: "The book has been added to your shelf!",
+      });
     }
   }
   
   const handleBookInfo = (event) => {
-    if (
-      bookInfoClicked === false &&
-      !event.target.className.includes("ant-select") &&
-      !event.target.className.includes("spanSelect")
-    ) {
-      setBookInfoClicked(true);
-    }
+    dispatch(requestUsersBookDescription(bookData.google_book_id))
+    const eventClassName = event.target.className
+    setTimeout(() => {
+      if (
+        bookInfoClicked === false &&
+        !eventClassName.includes("ant-select") &&
+        !eventClassName.includes("spanSelect")
+      ) {
+        setBookInfoClicked(true);
+      }
+    } , 200)
+    
   };
 
   const handleModal = (event) => {
@@ -89,20 +121,7 @@ const Book = ({ bookData, type }) => {
                 />
               </div>
             </div>
-            {bookInfoClicked && (
-              <BookInfo
-                type="search"
-                title={bookData.title}
-                image={bookData.image_url}
-                description={bookData.description}
-                grading={bookData.grade}
-                handleModal={handleModal}
-                onChange={onChange}
-                addFeedback={false}
-                bookId={bookData.id}
-                
-              />
-            )}
+           
           </>
         )}
 
@@ -132,20 +151,7 @@ const Book = ({ bookData, type }) => {
                 />
               </div>
             </div>
-            {bookInfoClicked && (
-              <BookInfo
-                type="search"
-                title={bookData.title}
-                image={bookData.image_url}
-                description={bookData.description}
-                grading={bookData.grade}
-                handleModal={handleModal}
-                onChange={onChange}
-                addFeedback={false}
-                bookId={bookData.id}
-                
-              />
-            )}
+            
           </>
         )}
 
@@ -181,20 +187,7 @@ const Book = ({ bookData, type }) => {
                 />
               </div>
             </div>
-            {bookInfoClicked && (
-              <BookInfo
-                type="timeline"
-                title={bookData.title}
-                image={bookData.image_url}
-                description={googleInfo}
-                grading={bookData.grade}
-                handleModal={handleModal}
-                onChange={onChange}
-                addFeedback={false}
-                bookId={bookData.id}
-                googleBookId={bookData.google_book_id}
-              />
-            )}
+           
           </>
         )}
 
@@ -230,20 +223,8 @@ const Book = ({ bookData, type }) => {
                 />
               </div>
             </div>
-            {bookInfoClicked && (
-              <BookInfo
-                type="timeline"
-                title={bookData.title}
-                image={bookData.image_url}
-                description={googleInfo}
-                grading={bookData.grade}
-                handleModal={handleModal}
-                onChange={onChange}
-                addFeedback={false}
-                bookId={bookData.id}
-                googleBookId={bookData.google_book_id}
-              />
-            )}
+           
+           
           </>
         )}
 
@@ -305,7 +286,22 @@ const Book = ({ bookData, type }) => {
           </Select>
         </div>
       </BookContainer>
+      {bookInfoClicked && (
+              <BookInfo
+                type="search"
+                title={bookData.title}
+                image={bookData.image_url}
+                description={bookDescription}
+                grading={bookData.grade}
+                handleModal={handleModal}
+                onChange={onChange}
+                addFeedback={false}
+                bookId={bookData.id}
+                googleBookId={bookData.google_book_id}
+              />
+            )}
     </div>
+    
   );
 };
 
