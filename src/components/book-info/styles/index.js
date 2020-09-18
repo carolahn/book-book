@@ -6,7 +6,6 @@ export const StyledBookInfo = styled.div`
   background-color: #fff;
   display: grid;
   border-radius: 0.625rem;
-
   grid-template-columns: 8% 38% 8% 38% 8%;
   grid-template-rows: 10% 80% 10%;
   
@@ -16,16 +15,18 @@ export const StyledBookInfo = styled.div`
   }
 
   .bookInfoContent {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(20, 1fr);
+    
     grid-column-start:2;
     grid-column-end: 2;
     grid-row-start:2;
     grid-row-end:2;
 
 
-    display: grid;
-
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: repeat(20, 1fr);
+    
 
     .bookCover {
       width: 128px;
@@ -136,6 +137,7 @@ export const StyledBookInfo = styled.div`
   }
 
   @media (max-width: 540px) {
+   
     grid-template-columns: 10% 80% 10%;
     grid-template-rows: 5% 50% 5% 35% 5%;
     height: 1000px;
@@ -171,7 +173,7 @@ export const StyledBookInfo = styled.div`
   @media (max-width: 420px) {
     grid-template-columns: 10% 80% 10%;
     grid-template-rows: 8% 60% 24% 8%;
-    
+    margin-top: 500px;
     
     
     .bookInfoContent {
@@ -199,6 +201,11 @@ export const StyledBookInfo = styled.div`
         grid-row-start: 2;
         grid-row-end: 2;
         align-self: center;
+      }
+
+      .bookNewFeedback {
+        justify-self: center;
+        margin-bottom: 20px;
       }
     }
   
@@ -243,6 +250,10 @@ export const StyledBookInfo = styled.div`
         grid-column-end:3;
         align-self: center;
       }
+
+      .bookNewFeedback {
+        margin-left: 120px;
+      }
     }
   
     .feedbackContainer {
@@ -269,5 +280,10 @@ export const ModalContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 11;
+  z-index: 111;
+
+
+  @media (max-width: 420px) {
+    overflow: auto;
+  } 
 `;

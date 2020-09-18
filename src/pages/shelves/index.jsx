@@ -27,7 +27,8 @@ const Shelves = () => {
     const [shelfValue, setShelfValue] = useState();
     
     const tokenInfo = useSelector(state => state.login);
-
+    
+  
     const whishlistShelf = userBooks.filter(e => e.shelf === 1);
     const readingShelf = userBooks.filter(e => e.shelf === 2);
     const readShelf = userBooks.filter(e => e.shelf === 3);
@@ -81,7 +82,7 @@ const Shelves = () => {
                     title={uniqueBook.title} 
                     image={uniqueBook.image} 
                     description={bookDescription} 
-                    addFeedback={false} 
+                    addFeedback={true} 
                     grading={0} 
                     handleModal={handleModal} 
                     onChange={onChange} 
@@ -101,7 +102,7 @@ const Shelves = () => {
             <Switch>
                 <Route path="/my-shelves/whishlist">    
                     <BookShelf>
-                        {whishlistShelf.map((e, i) => (<div>
+                        {whishlistShelf.map((e, i) => (<div key={i}>
                             <Book
                                   colour="darkred" 
                                   alt={e.title} src={e.image_url} 
@@ -126,7 +127,7 @@ const Shelves = () => {
                 </Route>
                 <Route path="/my-shelves/reading" >
                     <BookShelf>
-                        {readingShelf.map((e, i) => (<div>
+                        {readingShelf.map((e, i) => (<div key={i}>
                             <Book 
                                   colour="darkred"  
                                   alt={e.title} src={e.image_url} 
@@ -151,7 +152,7 @@ const Shelves = () => {
                 </Route>
                 <Route path="/my-shelves/read" >
                     <BookShelf>
-                        {readShelf.map((e, i) => (<div>
+                        {readShelf.map((e, i) => (<div key={i}>
                             <Book
                                   colour="darkred"  
                                   alt={e.title} src={e.image_url} 
