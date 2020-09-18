@@ -6,7 +6,7 @@ import Feedback from "../feedback";
 import { DeleteTwoTone } from "@ant-design/icons";
 import FeedbackForm from "../feedback-form";
 import { requestReviews } from "../../redux/actions/reviews-list";
-import { putBookChanges } from "../../redux/actions/user-books";
+import { putBookChanges, requestUsersBookDescription } from "../../redux/actions/user-books";
 
 
 const BookInfo = ({
@@ -17,20 +17,22 @@ const BookInfo = ({
   grading,
   handleModal,
   onChange,
-  type,
   googleBookId,
   bookId,
 }) => {
+  
   const dispatch = useDispatch();
   const [feedbackForm, setFeedbackForm] = useState(false);
-  console.log(googleBookId)
+ 
   const token = useSelector((state) => state.login.token);
   const userId = useSelector((state) => state.login.id);
+  const bookDescription = useSelector((state) => state.bookDescription.description)
   const googleInfo = useSelector((state) => state.reviewsList.googleInfo);
   const booksReviewsById= useSelector((state) => state.reviewsList.booksReviewsById)
   
   useEffect(() => {
     dispatch(requestReviews(token));
+    dispatch(requestUsersBookDescription(googleBookId))
   }, [dispatch, token]);
 
   const { Option } = Select;
@@ -42,7 +44,7 @@ const BookInfo = ({
       putBookChanges(token, userId, bookId, 3, event.grade, event.comment)
     );
   };
-  console.log(googleInfo)
+  
   const handleNewFeedback = () => {
     if (feedbackForm === false) {
       setFeedbackForm(true);
@@ -70,13 +72,7 @@ const BookInfo = ({
           />
 
           <p className="bookDescription">
-            {type === "search"
-              ? description
-              : type === "timeline"
-              ? googleInfo[googleBookId]
-              : type === "shelf"
-              ? description
-              : "No description"}
+            {description}
           </p>
           <Select
             className="addToShelf"
