@@ -20,7 +20,7 @@ const Footer = () => {
 export default Footer;
 
 const StyledFooter = styled.div`
-    width: 100vw;
+    width: 100%;
     height: 50px;
     background-color: #2f3942;
     margin-top: 50px;
