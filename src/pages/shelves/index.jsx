@@ -108,7 +108,7 @@ const Shelves = () => {
             title={uniqueBook.title}
             image={uniqueBook.image}
             description={bookDescription}
-            addFeedback={false}
+            addFeedback={true}
             grading={0}
             handleModal={handleModal}
             onChange={onChange}
@@ -145,7 +145,7 @@ const Shelves = () => {
         <Route path="/my-shelves/whishlist">
           <BookShelf>
             {whishlistShelf.map((e, i) => (
-              <div>
+              <div key={i}>
                 <Book
                   colour="darkred"
                   alt={e.title}
@@ -173,7 +173,7 @@ const Shelves = () => {
         <Route path="/my-shelves/reading">
           <BookShelf>
             {readingShelf.map((e, i) => (
-              <div>
+              <div key={i}>
                 <Book
                   colour="darkred"
                   alt={e.title}
@@ -201,7 +201,7 @@ const Shelves = () => {
         <Route path="/my-shelves/read">
           <BookShelf>
             {readShelf.map((e, i) => (
-              <div>
+              <div key={i}>
                 <Book
                   colour="darkred"
                   alt={e.title}

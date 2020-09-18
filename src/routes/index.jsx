@@ -42,7 +42,7 @@ const Routes = () => {
             <Route exact path="/timeline">
               <Timeline />
             </Route>
-            <Route path="/perfil/:id">
+            <Route path="/profile/:id">
               <Perfil />
             </Route>
           </>
@@ -57,7 +57,7 @@ const Routes = () => {
             <Route exact path="/timeline">
               <NotAuthorized>NOT Authorized</NotAuthorized>
             </Route>
-            <Route path="/perfil">
+            <Route path="/profile">
               <NotAuthorized>NOT Authorized</NotAuthorized>
             </Route>
           </>

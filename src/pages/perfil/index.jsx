@@ -33,7 +33,7 @@ const Perfil = () => {
         setUser({ ...user, books: data });
       });
   }, [user]);
-
+  console.log(user.books)
   return (
     user.name !== undefined && (
       <PerfilContainer>
