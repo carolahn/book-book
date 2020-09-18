@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Select, Rate } from "antd";
+import { Select, Rate, notification } from "antd";
 import { DeleteTwoTone } from "@ant-design/icons";
 import "antd/dist/antd.css";
 import { BookContainer } from "./styles.js";
@@ -28,10 +28,25 @@ const Book = ({ bookData, type }) => {
       const selectedBook = userBooks[bookData.google_book_id];
       if (value === "delete") {
         dispatch(removeBook(user.token, user.id, selectedBook.id));
+        notification.info({
+          key: user.id,
+          message: "Done:",
+          description: "The book has been removed!",
+        });
       } else {
         dispatch(putBookChanges(user.token, user.id, selectedBook.id, value));
+        notification.success({
+          key: user.id,
+          message: "Done:",
+          description: "Shelf change completed!",
+        });
       }
     } else if (!userBooks[bookData.google_book_id] && value === "delete") {
+      return notification.error({
+        key: user.id,
+        message: "Error:",
+        description: "This book are not in your shelves!",
+      });
       return;
     } else {
       dispatch(
@@ -48,6 +63,11 @@ const Book = ({ bookData, type }) => {
           bookData.google_book_id
         )
       );
+      notification.success({
+        key: user.id,
+        message: "Done:",
+        description: "The book has been added to your shelf!",
+      });
     }
   }
   
