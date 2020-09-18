@@ -4,7 +4,7 @@ import {
   ADD_TO_MOST_POPULAR,
 } from "../../actions/reviews-list";
 
-const defaultState = { booksReviews: {} };
+const defaultState = { booksReviews: {}, booksReviewsById: {} };
 
 const reviewsList = (state = defaultState, { type, payload }) => {
   switch (type) {
