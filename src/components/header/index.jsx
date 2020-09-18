@@ -95,7 +95,7 @@ const Header = () => {
                     <div className="menu-button"
                         onClick={() => setMenu((prevState) => !prevState)} />
                     {menu ?
-                        <Menu>
+                        <Menu onClick={() => setMenu(false)} >
                             <LoggedLittleMenu className="little-menu">
                                 <button className={where === '/timeline' ? "little hbtn" : "hbtn"}
                                         onClick={() => {
