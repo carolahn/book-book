@@ -8,7 +8,10 @@ export const BookSearchContainer = styled.div`
   min-width: 315px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
+  justify-content: flex-start;
+  align-items: center;
+  min-height: calc(100% - 100px);
 `;
 
 export const InputContainer = styled.div`
