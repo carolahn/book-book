@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 export const StyledFeedback  = styled.div`
-  width: 100%;
-  overflow: auto;
+  width: 95%;
+  margin: 0.625rem 0.625rem 0.625rem 0;
   text-align: left;
   padding: 0.625rem;
   border-radius: 10px;
@@ -10,6 +10,7 @@ export const StyledFeedback  = styled.div`
 
   p{
     padding: 0.625rem;
+    overflow: hidden;
   }
 
   .feedbackGrade {

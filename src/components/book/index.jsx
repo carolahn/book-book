@@ -279,19 +279,20 @@ const Book = ({ bookData, type }) => {
         </div>
       </BookContainer>
       {bookInfoClicked && (
-        <BookInfo
-          type="search"
-          title={bookData.title}
-          image={bookData.image_url}
-          description={bookDescription}
-          grading={bookData.grade}
-          handleModal={handleModal}
-          onChange={onChange}
-          addFeedback={false}
-          bookId={bookData.id}
-          googleBookId={bookData.google_book_id}
-        />
-      )}
+              <BookInfo
+                type="search"
+                title={bookData.title}
+                author={bookData.author}
+                image={bookData.image_url}
+                description={bookDescription}
+                grading={bookData.grade}
+                handleModal={handleModal}
+                onChange={onChange}
+                addFeedback={false}
+                bookId={bookData.id}
+                googleBookId={bookData.google_book_id}
+              />
+            )}
     </div>
   );
 };
