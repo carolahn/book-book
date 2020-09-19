@@ -9,7 +9,7 @@ import {
   postUserBook,
   removeBook,
   putBookChanges,
-  requestUsersBookDescription
+  requestUsersBookDescription,
 } from "../../redux/actions/user-books";
 import { Link } from "react-router-dom";
 
@@ -18,19 +18,17 @@ const Book = ({ bookData, type }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.login);
   const userBooks = useSelector((state) => state.userBooks);
+  const userBooksById = useSelector((state) => state.userBooksById);
 
   const [bookInfoClicked, setBookInfoClicked] = useState(false);
   const googleInfo = useSelector((state) => state.reviewsList.googleInfo);
-  const bookDescription = useSelector((state) => state.bookDescription.description)
-  
+  const bookDescription = useSelector(
+    (state) => state.bookDescription.description
+  );
 
-  
   useEffect(() => {}, [bookInfoClicked]);
 
   function onChange(value) {
-
-   
-    
     if (userBooks[bookData.google_book_id]) {
       const selectedBook = userBooks[bookData.google_book_id];
       if (value === "delete") {
@@ -62,11 +60,11 @@ const Book = ({ bookData, type }) => {
           user.id,
           bookData.title,
           bookData.author,
-          value, // shelf -> 1, 2 ou 3
+          value,
           bookData.image_url,
-          0, // grade
+          0,
           bookData.categories,
-          "", // review
+          "",
           bookData.google_book_id
         )
       );
@@ -77,10 +75,10 @@ const Book = ({ bookData, type }) => {
       });
     }
   }
-  
+
   const handleBookInfo = (event) => {
-    dispatch(requestUsersBookDescription(bookData.google_book_id))
-    const eventClassName = event.target.className
+    dispatch(requestUsersBookDescription(bookData.google_book_id));
+    const eventClassName = event.target.className;
     setTimeout(() => {
       if (
         bookInfoClicked === false &&
@@ -89,8 +87,7 @@ const Book = ({ bookData, type }) => {
       ) {
         setBookInfoClicked(true);
       }
-    } , 200)
-    
+    }, 200);
   };
 
   const handleModal = (event) => {
@@ -121,7 +118,6 @@ const Book = ({ bookData, type }) => {
                 />
               </div>
             </div>
-           
           </>
         )}
 
@@ -151,7 +147,6 @@ const Book = ({ bookData, type }) => {
                 />
               </div>
             </div>
-            
           </>
         )}
 
@@ -187,7 +182,6 @@ const Book = ({ bookData, type }) => {
                 />
               </div>
             </div>
-           
           </>
         )}
 
@@ -223,8 +217,6 @@ const Book = ({ bookData, type }) => {
                 />
               </div>
             </div>
-           
-           
           </>
         )}
 
@@ -302,7 +294,6 @@ const Book = ({ bookData, type }) => {
               />
             )}
     </div>
-    
   );
 };
 

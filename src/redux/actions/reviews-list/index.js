@@ -37,7 +37,6 @@ const addToReviewsList = (booksReviews, booksReviewsById) => ({
 export const requestGoogleInfo = (booksReviews, page) => (dispatch) => {
   let urlRequests = [];
   let booksDescriptions = [];
-
   Object.keys(booksReviews)
     .slice(page * 10 - 10, page * 10)
     .map((key) => {

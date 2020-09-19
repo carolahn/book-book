@@ -23,7 +23,6 @@ const BookInfo = ({
   googleBookId,
   bookId,
 }) => {
-  
   const dispatch = useDispatch();
   const [feedbackForm, setFeedbackForm] = useState(false);
   const [feedbackMissing, setFeedbackMissing] = useState(false)
@@ -45,7 +44,6 @@ const BookInfo = ({
   const { Option } = Select;
 
   const onFinish = (event) => {
-    
     setFeedbackForm(false);
     dispatch(putBookChanges(token, userId, bookId, 3, event.grading, event.comment));
 

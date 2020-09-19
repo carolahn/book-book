@@ -14,8 +14,6 @@ export const BookSearchContainer = styled.div`
 `;
 
 export const InputContainer = styled.div`
-  /* width: 60%; */
-  /* max-width: 950px; */
   width: 950px;
   .ant-btn-primary {
     background: #68c866;
@@ -82,7 +80,6 @@ export const MostPopularContainer = styled.div`
 `;
 
 export const MostPopularCarousel = styled.div`
-  /* background-color: pink; */
   width: 100%;
   min-width: 315px;
   display: flex;

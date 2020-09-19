@@ -75,8 +75,10 @@ export const StyledRegister = styled.div`
     padding-bottom: 2.50rem;
   }
 
-  .sucess {
+  .sucess{
     color: green;
+    text-transform: capitalize;
+    margin-bottom: 1.25rem;
   }
 
   h1{
