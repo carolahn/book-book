@@ -1,14 +1,7 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
-  margin: 5px;
-
-  > div {
-    display: flex;
-    flex-direction: column;
-
-    align-items: center;
-  }
+export const MainContainer = styled.div`
+  width: 100%;
 `;
 
 export const WrapBook = styled.div`
@@ -17,4 +10,5 @@ export const WrapBook = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   margin-bottom: 15px;
+  background-color: rgba(255, 145, 77, 0.3);
 `;

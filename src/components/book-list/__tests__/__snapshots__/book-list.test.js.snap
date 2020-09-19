@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render Test render books 1`] = `
+<div
+  className="sc-bdnylx dvJgMb"
+>
+  <div />
+</div>
+`;
+
+exports[`Render Test render empty when there is no book 1`] = `
+<div
+  className="sc-bdnylx dvJgMb"
+>
+  <div />
+</div>
+`;

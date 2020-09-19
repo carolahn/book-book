@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Select, Rate } from "antd";
+import { Select, Rate, notification } from "antd";
 import { DeleteTwoTone } from "@ant-design/icons";
 import "antd/dist/antd.css";
 import { BookContainer } from "./styles.js";
+import BookInfo from "../book-info";
 import {
   postUserBook,
   removeBook,
   putBookChanges,
+  requestUsersBookDescription
 } from "../../redux/actions/user-books";
+import { Link } from "react-router-dom";
 
 const Book = ({ bookData, type }) => {
   const { Option } = Select;
@@ -16,27 +19,37 @@ const Book = ({ bookData, type }) => {
   const user = useSelector((state) => state.login);
   const userBooks = useSelector((state) => state.userBooks);
 
-  /* ainda a ser decidido
-    const bookData = {
-      title = props.title,
-      author: props.author,
-      image_url: props.image_url,
-      grade: props.grade,
-      categories: props.categories,
-      review: props.review,
-      google_book_id: props.google_book_id
-    }
-  */
+  const [bookInfoClicked, setBookInfoClicked] = useState(false);
+  const googleInfo = useSelector((state) => state.reviewsList.googleInfo);
+  const bookDescription = useSelector((state) => state.bookDescription.description)
+
+  useEffect(() => {}, [bookInfoClicked]);
 
   function onChange(value) {
+
     if (userBooks[bookData.google_book_id]) {
       const selectedBook = userBooks[bookData.google_book_id];
       if (value === "delete") {
         dispatch(removeBook(user.token, user.id, selectedBook.id));
+        notification.info({
+          key: user.id,
+          message: "Done:",
+          description: "The book has been removed!",
+        });
       } else {
         dispatch(putBookChanges(user.token, user.id, selectedBook.id, value));
+        notification.success({
+          key: user.id,
+          message: "Done:",
+          description: "Shelf change completed!",
+        });
       }
     } else if (!userBooks[bookData.google_book_id] && value === "delete") {
+      return notification.error({
+        key: user.id,
+        message: "Error:",
+        description: "This book are not in your shelves!",
+      });
       return;
     } else {
       dispatch(
@@ -47,38 +60,189 @@ const Book = ({ bookData, type }) => {
           bookData.author,
           value,
           bookData.image_url,
-          bookData.grade,
+          0,
           bookData.categories,
           "",
           bookData.google_book_id
         )
       );
+      notification.success({
+        key: user.id,
+        message: "Done:",
+        description: "The book has been added to your shelf!",
+      });
     }
   }
+  
+  const handleBookInfo = (event) => {
+    dispatch(requestUsersBookDescription(bookData.google_book_id))
+    const eventClassName = event.target.className
+    setTimeout(() => {
+      if (
+        bookInfoClicked === false &&
+        !eventClassName.includes("ant-select") &&
+        !eventClassName.includes("spanSelect")
+      ) {
+        setBookInfoClicked(true);
+      }
+    } , 200)
+    
+  };
 
-  function onBlur() {
-    console.log("blur");
-  }
-
-  function onFocus() {
-    console.log("focus");
-  }
-
-  function onSearch(val) {
-    console.log("search:", val);
-  }
+  const handleModal = (event) => {
+    if (event.target.id === "modal-container") {
+      setBookInfoClicked(false);
+    }
+  };
 
   return (
-    <BookContainer className="book">
-      {type === "search-desktop" && (
-        <>
-          <img src={bookData.image_url} alt="cover" />
-          <div className="book-info">
-            <div className="title">{bookData.title}</div>
-            <div className="author">{bookData.author}</div>
-            <div className="description">
-              <p>{bookData.categories}</p>
-              <p>{bookData.year}</p>
+    <div>
+      <BookContainer className="book" onClick={handleBookInfo}>
+        {type === "search-desktop" && (
+          <>
+            <img src={bookData.image_url} alt="cover" className="bookImage" />
+            <div className="book-info">
+              <div className="title">{bookData.title}</div>
+              <div className="author">{bookData.author}</div>
+              <div className="description description-search-desktop">
+                <p>{bookData.categories}</p>
+                <p>{bookData.year}</p>
+              </div>
+              <div className="grade">
+                <Rate
+                  disabled
+                  allowHalf
+                  defaultValue={bookData.grade || 0}
+                  style={{ fontSize: 15, display: "revert" }}
+                />
+              </div>
+            </div>
+           
+          </>
+        )}
+
+        {type === "search-mobile" && (
+          <>
+            <img src={bookData.image_url} alt="cover" className="bookImage" />
+            <div className="book-info">
+              <div className="title">{bookData.title}</div>
+              <div className="author">{bookData.author}</div>
+              <div className="description description-search-mobile">
+                {bookData.description ? (
+                  bookData.description.length > 80 ? (
+                    <p>{bookData.description.slice(0, 80)}...</p>
+                  ) : (
+                    <p>{bookData.description}</p>
+                  )
+                ) : (
+                  <p>No review</p>
+                )}
+              </div>
+              <div className="grade">
+                <Rate
+                  disabled
+                  allowHalf
+                  defaultValue={bookData.grade || 0}
+                  style={{ fontSize: 15, display: "revert" }}
+                />
+              </div>
+            </div>
+            
+          </>
+        )}
+
+        {type === "timeline-desktop" && (
+          <>
+            <img src={bookData.image_url} alt="cover" className="bookImage" />
+            <div className="book-info">
+              <div className="title">{bookData.title}</div>
+              <div className="author">{bookData.author}</div>
+              <div className="description description-timeline">
+                {bookData.review ? (
+                  bookData.review.length > 65 ? (
+                    <p>{bookData.review.slice(0, 65)}...</p>
+                  ) : (
+                    <p>{bookData.review}</p>
+                  )
+                ) : (
+                  <p>No review</p>
+                )}
+                <p>
+                  By{" "}
+                  <Link to={`/profile/${bookData.creator.id}`}>
+                    {bookData.creator.user}
+                  </Link>
+                </p>
+              </div>
+              <div className="grade">
+                <Rate
+                  disabled
+                  allowHalf
+                  defaultValue={bookData.grade || 0}
+                  style={{ fontSize: 15, display: "revert" }}
+                />
+              </div>
+            </div>
+           
+          </>
+        )}
+
+        {type === "timeline-mobile" && (
+          <>
+            <img src={bookData.image_url} alt="cover" className="bookImage" />
+            <div className="book-info">
+              <div className="title">{bookData.title}</div>
+              <div className="author">{bookData.author}</div>
+              <div className="description description-timeline">
+                {bookData.review ? (
+                  bookData.review.length > 65 ? (
+                    <p>{bookData.review.slice(0, 65)}...</p>
+                  ) : (
+                    <p>{bookData.review}</p>
+                  )
+                ) : (
+                  <p>No review</p>
+                )}
+                <p>
+                  By{" "}
+                  <Link to={`/profile/${bookData.creator.id}`}>
+                    {bookData.creator.user}
+                  </Link>
+                </p>
+              </div>
+              <div className="grade">
+                <Rate
+                  disabled
+                  allowHalf
+                  defaultValue={bookData.grade || 0}
+                  style={{ fontSize: 15, display: "revert" }}
+                />
+              </div>
+            </div>
+           
+           
+          </>
+        )}
+
+        {type === "aside" && (
+          <>
+            <img src={bookData.image_url} alt="cover" className="bookImage" />
+            <div className="book-info-aside">
+              {bookData.review ? (
+                bookData.review.length > 240 ? (
+                  <p>{bookData.review.slice(0, 240)}...</p>
+                ) : (
+                  <p>{bookData.review}</p>
+                )
+              ) : (
+                <p>No review</p>
+              )}
+              <p>
+                By{" "}
+                <Link to={`/profile/${bookData.creator.id}`}>
+                  {bookData.creator.user}
+                </Link>
+              </p>
             </div>
             <div className="grade">
               <Rate
@@ -88,106 +252,52 @@ const Book = ({ bookData, type }) => {
                 style={{ fontSize: 15, display: "revert" }}
               />
             </div>
-          </div>
-        </>
-      )}
+          </>
+        )}
 
-      {type === "search-mobile" && (
-        <>
-          <img src={bookData.image_url} alt="cover" />
-          <div className="book-info">
-            <div className="title">{bookData.title}</div>
-            <div className="author">{bookData.author}</div>
-            <div className="description">
-              <p>{bookData.description}</p>
-            </div>
-            <div className="grade">
-              <Rate
-                disabled
-                allowHalf
-                defaultValue={bookData.grade || 0}
-                style={{ fontSize: 15, display: "revert" }}
+        <div className="select-menu">
+          <Select
+            style={{ width: 200 }}
+            size={"small"}
+            placeholder="SHELF"
+            optionFilterProp="children"
+            onChange={onChange}
+          >
+            <Option value="1" style={{ paddingLeft: 37 }}>
+              <span className="spanSelect">Wishlist</span>
+            </Option>
+            <Option value="2" style={{ paddingLeft: 37 }}>
+              <span className="spanSelect">Reading</span>
+            </Option>
+            <Option value="3" style={{ paddingLeft: 37 }}>
+              <span className="spanSelect">Read</span>
+            </Option>
+            <Option value="delete" style={{ color: "#dd2e44" }}>
+              <DeleteTwoTone
+                twoToneColor="#dd2e44"
+                style={{ marginRight: 10 }}
               />
-            </div>
-          </div>
-        </>
-      )}
-
-      {type === "timeline-desktop" && (
-        <>
-          <img src={bookData.image_url} alt="cover" />
-          <div className="book-info">
-            <div className="title">{bookData.title}</div>
-            <div className="author">{bookData.author}</div>
-            <div className="description">
-              <p>{bookData.categories}</p>
-              <p>{bookData.creator.user} read it.</p>
-            </div>
-            <div className="grade">
-              <Rate
-                disabled
-                allowHalf
-                defaultValue={bookData.grade || 0}
-                style={{ fontSize: 15, display: "revert" }}
+              <span className="spanSelect">Remove</span>
+            </Option>
+          </Select>
+        </div>
+      </BookContainer>
+      {bookInfoClicked && (
+              <BookInfo
+                type="search"
+                title={bookData.title}
+                image={bookData.image_url}
+                description={bookDescription}
+                grading={bookData.grade}
+                handleModal={handleModal}
+                onChange={onChange}
+                addFeedback={false}
+                bookId={bookData.id}
+                googleBookId={bookData.google_book_id}
               />
-            </div>
-          </div>
-        </>
-      )}
-
-      {type === "timeline-mobile" && (
-        <>
-          <img src={bookData.image_url} alt="cover" />
-          <div className="book-info">
-            <div className="title">{bookData.title}</div>
-            <div className="author">{bookData.author}</div>
-            <div className="description">
-              <p>{bookData.review}</p>
-              <p>{bookData.creator.user}</p>
-            </div>
-            <div className="grade">
-              <Rate
-                disabled
-                allowHalf
-                defaultValue={bookData.grade || 0}
-                style={{ fontSize: 15, display: "revert" }}
-              />
-            </div>
-          </div>
-        </>
-      )}
-
-      <div className="select-menu">
-        <Select
-          showSearch
-          style={{ width: 200 }}
-          size={"small"}
-          placeholder="SHELF"
-          optionFilterProp="children"
-          onChange={onChange}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          onSearch={onSearch}
-          filterOption={(input, option) =>
-            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-          }
-        >
-          <Option value="1" style={{ paddingLeft: 37 }}>
-            <span>Wish List</span>
-          </Option>
-          <Option value="2" style={{ paddingLeft: 37 }}>
-            <span>Reading</span>
-          </Option>
-          <Option value="3" style={{ paddingLeft: 37 }}>
-            <span>Read</span>
-          </Option>
-          <Option value="delete" style={{ color: "#dd2e44" }}>
-            <DeleteTwoTone twoToneColor="#dd2e44" style={{ marginRight: 10 }} />
-            <span>Remove</span>
-          </Option>
-        </Select>
-      </div>
-    </BookContainer>
+            )}
+    </div>
+    
   );
 };
 

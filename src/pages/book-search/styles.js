@@ -6,69 +6,92 @@ export const BookSearchContainer = styled.div`
   place-items: center;
   padding-top: 65px;
   min-width: 315px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: calc(100% - 100px);
 `;
 
 export const InputContainer = styled.div`
-  width: 60%;
-  min-width: 315px;
+  width: 950px;
   .ant-btn-primary {
     background: #68c866;
     border-color: #68c866;
+    width: 150px;
+  }
+  button.ant-btn.ant-btn-primary.ant-btn-lg.ant-input-search-button {
+    width: 150px;
   }
 
-  @media screen and (max-width: 560px) {
-    width: 95%;
-    min-width: 315px;
+  @media screen and (max-width: 940px) {
+    width: 627px;
+  }
+
+  @media screen and (max-width: 627px) {
+    width: 315px;
+    button.ant-btn.ant-btn-primary.ant-btn-lg.ant-input-search-button {
+      width: 100px;
+    }
   }
 `;
 
 export const MainContainer = styled.div`
-  /* min-width: 515px; */
+  width: 950px;
   margin: 0 auto;
   margin-top: 15px;
   display: grid;
-  /* grid-template-columns: 515px 200px; */
 
-  @media screen and (max-width: 560px) {
-    width: 100%;
-    min-width: 315px;
+  @media screen and (max-width: 940px) {
+    width: 627px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+  }
+  @media screen and (max-width: 627px) {
+    width: 315px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 `;
 
 export const ResultsContainer = styled.div`
-  /* background-color: red; */
   grid-column: 1;
-  min-width: 315px;
+  width: 627px;
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
+  align-items: center;
+  justify-content: center;
 
-  @media screen and (max-width: 560px) {
-    width: 100%;
-    min-width: 315px;
+  @media screen and (max-width: 627px) {
+    width: 315px;
   }
 `;
 
 export const MostPopularContainer = styled.div`
-  height: 200px;
-  background-color: pink;
   grid-column: 2;
-  width: 200px;
+  width: 315px;
+  margin-top: -5px;
 
-  @media screen and (max-width: 560px) {
+  @media screen and (max-width: 940px) {
     display: none;
   }
 `;
 
 export const MostPopularCarousel = styled.div`
-  height: 150px;
-  background-color: pink;
   width: 100%;
   min-width: 315px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  @media screen and (max-width: 940px) {
+    width: 627px;
+  }
+
+  @media screen and (max-width: 627px) {
+    width: 315px;
+  }
 `;

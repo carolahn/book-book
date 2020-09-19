@@ -5,7 +5,7 @@ export const BookContainer = styled.div`
   margin-bottom: 10px;
   padding: 4px;
   width: 312px;
-  background-color: white;
+  /* background-color: white; */
   display: grid;
   grid-template-columns: 100px 200px;
   grid-template-rows: 30px 16px 60px 20px 24px;
@@ -15,6 +15,11 @@ export const BookContainer = styled.div`
   column-gap: 4px;
 
   img {
+    width: 128px;
+    height: 144px;
+  }
+
+  .bookImage {
     grid-column: 1;
     grid-row: 1/6;
     width: 100%;
@@ -47,8 +52,64 @@ export const BookContainer = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 12px;
-    line-height: 15px;
+    /* line-height: 15px; */
     color: #777777;
+  }
+
+  div.description p {
+    /* line-height: 12px; */
+    padding: 0;
+    margin: 0;
+  }
+
+  div.description-search-desktop {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  div.description-search-mobile {
+    line-height: 15px;
+    width: 150px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  div.description-search-mobile p {
+    line-height: 15px;
+    width: 150px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+  }
+
+  div.description-timeline {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  div.book-info-aside {
+    grid-column: 2;
+    grid-row: 1/4;
+    font-size: 12px;
+    line-height: 13px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+  }
+
+  div.book-info-aside p {
+    margin: 0;
+    padding: 0;
   }
 
   div.grade {
@@ -59,6 +120,7 @@ export const BookContainer = styled.div`
     text-align: right;
     margin: 0;
     padding: 0;
+    pointer-events: none;
   }
 
   div.grade .ant-rate {

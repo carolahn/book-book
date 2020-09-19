@@ -3,8 +3,8 @@ import logo from '../../assets/images/header/logo/logo255.svg';
 import menu from '../../assets/images/header/menu/menu.svg';
 
 export const StyledHeader = styled.div`
-
-    background-color: #545454;
+    background-color: #2f3942;
+    /* background-color: #545454; */
     position: absolute;
     top: 0;
     width: 100%;
@@ -35,7 +35,7 @@ export const StyledHeader = styled.div`
 
     .button {
         height: 100%;
-        background: #545454;
+        background: transparent;
         margin-right: 1rem;
         border: none;
         color: #FFF;
@@ -70,7 +70,7 @@ export const StyledHeader = styled.div`
 
 export const Menu = styled.div`
     position: absolute;
-    z-index: 2;
+    z-index: 50;
     top: 50px;
     width: 100vw;
     height: calc(100vh - 50px);
@@ -88,7 +88,7 @@ export const LittleMenu = styled.div`
     width: 150px;
     height: 85px !important;
     background-color: whitesmoke;
-    z-index: 2;
+    z-index: 50;
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-evenly;
@@ -110,7 +110,7 @@ export const LoggedLittleMenu = styled.div`
     width: 150px;
     height: 150px !important;
     background-color: whitesmoke;
-    z-index: 2;
+    z-index: 50;
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-evenly;

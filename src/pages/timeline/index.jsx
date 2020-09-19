@@ -1,43 +1,81 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { requestReviews } from "../../redux/actions/reviews-list";
-import BookList from "../../components/book-list";
-import { ListContainer } from "./styles.js";
-
-/*
-    Ainda não está 100% completo, pois falta o componente MostPopular (se for criado)
-*/
+import BookListPaginated from "../../containers/book-list-paginated";
+import {
+  ListContainer,
+  MainContainer,
+  MostPopularCarousel,
+  MostPopularContainer,
+  ResultsContainer,
+} from "./styles.js";
+import AsideMostPopular from "../../components/aside-most-popular";
+import CarouselMostPopular from "../../components/carousel";
 
 const Timeline = () => {
   const [message, setMessage] = useState("Loading");
   const token = useSelector((state) => state.login.token);
-  const booksReviews = useSelector((state) => state.reviewsList);
+  const booksReviews = useSelector((state) => state.reviewsList.booksReviews);
   const dispatch = useDispatch();
+  const size = useWindowSize();
 
   useEffect(() => {
     dispatch(requestReviews(token));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
   return (
     <ListContainer>
-      {booksReviews && Object.values(booksReviews).length !== 0 ? (
-        <BookList showBooks={Object.values(booksReviews)} type="timeline" />
-      ) : (
-        message
-      )}
-      {/* <MostPopular>
-      {showScreen(
-        reduce(
-          showBooks.filter((currBook) => {
-            if (!currBook.grade || currBook.grade !== 5) return false;
-            return true;
-          })
-        )
-      )}
-    </MostPopular> */}
+      <MainContainer>
+        {size.width < 940 ? (
+          <MostPopularCarousel>
+            <CarouselMostPopular />
+          </MostPopularCarousel>
+        ) : (
+          ""
+        )}
+        <ResultsContainer>
+
+          {Object.values(booksReviews).length !== 0 ? (
+            <BookListPaginated
+              showBooks={Object.values(booksReviews)}
+              type="timeline"
+            />
+          ) : (
+            message
+          )}
+        </ResultsContainer>
+
+        <MostPopularContainer>
+          <AsideMostPopular />
+        </MostPopularContainer>
+      </MainContainer>
     </ListContainer>
   );
 };
 
 export default Timeline;
+
+function useWindowSize() {
+  const [windowSize, setWindowSize] = useState({
+    width: undefined,
+    height: undefined,
+  });
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    }
+
+    window.addEventListener("resize", handleResize);
+
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return windowSize;
+}

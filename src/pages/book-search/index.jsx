@@ -12,17 +12,17 @@ import {
   MostPopularContainer,
   MostPopularCarousel,
 } from "./styles.js";
-import BookList from "../../components/book-list";
+import BookListPaginated from "../../containers/book-list-paginated";
+import AsideMostPopular from "../../components/aside-most-popular";
+import CarouselMostPopular from "../../components/carousel";
 
 const BookSearch = () => {
   const dispatch = useDispatch();
   const searchResults = useSelector((state) => state.searchList);
 
-  const history = useHistory();
   const { Search } = Input;
   const [typedInput, setTypedInput] = useState("");
   const [message, setMessage] = useState("Loading");
-  const [page, setPage] = useState(1);
 
   const max = 40;
   const size = useWindowSize();
@@ -47,38 +47,42 @@ const BookSearch = () => {
         />
       </InputContainer>
       <MainContainer>
-        {size.width < 560 ? (
-          <MostPopularCarousel>Carousel Extra</MostPopularCarousel>
+        {size.width < 940 ? (
+          <MostPopularCarousel>
+            <CarouselMostPopular />
+          </MostPopularCarousel>
         ) : (
           ""
         )}
         <ResultsContainer>
           {searchResults && Object.values(searchResults).length !== 0 ? (
-            <BookList
+            <BookListPaginated
               showBooks={Object.values(searchResults)}
               type="search"
-              getMorePages={setPage}
             />
           ) : (
             message
           )}
         </ResultsContainer>
 
-        <MostPopularContainer>Aside Extra</MostPopularContainer>
+        <MostPopularContainer>
+          <AsideMostPopular />
+        </MostPopularContainer>
       </MainContainer>
     </BookSearchContainer>
   );
 };
 
-export default BookSearch;
+export default BookSearch
 
 function useWindowSize() {
+  
   const [windowSize, setWindowSize] = useState({
     width: undefined,
     height: undefined,
   });
 
-  useEffect(() => {
+  useEffect(() => {  
     function handleResize() {
       setWindowSize({
         width: window.innerWidth,
@@ -91,6 +95,7 @@ function useWindowSize() {
     handleResize();
 
     return () => window.removeEventListener("resize", handleResize);
+
   }, []);
 
   return windowSize;

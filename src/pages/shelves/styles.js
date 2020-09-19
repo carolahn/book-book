@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import background_image from '../../assets/images/background-image/background-covers.png';
 
 export const StyledShelf = styled.div`
     margin: 0 auto;
@@ -7,8 +6,9 @@ export const StyledShelf = styled.div`
     widows: 90vw;
     display: flex;
     flex-flow: column nowrap;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
+    min-height: calc(100% - 100px);
 `;
 
 export const ShelvesButtons = styled.div`
@@ -48,9 +48,15 @@ export const BookShelf = styled.div`
     align-items: flex-start;
 `;
 
-export const Book = styled.div`
+export const Book = styled.img`
     width: 150px;
-    height: 250px;
+    height: 220px;
     margin: 10px 5px 0;
     background-color: ${props => props.colour};
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center; 
 `;

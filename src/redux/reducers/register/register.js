@@ -1,4 +1,4 @@
-import { REGISTER_SUCESS, REGISTER_FAILED, REGISTER_RESET } from '../../actions/action-register'
+import { REGISTER_SUCESS, REGISTER_FAILED, REGISTER_RESET } from '../../actions/register/register'
 
 const defaultState = {
     status: null,
@@ -20,7 +20,6 @@ const register = (state = defaultState, action) => {
         status: action.failed,
         user: action.userError,
         email: action.emailError
-
       }
 
       case REGISTER_RESET:

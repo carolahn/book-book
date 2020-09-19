@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { requestUsersBookDescription } from '../../redux/actions/user-books/'
 import axios from "axios";
 
-import BookList from "../../components/book-list";
+import BookListPaginated from "../../containers/book-list-paginated";
 
-import {PerfilContainer} from "./styled";
+import { PerfilContainer, SvgContainer } from "./styled";
 
 const Perfil = () => {
+
+  const dispatch = useDispatch()
   const { id } = useParams();
   const token = useSelector((state) => state.login.token);
   const [user, setUser] = useState({});
-
+  
+  
   useEffect(() => {
     axios
       .get(`https://ka-users-api.herokuapp.com/users/${id}/`, {
@@ -20,6 +24,7 @@ const Perfil = () => {
       .then(({ data }) => {
         setUser(data);
       });
+      
   }, []);
 
   useEffect(() => {
@@ -32,16 +37,26 @@ const Perfil = () => {
       .then(({ data }) => {
         setUser({ ...user, books: data });
       });
+      
   }, [user]);
-
+  
   return (
     user.name !== undefined && (
       <PerfilContainer>
-        <h2>Name: {user.name}</h2>
-        <h3>Email: {user.email}</h3>
+        <SvgContainer>
+          <svg height="100" width="100" />
+          <h1 className="title">
+            <div>{user.name}'s shelf</div>
+            <div>({user.user})</div>
+          </h1>
+        </SvgContainer>
         <div>
-            <h3>Books read</h3>
-            {user.books && (user.books.length > 0 ? <BookList showBooks={user.books} type="timeline"/> : "User has not finished reading any books")}
+          {user.books &&
+            (user.books.length > 0 ? (
+              <BookListPaginated showBooks={user.books} type="timeline" />
+            ) : (
+              "User has not finished reading any books"
+            ))}
         </div>
       </PerfilContainer>
     )
