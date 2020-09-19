@@ -4,6 +4,7 @@ export const GET_USER_BOOKS = " GET_USER_BOOKS";
 export const ADD_TO_SHELF = "ADD_TO_SHELF";
 export const REMOVE_OF_SHELF = "REMOVE_OF_SHELF";
 export const CHANGE_BOOK_DATA = "CHANGE_BOOK_DATA";
+export const GET_USER_BOOKS_BY_ID = "GET_USER_BOOKS_BY_ID";
 
 export const requestUserBooks = (token, id) => (dispatch) => {
   axios
@@ -14,10 +15,13 @@ export const requestUserBooks = (token, id) => (dispatch) => {
     })
     .then(({ data }) => {
       const normalized = {};
+      const normalizedById = {};
       data.map((currentBook) => {
         normalized[currentBook.google_book_id] = { ...currentBook };
+        normalizedById[currentBook.id] = { ...currentBook };
       });
       dispatch(getUserBooks(normalized));
+      dispatch(getUserBooksById(normalizedById));
     });
   // .catch((e) => {
   //   const errorstatus = e.response.status;
@@ -29,6 +33,13 @@ export const getUserBooks = (userBooks) => ({
   type: GET_USER_BOOKS,
   payload: {
     userBooks,
+  },
+});
+
+export const getUserBooksById = (userBooksById) => ({
+  type: GET_USER_BOOKS_BY_ID,
+  payload: {
+    userBooksById,
   },
 });
 
