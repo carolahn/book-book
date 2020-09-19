@@ -5,6 +5,7 @@ export const ADD_TO_SHELF = "ADD_TO_SHELF";
 export const REMOVE_OF_SHELF = "REMOVE_OF_SHELF";
 export const CHANGE_BOOK_DATA = "CHANGE_BOOK_DATA";
 export const GET_USER_BOOKS_BY_ID = "GET_USER_BOOKS_BY_ID";
+export const RESET_SHELVES = "RESET_SHELVES";
 
 export const requestUserBooks = (token, id) => (dispatch) => {
   axios
@@ -42,6 +43,55 @@ export const getUserBooksById = (userBooksById) => ({
     userBooksById,
   },
 });
+
+export const deleteAllBooks = (token, id, userBooksById) => (dispatch) => {
+  let urlRequests = [];
+
+  Object.keys(userBooksById).map((bookId) => {
+    urlRequests.push(
+      `https://ka-users-api.herokuapp.com/users/${id}/books/${bookId}`
+    );
+  });
+
+  if (urlRequests) {
+    let promises = [];
+    urlRequests.forEach((item, index) => {
+      promises.push(
+        axios.delete(item, {
+          headers: {
+            Authorization: `${token}`,
+          },
+        })
+      );
+    });
+    axios.all(promises).then(() => {
+      dispatch(requestUserBooks(token, id));
+      dispatch(removeOfShelf());
+      dispatch(resetShelves());
+    });
+  }
+
+  // axios
+  // .delete(
+  //   `https://ka-users-api.herokuapp.com/users/${id}/books/${bookToRemove}`,
+  //   {
+  //     headers: {
+  //       Authorization: `${token}`,
+  //     },
+  //   }
+  // )
+  // .then(() => {
+  //   dispatch(requestUserBooks(token, id));
+  //   dispatch(removeOfShelf());
+  //   dispatch(resetShelves())
+  // });
+};
+
+const resetShelves = () => {
+  return {
+    type: RESET_SHELVES,
+  };
+};
 
 export const postUserBook = (
   token,
