@@ -38,10 +38,6 @@ const AsideDescription = ({ description, review, bookData, type }) => {
               ) : (
                 <span className="no-description">No description</span>
               )}
-
-              {/* {googleInfo
-                ? googleInfo[bookData.google_book_id]
-                : "No description!"} */}
             </div>
           </div>
         </AsideContainer>

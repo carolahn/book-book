@@ -35,14 +35,6 @@ const Timeline = () => {
           ""
         )}
         <ResultsContainer>
-          {/* {booksReviews && Object.values(booksReviews).length !== 0 ? (
-            <BookListPaginated
-              showBooks={Object.values(booksReviews)}
-              type="timeline"
-            />
-          ) : (
-            message
-          )} */}
 
           {Object.values(booksReviews).length !== 0 ? (
             <BookListPaginated

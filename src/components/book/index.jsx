@@ -22,15 +22,11 @@ const Book = ({ bookData, type }) => {
   const [bookInfoClicked, setBookInfoClicked] = useState(false);
   const googleInfo = useSelector((state) => state.reviewsList.googleInfo);
   const bookDescription = useSelector((state) => state.bookDescription.description)
-  
 
-  
   useEffect(() => {}, [bookInfoClicked]);
 
   function onChange(value) {
 
-   
-    
     if (userBooks[bookData.google_book_id]) {
       const selectedBook = userBooks[bookData.google_book_id];
       if (value === "delete") {
@@ -62,11 +58,11 @@ const Book = ({ bookData, type }) => {
           user.id,
           bookData.title,
           bookData.author,
-          value, // shelf -> 1, 2 ou 3
+          value,
           bookData.image_url,
-          0, // grade
+          0,
           bookData.categories,
-          "", // review
+          "",
           bookData.google_book_id
         )
       );
