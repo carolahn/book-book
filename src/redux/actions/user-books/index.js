@@ -206,8 +206,10 @@ const addUserBookDescription = (description) => {
 export const requestUsersBookDescription = (google_book_id) => async (
   dispatch
 ) => {
-  await axios
-    .get(`https://www.googleapis.com/books/v1/volumes/${google_book_id}`)
-    .then((res) => res.data.volumeInfo.description)
-    .then((res) => dispatch(addUserBookDescription(res)));
+  if (isNaN(google_book_id)) {
+    await axios
+      .get(`https://www.googleapis.com/books/v1/volumes/${google_book_id}`)
+      .then((res) => res.data.volumeInfo.description)
+      .then((res) => dispatch(addUserBookDescription(res)));
+  }
 };
