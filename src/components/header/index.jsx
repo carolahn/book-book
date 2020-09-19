@@ -19,7 +19,7 @@ const Header = () => {
 
     return (
         <StyledHeader >
-            <div className="logo-holder" />
+            <div className="logo-holder" onClick={() => history.push('/timeline')} />
             {(where === '/' || where === '/register') ? 
             <>
                 {size.width > 895 ?
