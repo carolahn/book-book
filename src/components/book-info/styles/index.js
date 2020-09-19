@@ -10,6 +10,8 @@ export const StyledBookInfo = styled.div`
   justify-content: space-between;
   padding: 2.50rem;
 
+  
+
   @keyframes modal {
     from {
       opacity: 0;
@@ -30,7 +32,10 @@ export const StyledBookInfo = styled.div`
 
   .bookInfoContainer {
     width: 50%;
+    display: flex;
+    flex-direction: column;
     
+
     .topContent {
       display: grid;
       grid-template-columns: 128px 2fr;
@@ -49,12 +54,20 @@ export const StyledBookInfo = styled.div`
       }
       
       .bookTitle {
+        width: 100%;
+        height: 100%;
         grid-column-start:2;
         grid-column-end:2;
         grid-row-start:1; 
         grid-row-end:1;
         align-self: start;
-        text-overflow: '...'
+        overflow: hidden;
+
+        .bigTitle {
+          font-size: 16px;
+          line-height: 22px;
+        }
+        
       }
       .bookAuthor {
         grid-column-start:2;
@@ -73,6 +86,7 @@ export const StyledBookInfo = styled.div`
       }
       
       .addToShelf {
+      
         grid-column-start:2;
         grid-column-end:2;
         grid-row-start:4;       
@@ -87,6 +101,18 @@ export const StyledBookInfo = styled.div`
       margin: 1.25rem 0;
       overflow: auto;
     }
+
+    .bookNewFeedback {
+      width: 70%;
+      align-self: center;
+    }
+    
+    .noDescription {
+      width: 70%;
+      margin-top: 1.25rem;
+      margin-bottom: 1.25rem;
+      align-self: center;
+    }
   }
   
   .feedbackContainer {
@@ -95,8 +121,102 @@ export const StyledBookInfo = styled.div`
     flex-direction: column;
     
     overflow: auto;
+
+    .noFeedback {
+      width: 80%;
+      margin-left: 10%;
+      margin-top: 50%;
+    }
+
+    .feedbackForm {
+      font-weight: bold;
+
+
+      .ant-form-item{
+        display: flex;
+        flex-direction: column;
+        
+
+        .ant-form-item-label {
+          text-align: left;
+        }
+      }
+
+      .feedbackFormSubmit {
+        width: 70%;
+        margin-left: 15%;
+      }
+    }
   }
 
+
+  @media (max-width: 1368px) {
+
+    .bookInfoContainer {
+
+      .noDescription {
+        margin-top: 2.50rem;
+        margin-bottom: 2.50rem;
+      }
+    }
+
+    
+  }
+
+  @media (max-width: 1024px) {
+    width: 80vw;
+    height: 60%;
+  }
+  
+  @media (max-width: 540px) {
+    width: 90vw;
+    height: 80%;
+    padding: 1.25rem;
+    flex-direction: column;
+    align-items: center;
+    overflow: scroll;
+    height: 100%;
+    .bookInfoContainer {
+      width: 80%;
+      .topContent {
+        .bookTitle {
+          line-height: 20px;
+        }
+      }
+    
+    }
+
+    .feedbackContainer {
+      margin-top: 2.50rem;
+      width: 70%;
+      align-self: center;
+      overflow: visible;
+    }
+  }
+
+  @media (max-width: 420px) {
+
+    .bookInfoContainer {
+      height: 80%;
+
+      .topContent {
+        grid-template-columns: 100px 3fr;
+
+        .bookCover {
+          width: 100px;
+          height: 144px;
+        }
+      }
+    }
+
+    .feedbackContainer {
+      margin-top: 1.25rem;
+
+      .noFeedback {
+        margin-top: 10%;
+      }
+    }
+  }
 `;
 
 export const ModalContainer = styled.div`

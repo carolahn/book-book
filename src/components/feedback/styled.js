@@ -10,6 +10,7 @@ export const StyledFeedback  = styled.div`
 
   p{
     padding: 0.625rem;
+    overflow: hidden;
   }
 
   .feedbackGrade {

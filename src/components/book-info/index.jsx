@@ -7,6 +7,8 @@ import { DeleteTwoTone } from "@ant-design/icons";
 import FeedbackForm from "../feedback-form";
 import { requestReviews } from "../../redux/actions/reviews-list";
 import { putBookChanges, requestUsersBookDescription } from "../../redux/actions/user-books";
+import noDescription from '../../assets/images/book-info/nodescription.png'
+import noFeedback from '../../assets/images/book-info/nofeedback.png'
 
 
 const BookInfo = ({
@@ -24,6 +26,7 @@ const BookInfo = ({
   
   const dispatch = useDispatch();
   const [feedbackForm, setFeedbackForm] = useState(false);
+  const [feedbackMissing, setFeedbackMissing] = useState(false)
  
   const token = useSelector((state) => state.login.token);
   const userId = useSelector((state) => state.login.id);
@@ -32,17 +35,22 @@ const BookInfo = ({
   useEffect(() => {
     dispatch(requestReviews(token));
     dispatch(requestUsersBookDescription(googleBookId))
-  }, [ token]);
+    Object.values(booksReviewsById).map((bookReview) => {
+      if (bookReview.title === title) {
+         setFeedbackMissing(true)
+      }
+    })
+  }, [token, booksReviewsById]);
 
   const { Option } = Select;
 
   const onFinish = (event) => {
-    console.log(event)
+    
     setFeedbackForm(false);
     dispatch(putBookChanges(token, userId, bookId, 3, event.grading, event.comment));
 
   };
-  
+ 
   const handleNewFeedback = () => {
     if (feedbackForm === false) {
       setFeedbackForm(true);
@@ -50,6 +58,8 @@ const BookInfo = ({
       setFeedbackForm(false);
     }
   };
+
+
   
   return (
     <ModalContainer
@@ -61,7 +71,9 @@ const BookInfo = ({
         <section className="bookInfoContainer">
           <div className='topContent'>
             <img src={image} className="bookCover" />
-            <h2 className="bookTitle">{title}</h2>
+            <div className="bookTitle">
+              <h2 className={title.length > 29 && 'bigTitle'}>{title}</h2>
+            </div>
             <h5 className='bookAuthor'>{author}</h5>
             <Rate
               disabled
@@ -72,7 +84,7 @@ const BookInfo = ({
             />
             <Select
               className="addToShelf"
-              style={{ width: "100%" }}
+              style={{ width: "70%" }}
               size={"small"}
               placeholder="SHELF"
               optionFilterProp="children"
@@ -97,9 +109,9 @@ const BookInfo = ({
             </Select>
           </div>
 
-          <p className="bookDescription">
+          {description === undefined ? <img src={noDescription} className='noDescription' /> : <p className="bookDescription">
             {description}
-          </p>
+          </p>}
           
 
           {addFeedback && (
@@ -109,24 +121,27 @@ const BookInfo = ({
           )}
         </section>
            
-        <section className="feedbackContainer">
-          <h2>Feedbacks</h2>
+        <section className="feedbackContainer" id='feedbackContainer'>
+          <h2 className='feedbackTitle'>Feedbacks</h2>
           {feedbackForm ? (
             <FeedbackForm handleFinish={onFinish} />
             
-          ) : (
-            Object.values(booksReviewsById).map((bookReview) =>
-              bookReview.title === title ? (
-                <Feedback
-                  key={bookReview.id}
-                  user={bookReview.creator.name}
-                  grading={bookReview.grade}
-                  comment={bookReview.review}
-                />
-              ) : null
-            )
-          )}
+          ) : 
+            Object.values(booksReviewsById).map((bookReview) => {
+              if (bookReview.title === title) {
+                return <Feedback
+                key={bookReview.id}
+                user={bookReview.creator.name}
+                grading={bookReview.grade}
+                comment={bookReview.review}
+              />
+              }else {
+                return null
+              }
+            })}
+          {feedbackMissing === false && <img src={noFeedback} className='noFeedback'/>}
         </section>
+        
       </StyledBookInfo>
     </ModalContainer>
   );
