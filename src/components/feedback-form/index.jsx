@@ -10,7 +10,7 @@ const FeedbackForm = ({ handleFinish }) => {
             <Form.Item
             name='comment'
             label='Comment:' >
-              <TextArea rows={10} />
+              <TextArea rows={10} cols={40}/>
             </Form.Item>
            
             <Form.Item

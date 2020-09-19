@@ -290,6 +290,7 @@ const Book = ({ bookData, type }) => {
               <BookInfo
                 type="search"
                 title={bookData.title}
+                author={bookData.author}
                 image={bookData.image_url}
                 description={bookDescription}
                 grading={bookData.grade}

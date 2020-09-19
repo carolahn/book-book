@@ -11,6 +11,7 @@ import { putBookChanges, requestUsersBookDescription } from "../../redux/actions
 
 const BookInfo = ({
   title,
+  author,
   image,
   description,
   addFeedback,
@@ -26,23 +27,20 @@ const BookInfo = ({
  
   const token = useSelector((state) => state.login.token);
   const userId = useSelector((state) => state.login.id);
-  const bookDescription = useSelector((state) => state.bookDescription.description)
-  const googleInfo = useSelector((state) => state.reviewsList.googleInfo);
-  const booksReviewsById= useSelector((state) => state.reviewsList.booksReviewsById)
+  const booksReviewsById = useSelector((state) => state.reviewsList.booksReviewsById)
   
   useEffect(() => {
     dispatch(requestReviews(token));
     dispatch(requestUsersBookDescription(googleBookId))
-  }, [dispatch, token]);
+  }, [ token]);
 
   const { Option } = Select;
 
   const onFinish = (event) => {
-    
+    console.log(event)
     setFeedbackForm(false);
-    dispatch(
-      putBookChanges(token, userId, bookId, 3, event.grade, event.comment)
-    );
+    dispatch(putBookChanges(token, userId, bookId, 3, event.grading, event.comment));
+
   };
   
   const handleNewFeedback = () => {
@@ -60,54 +58,59 @@ const BookInfo = ({
       id="modal-container"
     >
       <StyledBookInfo>
-        <div className="bookInfoContent">
-          <img src={image} className="bookCover" />
-          <h2 className="bookTitle">{title}</h2>
-          <Rate
-            disabled
-            allowHalf
-            defaultValue={grading}
-            style={{ fontSize: 15, display: "revert" }}
-            className="bookGrade"
-          />
+        <section className="bookInfoContainer">
+          <div className='topContent'>
+            <img src={image} className="bookCover" />
+            <h2 className="bookTitle">{title}</h2>
+            <h5 className='bookAuthor'>{author}</h5>
+            <Rate
+              disabled
+              allowHalf
+              defaultValue={grading}
+              style={{ fontSize: 15, display: "revert" }}
+              className="bookGrade"
+            />
+            <Select
+              className="addToShelf"
+              style={{ width: "100%" }}
+              size={"small"}
+              placeholder="SHELF"
+              optionFilterProp="children"
+              onChange={onChange}
+            >
+              <Option value="1" style={{ paddingLeft: 37 }}>
+                <span>Wishlist</span>
+              </Option>
+              <Option value="2" style={{ paddingLeft: 37 }}>
+                <span>Reading</span>
+              </Option>
+              <Option value="3" style={{ paddingLeft: 37 }}>
+                <span>Read</span>
+              </Option>
+              <Option value="delete" style={{ color: "#dd2e44" }}>
+                <DeleteTwoTone
+                  twoToneColor="#dd2e44"
+                  style={{ marginRight: 10 }}
+                />
+                <span>Remove</span>
+              </Option>
+            </Select>
+          </div>
 
           <p className="bookDescription">
             {description}
           </p>
-          <Select
-            className="addToShelf"
-            style={{ width: "100%" }}
-            size={"small"}
-            placeholder="SHELF"
-            optionFilterProp="children"
-            onChange={onChange}
-          >
-            <Option value="1" style={{ paddingLeft: 37 }}>
-              <span>Wishlist</span>
-            </Option>
-            <Option value="2" style={{ paddingLeft: 37 }}>
-              <span>Reading</span>
-            </Option>
-            <Option value="3" style={{ paddingLeft: 37 }}>
-              <span>Read</span>
-            </Option>
-            <Option value="delete" style={{ color: "#dd2e44" }}>
-              <DeleteTwoTone
-                twoToneColor="#dd2e44"
-                style={{ marginRight: 10 }}
-              />
-              <span>Remove</span>
-            </Option>
-          </Select>
+          
 
           {addFeedback && (
             <Button className="bookNewFeedback" onClick={handleNewFeedback}>
               New Feedback
             </Button>
           )}
-        </div>
+        </section>
            
-        <div className="feedbackContainer">
+        <section className="feedbackContainer">
+          <h2>Feedbacks</h2>
           {feedbackForm ? (
             <FeedbackForm handleFinish={onFinish} />
             
@@ -123,7 +126,7 @@ const BookInfo = ({
               ) : null
             )
           )}
-        </div>
+        </section>
       </StyledBookInfo>
     </ModalContainer>
   );
