@@ -6,10 +6,12 @@ import Feedback from "../feedback";
 import { DeleteTwoTone } from "@ant-design/icons";
 import FeedbackForm from "../feedback-form";
 import { requestReviews } from "../../redux/actions/reviews-list";
-import { putBookChanges, requestUsersBookDescription } from "../../redux/actions/user-books";
-import noDescription from '../../assets/images/book-info/nodescription.png'
-import noFeedback from '../../assets/images/book-info/nofeedback.png'
-
+import {
+  putBookChanges,
+  requestUsersBookDescription,
+} from "../../redux/actions/user-books";
+import noDescription from "../../assets/images/book-info/nodescription.png";
+import noFeedback from "../../assets/images/book-info/nofeedback.png";
 
 const BookInfo = ({
   title,
@@ -23,34 +25,43 @@ const BookInfo = ({
   googleBookId,
   bookId,
 }) => {
-  
   const dispatch = useDispatch();
   const [feedbackForm, setFeedbackForm] = useState(false);
-  const [feedbackMissing, setFeedbackMissing] = useState(false)
- 
+  const [feedbackMissing, setFeedbackMissing] = useState(false);
+
   const token = useSelector((state) => state.login.token);
   const userId = useSelector((state) => state.login.id);
-  const booksReviewsById = useSelector((state) => state.reviewsList.booksReviewsById)
-  
+  const booksReviewsById = useSelector(
+    (state) => state.reviewsList.booksReviewsById
+  );
+
   useEffect(() => {
-    dispatch(requestReviews(token));
-    dispatch(requestUsersBookDescription(googleBookId))
     Object.values(booksReviewsById).map((bookReview) => {
       if (bookReview.title === title) {
-         setFeedbackMissing(true)
+        setFeedbackMissing(true);
       }
-    })
-  }, [token, booksReviewsById]);
+    });
+  }, []);
+
+  // useEffect(() => {
+  //   dispatch(requestReviews(token));
+  //   dispatch(requestUsersBookDescription(googleBookId))
+  //   Object.values(booksReviewsById).map((bookReview) => {
+  //     if (bookReview.title === title) {
+  //        setFeedbackMissing(true)
+  //     }
+  //   })
+  // }, [token, booksReviewsById]);
 
   const { Option } = Select;
 
   const onFinish = (event) => {
-    
     setFeedbackForm(false);
-    dispatch(putBookChanges(token, userId, bookId, 3, event.grading, event.comment));
-
+    dispatch(
+      putBookChanges(token, userId, bookId, 3, event.grading, event.comment)
+    );
   };
- 
+
   const handleNewFeedback = () => {
     if (feedbackForm === false) {
       setFeedbackForm(true);
@@ -59,8 +70,6 @@ const BookInfo = ({
     }
   };
 
-
-  
   return (
     <ModalContainer
       className="modal-container"
@@ -69,12 +78,12 @@ const BookInfo = ({
     >
       <StyledBookInfo>
         <section className="bookInfoContainer">
-          <div className='topContent'>
+          <div className="topContent">
             <img src={image} className="bookCover" />
             <div className="bookTitle">
-              <h2 className={title.length > 29 && 'bigTitle'}>{title}</h2>
+              <h2 className={title.length > 29 && "bigTitle"}>{title}</h2>
             </div>
-            <h5 className='bookAuthor'>{author}</h5>
+            <h5 className="bookAuthor">{author}</h5>
             <Rate
               disabled
               allowHalf
@@ -109,10 +118,11 @@ const BookInfo = ({
             </Select>
           </div>
 
-          {description === undefined ? <img src={noDescription} className='noDescription' /> : <p className="bookDescription">
-            {description}
-          </p>}
-          
+          {description === undefined ? (
+            <img src={noDescription} className="noDescription" />
+          ) : (
+            <p className="bookDescription">{description}</p>
+          )}
 
           {addFeedback && (
             <Button className="bookNewFeedback" onClick={handleNewFeedback}>
@@ -120,28 +130,31 @@ const BookInfo = ({
             </Button>
           )}
         </section>
-           
-        <section className="feedbackContainer" id='feedbackContainer'>
-          <h2 className='feedbackTitle'>Feedbacks</h2>
+
+        <section className="feedbackContainer" id="feedbackContainer">
+          <h2 className="feedbackTitle">Feedbacks</h2>
           {feedbackForm ? (
             <FeedbackForm handleFinish={onFinish} />
-            
-          ) : 
+          ) : (
             Object.values(booksReviewsById).map((bookReview) => {
               if (bookReview.title === title) {
-                return <Feedback
-                key={bookReview.id}
-                user={bookReview.creator.name}
-                grading={bookReview.grade}
-                comment={bookReview.review}
-              />
-              }else {
-                return null
+                return (
+                  <Feedback
+                    key={bookReview.id}
+                    user={bookReview.creator.name}
+                    grading={bookReview.grade}
+                    comment={bookReview.review}
+                  />
+                );
+              } else {
+                return null;
               }
-            })}
-          {feedbackMissing === false && <img src={noFeedback} className='noFeedback'/>}
+            })
+          )}
+          {feedbackMissing === false && (
+            <img src={noFeedback} className="noFeedback" />
+          )}
         </section>
-        
       </StyledBookInfo>
     </ModalContainer>
   );
