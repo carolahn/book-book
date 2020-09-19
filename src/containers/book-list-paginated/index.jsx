@@ -26,12 +26,15 @@ const BookListPaginated = ({ showBooks, type }) => {
 
   useEffect(() => {
     if (type.includes("timeline")) {
+      console.log("booksReviews", booksReviews);
       dispatch(requestGoogleInfo(booksReviews, page));
     }
   }, [page]);
 
   return (
-    <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+    <div
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
       <Pagination
         defaultCurrent={page}
         current={page}

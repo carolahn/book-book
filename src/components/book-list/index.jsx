@@ -5,6 +5,7 @@ import Book from "../book";
 import AsideDescription from "../aside-description";
 
 const BookList = ({ showBooks, type, page, size }) => {
+  console.log("showBooks", showBooks);
   return (
     <Container>
       {size.width < 627 && (
