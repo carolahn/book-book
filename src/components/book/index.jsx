@@ -28,6 +28,7 @@ const Book = ({ bookData, type }) => {
   useEffect(() => {}, [bookInfoClicked]);
 
   function onChange(value) {
+    console.log("userBooks", userBooks);
     if (userBooks[bookData.google_book_id]) {
       const selectedBook = userBooks[bookData.google_book_id];
       if (value === "delete") {
