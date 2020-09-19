@@ -26,7 +26,6 @@ const BookListPaginated = ({ showBooks, type }) => {
 
   useEffect(() => {
     if (type.includes("timeline")) {
-      console.log("booksReviews", booksReviews);
       dispatch(requestGoogleInfo(booksReviews, page));
     }
   }, [page]);
