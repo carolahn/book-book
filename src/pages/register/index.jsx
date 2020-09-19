@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Form, Input, Button } from "antd";
 import { Container, StyledRegister } from "./styles.js";
 import { useDispatch, useSelector } from "react-redux";
-import { requestRegisterData } from "../../redux/actions/action-register";
+import { requestRegisterData } from "../../redux/actions/register/register";
 import { useHistory } from "react-router-dom";
-import { resetRegisterScreen } from '../../redux/actions/action-register'
+import { resetRegisterScreen } from '../../redux/actions/register/register'
 
 const Register = () => {
   const dispatch = useDispatch();

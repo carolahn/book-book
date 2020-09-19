@@ -1,6 +1,5 @@
 import axios from 'axios'
 
-
 export const REGISTER_SUCESS = 'REGISTER_SUCESS'
 export const REGISTER_FAILED = 'REGISTER_FAILED'
 export const REGISTER_RESET = 'REGISTER_RESET'
@@ -21,7 +20,6 @@ export const resetRegisterScreen = (status) => ({
   type: REGISTER_RESET,
   status
 })
-
 
 export const requestRegisterData = (name, username, email, password, confirmPassword) => async (dispatch) => {
 

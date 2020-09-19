@@ -1,4 +1,4 @@
-import { REGISTER_SUCESS, REGISTER_FAILED, REGISTER_RESET } from '../../actions/action-register'
+import { REGISTER_SUCESS, REGISTER_FAILED, REGISTER_RESET } from '../../actions/register/register'
 
 const defaultState = {
     status: null,

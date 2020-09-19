@@ -52,7 +52,5 @@ export const AsideContainer = styled.div`
 
   @media screen and (max-width: 627px) {
     display: none;
-    /* width: 100%;
-    min-width: 315px; */
   }
 `;
