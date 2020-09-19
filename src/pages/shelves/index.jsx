@@ -5,6 +5,7 @@ import {
   removeBook,
   putBookChanges,
   requestUsersBookDescription,
+  deleteAllBooks,
 } from "../../redux/actions/user-books";
 import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 import { StyledShelf, ShelvesButtons, BookShelf, Book } from "./styles";
@@ -18,7 +19,7 @@ const Shelves = () => {
 
   const userBooks = useSelector((state) => Object.values(state.userBooks));
   const userBooksObj = useSelector((state) => state.userBooks);
-
+  const userBooksById = useSelector((state) => state.userBooksById);
   const bookDescription = useSelector(
     (state) => state.bookDescription.description
   );
@@ -100,8 +101,13 @@ const Shelves = () => {
       sendChanges(shelfValue);
   }, [bookInfoClicked]);
 
+  const handleReset = () => {
+    dispatch(deleteAllBooks(tokenInfo.token, tokenInfo.id, userBooksById));
+  };
+
   return (
     <StyledShelf className="shelf">
+      <button onClick={handleReset}>RESET</button>
       {bookInfoClicked ? (
         <>
           <BookInfo
