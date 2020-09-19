@@ -18,6 +18,7 @@ const Book = ({ bookData, type }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.login);
   const userBooks = useSelector((state) => state.userBooks);
+  const userBooksById = useSelector((state) => state.userBooksById);
 
   const [bookInfoClicked, setBookInfoClicked] = useState(false);
   const googleInfo = useSelector((state) => state.reviewsList.googleInfo);
