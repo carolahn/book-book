@@ -9,6 +9,7 @@ import {
   postUserBook,
   removeBook,
   putBookChanges,
+  requestUsersBookDescription,
 } from "../../redux/actions/user-books";
 import { Link } from "react-router-dom";
 
@@ -17,9 +18,13 @@ const Book = ({ bookData, type }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.login);
   const userBooks = useSelector((state) => state.userBooks);
+  const userBooksById = useSelector((state) => state.userBooksById);
 
   const [bookInfoClicked, setBookInfoClicked] = useState(false);
   const googleInfo = useSelector((state) => state.reviewsList.googleInfo);
+  const bookDescription = useSelector(
+    (state) => state.bookDescription.description
+  );
 
   useEffect(() => {}, [bookInfoClicked]);
 
@@ -55,11 +60,11 @@ const Book = ({ bookData, type }) => {
           user.id,
           bookData.title,
           bookData.author,
-          value, // shelf -> 1, 2 ou 3
+          value,
           bookData.image_url,
-          0, // grade
+          0,
           bookData.categories,
-          "", // review
+          "",
           bookData.google_book_id
         )
       );
@@ -70,15 +75,19 @@ const Book = ({ bookData, type }) => {
       });
     }
   }
-  
+
   const handleBookInfo = (event) => {
-    if (
-      bookInfoClicked === false &&
-      !event.target.className.includes("ant-select") &&
-      !event.target.className.includes("spanSelect")
-    ) {
-      setBookInfoClicked(true);
-    }
+    dispatch(requestUsersBookDescription(bookData.google_book_id));
+    const eventClassName = event.target.className;
+    setTimeout(() => {
+      if (
+        bookInfoClicked === false &&
+        !eventClassName.includes("ant-select") &&
+        !eventClassName.includes("spanSelect")
+      ) {
+        setBookInfoClicked(true);
+      }
+    }, 200);
   };
 
   const handleModal = (event) => {
@@ -109,20 +118,6 @@ const Book = ({ bookData, type }) => {
                 />
               </div>
             </div>
-            {bookInfoClicked && (
-              <BookInfo
-                type="search"
-                title={bookData.title}
-                image={bookData.image_url}
-                description={bookData.description}
-                grading={bookData.grade}
-                handleModal={handleModal}
-                onChange={onChange}
-                addFeedback={false}
-                bookId={bookData.id}
-                
-              />
-            )}
           </>
         )}
 
@@ -152,20 +147,6 @@ const Book = ({ bookData, type }) => {
                 />
               </div>
             </div>
-            {bookInfoClicked && (
-              <BookInfo
-                type="search"
-                title={bookData.title}
-                image={bookData.image_url}
-                description={bookData.description}
-                grading={bookData.grade}
-                handleModal={handleModal}
-                onChange={onChange}
-                addFeedback={false}
-                bookId={bookData.id}
-                
-              />
-            )}
           </>
         )}
 
@@ -201,20 +182,6 @@ const Book = ({ bookData, type }) => {
                 />
               </div>
             </div>
-            {bookInfoClicked && (
-              <BookInfo
-                type="timeline"
-                title={bookData.title}
-                image={bookData.image_url}
-                description={googleInfo}
-                grading={bookData.grade}
-                handleModal={handleModal}
-                onChange={onChange}
-                addFeedback={false}
-                bookId={bookData.id}
-                googleBookId={bookData.google_book_id}
-              />
-            )}
           </>
         )}
 
@@ -250,20 +217,6 @@ const Book = ({ bookData, type }) => {
                 />
               </div>
             </div>
-            {bookInfoClicked && (
-              <BookInfo
-                type="timeline"
-                title={bookData.title}
-                image={bookData.image_url}
-                description={googleInfo}
-                grading={bookData.grade}
-                handleModal={handleModal}
-                onChange={onChange}
-                addFeedback={false}
-                bookId={bookData.id}
-                googleBookId={bookData.google_book_id}
-              />
-            )}
           </>
         )}
 
@@ -325,6 +278,20 @@ const Book = ({ bookData, type }) => {
           </Select>
         </div>
       </BookContainer>
+      {bookInfoClicked && (
+        <BookInfo
+          type="search"
+          title={bookData.title}
+          image={bookData.image_url}
+          description={bookDescription}
+          grading={bookData.grade}
+          handleModal={handleModal}
+          onChange={onChange}
+          addFeedback={false}
+          bookId={bookData.id}
+          googleBookId={bookData.google_book_id}
+        />
+      )}
     </div>
   );
 };

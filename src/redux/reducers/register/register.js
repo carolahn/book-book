@@ -1,4 +1,4 @@
-import { REGISTER_SUCESS, REGISTER_FAILED } from '../../actions/register/register'
+import { REGISTER_SUCESS, REGISTER_FAILED, REGISTER_RESET } from '../../actions/register/register'
 
 const defaultState = {
     status: null,
@@ -21,6 +21,12 @@ const register = (state = defaultState, action) => {
         user: action.userError,
         email: action.emailError
       }
+
+      case REGISTER_RESET:
+        return {
+          ...state,
+          status: action.status
+        }
 
       default: 
         return state;

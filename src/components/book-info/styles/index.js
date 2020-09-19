@@ -8,6 +8,19 @@ export const StyledBookInfo = styled.div`
   border-radius: 0.625rem;
   grid-template-columns: 8% 38% 8% 38% 8%;
   grid-template-rows: 10% 80% 10%;
+
+  animation: modal .5s;
+
+  @keyframes modal {
+    from {
+      opacity: 0;
+      transform: translate3d(0, -60px,0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
   
   h2 {
     font-size: 16px;
@@ -57,6 +70,15 @@ export const StyledBookInfo = styled.div`
       grid-column-end:2;
       grid-row-start:5;
       grid-row-end:5;
+
+      
+      font-weight: 600;
+
+      .ant-select-selector {
+        background-color: #c4c4c4;
+        text-align: center;
+        color: black;
+      }
     }
     
     .bookDescription {
@@ -174,7 +196,7 @@ export const StyledBookInfo = styled.div`
     grid-template-columns: 10% 80% 10%;
     grid-template-rows: 8% 60% 24% 8%;
     margin-top: 500px;
-    
+    animation: modal .6s;
     
     .bookInfoContent {
       
@@ -281,7 +303,7 @@ export const ModalContainer = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 111;
-
+  
 
   @media (max-width: 420px) {
     overflow: auto;

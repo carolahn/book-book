@@ -70,7 +70,7 @@ export const StyledHeader = styled.div`
 
 export const Menu = styled.div`
     position: absolute;
-    z-index: 2;
+    z-index: 50;
     top: 50px;
     width: 100vw;
     height: calc(100vh - 50px);
@@ -88,7 +88,7 @@ export const LittleMenu = styled.div`
     width: 150px;
     height: 85px !important;
     background-color: whitesmoke;
-    z-index: 2;
+    z-index: 50;
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-evenly;
@@ -110,7 +110,7 @@ export const LoggedLittleMenu = styled.div`
     width: 150px;
     height: 150px !important;
     background-color: whitesmoke;
-    z-index: 2;
+    z-index: 50;
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-evenly;

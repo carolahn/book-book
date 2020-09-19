@@ -6,8 +6,10 @@ import Feedback from "../feedback";
 import { DeleteTwoTone } from "@ant-design/icons";
 import FeedbackForm from "../feedback-form";
 import { requestReviews } from "../../redux/actions/reviews-list";
-import { putBookChanges } from "../../redux/actions/user-books";
-
+import {
+  putBookChanges,
+  requestUsersBookDescription,
+} from "../../redux/actions/user-books";
 
 const BookInfo = ({
   title,
@@ -17,32 +19,36 @@ const BookInfo = ({
   grading,
   handleModal,
   onChange,
-  type,
   googleBookId,
   bookId,
 }) => {
   const dispatch = useDispatch();
   const [feedbackForm, setFeedbackForm] = useState(false);
-  console.log(googleBookId)
+
   const token = useSelector((state) => state.login.token);
   const userId = useSelector((state) => state.login.id);
+  const bookDescription = useSelector(
+    (state) => state.bookDescription.description
+  );
   const googleInfo = useSelector((state) => state.reviewsList.googleInfo);
-  const booksReviewsById= useSelector((state) => state.reviewsList.booksReviewsById)
-  
+  const booksReviewsById = useSelector(
+    (state) => state.reviewsList.booksReviewsById
+  );
+
   useEffect(() => {
     dispatch(requestReviews(token));
+    dispatch(requestUsersBookDescription(googleBookId));
   }, [dispatch, token]);
 
   const { Option } = Select;
 
   const onFinish = (event) => {
-    
     setFeedbackForm(false);
     dispatch(
       putBookChanges(token, userId, bookId, 3, event.grade, event.comment)
     );
   };
-  console.log(googleInfo)
+
   const handleNewFeedback = () => {
     if (feedbackForm === false) {
       setFeedbackForm(true);
@@ -50,7 +56,7 @@ const BookInfo = ({
       setFeedbackForm(false);
     }
   };
-  
+
   return (
     <ModalContainer
       className="modal-container"
@@ -69,15 +75,7 @@ const BookInfo = ({
             className="bookGrade"
           />
 
-          <p className="bookDescription">
-            {type === "search"
-              ? description
-              : type === "timeline"
-              ? googleInfo[googleBookId]
-              : type === "shelf"
-              ? description
-              : "No description"}
-          </p>
+          <p className="bookDescription">{description}</p>
           <Select
             className="addToShelf"
             style={{ width: "100%" }}
@@ -110,9 +108,9 @@ const BookInfo = ({
             </Button>
           )}
         </div>
-           
+
         <div className="feedbackContainer">
-          {feedbackForm ? (
+          {/* {feedbackForm ? (
             <FeedbackForm handleFinish={onFinish} />
             
           ) : (
@@ -124,6 +122,23 @@ const BookInfo = ({
                   grading={bookReview.grade}
                   comment={bookReview.review}
                 />
+              ) : null
+            )
+          )} */}
+
+          {feedbackForm ? (
+            <FeedbackForm handleFinish={onFinish} />
+          ) : (
+            Object.values(booksReviewsById).map((bookReview) =>
+              bookReview.title === title ? (
+                bookReview.review ? (
+                  <Feedback
+                    key={bookReview.id}
+                    user={bookReview.creator.name}
+                    grading={bookReview.grade}
+                    comment={bookReview.review}
+                  />
+                ) : null
               ) : null
             )
           )}

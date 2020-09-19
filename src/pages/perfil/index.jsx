@@ -9,6 +9,7 @@ import { requestGoogleInfo } from "../../redux/actions/reviews-list";
 import AsideDescription from "../../components/aside-description";
 
 const Perfil = () => {
+  const dispatch = useDispatch();
   const { id } = useParams();
   const token = useSelector((state) => state.login.token);
   const [user, setUser] = useState({});
@@ -18,7 +19,6 @@ const Perfil = () => {
 
   const [page, setPage] = useState(1);
   const size = useWindowSize();
-  const dispatch = useDispatch();
 
   const handleOnChange = (page) => {
     document.documentElement.scrollTop = 0;
