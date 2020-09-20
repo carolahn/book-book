@@ -7,6 +7,7 @@ import {
   requestUsersBookDescription,
   deleteAllBooks,
 } from "../../redux/actions/user-books";
+import { requestReviews } from "../../redux/actions/reviews-list";
 import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 import { StyledShelf, ShelvesButtons, BookShelf, Book } from "./styles";
 import BookInfo from "../../components/book-info";
@@ -23,6 +24,7 @@ const Shelves = () => {
   const bookDescription = useSelector(
     (state) => state.bookDescription.description
   );
+  const booksReviews = useSelector((state) => state.reviewsList.booksReviews);
 
   const [bookInfoClicked, setBookInfoClicked] = useState(false);
   const [uniqueBook, setUniqueBook] = useState({});
@@ -35,6 +37,12 @@ const Shelves = () => {
   const readShelf = userBooks.filter((e) => e.shelf === 3);
 
   const where = location.pathname;
+
+  useEffect(() => {
+    if (JSON.stringify(booksReviews) === "{}") {
+      dispatch(requestReviews(tokenInfo.token));
+    }
+  }, []);
 
   const handleModal = (event) => {
     if (event.target.id === "modal-container") {

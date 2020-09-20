@@ -11,16 +11,8 @@ export const Container = styled.div`
   }
   .aside-pop {
     position: relative;
-  }
-  .aside-pop:before {
-    content: "";
-    width: 312px;
-    height: 158px;
-    position: absolute;
-    left: 0;
-    top: 0;
     background: linear-gradient(transparent 44px, #ff914d);
-    z-index: 0;
+    height: 158px;
   }
 
   div.featured-books {
@@ -44,13 +36,4 @@ export const WrapBook = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   margin-bottom: 15px;
-  z-index: 10;
-
-  .bookImage {
-    z-index: 10;
-  }
-
-  .book-info-aside {
-    z-index: 10;
-  }
 `;

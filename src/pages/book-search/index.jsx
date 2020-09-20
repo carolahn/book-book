@@ -3,6 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Input } from "antd";
 import { executeSearch, clearList } from "../../redux/actions/search-list";
+import { requestReviews } from "../../redux/actions/reviews-list";
 import "antd/dist/antd.css";
 import {
   BookSearchContainer,
@@ -18,6 +19,8 @@ import CarouselMostPopular from "../../components/carousel";
 
 const BookSearch = () => {
   const dispatch = useDispatch();
+  const token = useSelector((state) => state.login.token);
+  const booksReviews = useSelector((state) => state.reviewsList.booksReviews);
   const searchResults = useSelector((state) => state.searchList);
 
   const { Search } = Input;
@@ -26,6 +29,12 @@ const BookSearch = () => {
 
   const max = 40;
   const size = useWindowSize();
+
+  useEffect(() => {
+    if (JSON.stringify(booksReviews) === "{}") {
+      dispatch(requestReviews(token));
+    }
+  }, [token]);
 
   useEffect(() => {
     if (typedInput) {
@@ -73,16 +82,15 @@ const BookSearch = () => {
   );
 };
 
-export default BookSearch
+export default BookSearch;
 
 function useWindowSize() {
-  
   const [windowSize, setWindowSize] = useState({
     width: undefined,
     height: undefined,
   });
 
-  useEffect(() => {  
+  useEffect(() => {
     function handleResize() {
       setWindowSize({
         width: window.innerWidth,
@@ -95,7 +103,6 @@ function useWindowSize() {
     handleResize();
 
     return () => window.removeEventListener("resize", handleResize);
-
   }, []);
 
   return windowSize;
