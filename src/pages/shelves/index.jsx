@@ -122,7 +122,9 @@ const Shelves = () => {
 
   return (
     <StyledShelf className="shelf">
-      <button onClick={handleReset}>RESET</button>
+      <button onClick={handleReset} className="reset-btn">
+        RESET
+      </button>
       {bookInfoClicked ? (
         <>
           <BookInfo
