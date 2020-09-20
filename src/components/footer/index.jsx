@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom';
 const Footer = () => {
     const where = useLocation().pathname;
 
-    console.log(where);
+    
     return (
         <StyledFooter where={where}>
             <span>Made by "The Librarians":&nbsp;</span>

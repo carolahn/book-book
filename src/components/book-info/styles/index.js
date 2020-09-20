@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledBookInfo = styled.div`
   width:50vw;
-  height: 80%;
+  height: 90%;
   background-color: #fff;
   border-radius: 0.625rem;
   animation: modal .5s;
@@ -26,6 +26,7 @@ export const StyledBookInfo = styled.div`
   h2 {
     font-size: 18px;
     font-weight: bold;
+    line-height:20px;
   }
 
   
@@ -125,7 +126,7 @@ export const StyledBookInfo = styled.div`
     .noFeedback {
       width: 80%;
       margin-left: 10%;
-      margin-top: 50%;
+      margin-top: 10%;
     }
 
     .feedbackForm {
@@ -152,9 +153,12 @@ export const StyledBookInfo = styled.div`
 
   @media (max-width: 1368px) {
 
+    width: 70vw;
+
     .bookInfoContainer {
 
       .noDescription {
+        width: 50%;
         margin-top: 2.50rem;
         margin-bottom: 2.50rem;
       }
@@ -165,7 +169,24 @@ export const StyledBookInfo = styled.div`
 
   @media (max-width: 1024px) {
     width: 80vw;
-    height: 60%;
+
+    .bookInfoContainer {
+      .topContent {
+        .bookTitle {
+          line-height: 20px;
+        }
+
+        .bookCover {
+          width: 110px;
+          height: 164px;
+        }
+      }
+
+      .noDescription {
+        width: 60%;
+      }
+    }
+    
   }
   
   @media (max-width: 540px) {
@@ -180,7 +201,8 @@ export const StyledBookInfo = styled.div`
       width: 80%;
       .topContent {
         .bookTitle {
-          line-height: 20px;
+          font-size: 16px;
+          line-height: 21px;
         }
       }
     
