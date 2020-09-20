@@ -5,6 +5,7 @@ import { Carousel } from "antd";
 import { MainContainer, WrapBook } from "./styles";
 import Book from "../book";
 import { addToMostPopular } from "../../redux/actions/reviews-list";
+import CarouselModal from "../carousel-modal";
 
 const CarouselMostPopular = () => {
   const [mostPopBooks, setMostPopBooks] = useState([]);
@@ -61,64 +62,62 @@ const CarouselMostPopular = () => {
   return (
     <MainContainer className="carousel">
       {mostPopular && (
-        <Carousel autoplay>
-          <div>
-            <div style={contentStyle}>
-              <WrapBook
-                key={Object.values(mostPopular)[0].id}
-                className="carousel-0-pop"
-              >
-                <Book
-                  bookData={Object.values(mostPopular)[0]}
-                  key={Object.values(mostPopular)[0].title}
-                  type="aside"
-                />
-              </WrapBook>
+        <>
+          <Carousel autoplay>
+            <div>
+              <div style={contentStyle}>
+                <WrapBook
+                  key={Object.values(mostPopular)[0].id}
+                  className="carousel-0-pop"
+                >
+                  <CarouselModal
+                    currBook={Object.values(mostPopular)[0]}
+                    type="carousel"
+                  />
+                </WrapBook>
+              </div>
             </div>
-          </div>
-          <div>
-            <div style={contentStyle}>
-              <WrapBook
-                key={Object.values(mostPopular)[1].id}
-                className="carousel-1-pop"
-              >
-                <Book
-                  bookData={Object.values(mostPopular)[1]}
-                  key={Object.values(mostPopular)[1].title}
-                  type="aside"
-                />
-              </WrapBook>
+            <div>
+              <div style={contentStyle}>
+                <WrapBook
+                  key={Object.values(mostPopular)[1].id}
+                  className="carousel-1-pop"
+                >
+                  <CarouselModal
+                    currBook={Object.values(mostPopular)[1]}
+                    type="carousel"
+                  />
+                </WrapBook>
+              </div>
             </div>
-          </div>
-          <div>
-            <div style={contentStyle}>
-              <WrapBook
-                key={Object.values(mostPopular)[2].id}
-                className="carousel-2-pop"
-              >
-                <Book
-                  bookData={Object.values(mostPopular)[2]}
-                  key={Object.values(mostPopular)[2].title}
-                  type="aside"
-                />
-              </WrapBook>
+            <div>
+              <div style={contentStyle}>
+                <WrapBook
+                  key={Object.values(mostPopular)[2].id}
+                  className="carousel-2-pop"
+                >
+                  <CarouselModal
+                    currBook={Object.values(mostPopular)[2]}
+                    type="carousel"
+                  />
+                </WrapBook>
+              </div>
             </div>
-          </div>
-          <div>
-            <div style={contentStyle}>
-              <WrapBook
-                key={Object.values(mostPopular)[3].id}
-                className="carousel-3-pop"
-              >
-                <Book
-                  bookData={Object.values(mostPopular)[3]}
-                  key={Object.values(mostPopular)[3].title}
-                  type="aside"
-                />
-              </WrapBook>
+            <div>
+              <div style={contentStyle}>
+                <WrapBook
+                  key={Object.values(mostPopular)[3].id}
+                  className="carousel-3-pop"
+                >
+                  <CarouselModal
+                    currBook={Object.values(mostPopular)[3]}
+                    type="carousel"
+                  />
+                </WrapBook>
+              </div>
             </div>
-          </div>
-        </Carousel>
+          </Carousel>
+        </>
       )}
     </MainContainer>
   );
