@@ -66,7 +66,7 @@ const BookSearch = () => {
         <ResultsContainer>
           {searchResults && Object.values(searchResults).length !== 0 ? (
             <BookListPaginated
-              showBooks={Object.values(searchResults)}
+              showBooks={searchResults}
               type="search"
             />
           ) : (

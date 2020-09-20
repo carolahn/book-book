@@ -7,7 +7,7 @@ import Login from "../pages/login";
 import Register from "../pages/register";
 import Timeline from "../pages/timeline/";
 import Shelves from "../pages/shelves";
-import Perfil from "../pages/perfil";
+import Profile from "../pages/profile";
 import BookSearch from "../pages/book-search";
 import { requestUserBooks } from "../redux/actions/user-books";
 
@@ -43,7 +43,7 @@ const Routes = () => {
               <Timeline />
             </Route>
             <Route path="/profile/:id">
-              <Perfil />
+              <Profile />
             </Route>
           </>
         ) : (
