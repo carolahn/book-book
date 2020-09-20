@@ -9,7 +9,7 @@ import {
   postUserBook,
   removeBook,
   putBookChanges,
-  requestUsersBookDescription
+  requestUsersBookDescription,
 } from "../../redux/actions/user-books";
 import { Link } from "react-router-dom";
 
@@ -18,15 +18,17 @@ const Book = ({ bookData, type }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.login);
   const userBooks = useSelector((state) => state.userBooks);
+  const userBooksById = useSelector((state) => state.userBooksById);
 
   const [bookInfoClicked, setBookInfoClicked] = useState(false);
   const googleInfo = useSelector((state) => state.reviewsList.googleInfo);
-  const bookDescription = useSelector((state) => state.bookDescription.description)
+  const bookDescription = useSelector(
+    (state) => state.bookDescription.description
+  );
 
   useEffect(() => {}, [bookInfoClicked]);
 
   function onChange(value) {
-
     if (userBooks[bookData.google_book_id]) {
       const selectedBook = userBooks[bookData.google_book_id];
       if (value === "delete") {
@@ -73,10 +75,10 @@ const Book = ({ bookData, type }) => {
       });
     }
   }
-  
+
   const handleBookInfo = (event) => {
-    dispatch(requestUsersBookDescription(bookData.google_book_id))
-    const eventClassName = event.target.className
+    dispatch(requestUsersBookDescription(bookData.google_book_id));
+    const eventClassName = event.target.className;
     setTimeout(() => {
       if (
         bookInfoClicked === false &&
@@ -85,8 +87,7 @@ const Book = ({ bookData, type }) => {
       ) {
         setBookInfoClicked(true);
       }
-    } , 200)
-    
+    }, 200);
   };
 
   const handleModal = (event) => {
@@ -117,7 +118,6 @@ const Book = ({ bookData, type }) => {
                 />
               </div>
             </div>
-           
           </>
         )}
 
@@ -147,7 +147,6 @@ const Book = ({ bookData, type }) => {
                 />
               </div>
             </div>
-            
           </>
         )}
 
@@ -183,7 +182,6 @@ const Book = ({ bookData, type }) => {
                 />
               </div>
             </div>
-           
           </>
         )}
 
@@ -219,8 +217,6 @@ const Book = ({ bookData, type }) => {
                 />
               </div>
             </div>
-           
-           
           </>
         )}
 
@@ -286,6 +282,7 @@ const Book = ({ bookData, type }) => {
               <BookInfo
                 type="search"
                 title={bookData.title}
+                author={bookData.author}
                 image={bookData.image_url}
                 description={bookDescription}
                 grading={bookData.grade}
@@ -297,7 +294,6 @@ const Book = ({ bookData, type }) => {
               />
             )}
     </div>
-    
   );
 };
 

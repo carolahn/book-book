@@ -3,6 +3,7 @@ import {
   ADD_TO_SHELF,
   REMOVE_OF_SHELF,
   CHANGE_BOOK_DATA,
+  RESET_SHELVES,
 } from "../../actions/user-books";
 
 const defaultState = [];
@@ -21,6 +22,9 @@ const userBooks = (state = defaultState, { type, payload }) => {
 
     case CHANGE_BOOK_DATA:
       return state;
+
+    case RESET_SHELVES:
+      return defaultState;
 
     default:
       return state;
