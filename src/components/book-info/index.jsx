@@ -43,16 +43,6 @@ const BookInfo = ({
     });
   }, []);
 
-  // useEffect(() => {
-  //   dispatch(requestReviews(token));
-  //   dispatch(requestUsersBookDescription(googleBookId))
-  //   Object.values(booksReviewsById).map((bookReview) => {
-  //     if (bookReview.title === title) {
-  //        setFeedbackMissing(true)
-  //     }
-  //   })
-  // }, [token, booksReviewsById]);
-
   const { Option } = Select;
 
   const onFinish = (event) => {
@@ -61,7 +51,6 @@ const BookInfo = ({
       putBookChanges(token, userId, bookId, 3, event.grading, event.comment)
     );
   };
-
   const handleNewFeedback = () => {
     if (feedbackForm === false) {
       setFeedbackForm(true);
@@ -151,7 +140,6 @@ const BookInfo = ({
               }
             })
           )}
-
           {feedbackMissing === false && (
             <img src={noFeedback} className="noFeedback" />
           )}
