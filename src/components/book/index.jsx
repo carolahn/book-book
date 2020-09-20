@@ -251,8 +251,30 @@ const Book = ({ bookData, type }) => {
                 disabled
                 allowHalf
                 defaultValue={bookData.grade || 0}
-                style={{ fontSize: 15, display: "revert" }}
+                style={{ fontSize: 15, display: "center" }}
               />
+            </div>
+          </>
+        )}
+
+        {type === "carousel" && (
+          <>
+            <img src={bookData.image_url} alt="cover" className="bookImage" />
+            <div className="book-info">
+              <div className="title">{bookData.title}</div>
+              <div className="author">{bookData.author}</div>
+              <div className="description description-search-desktop">
+                <p>{bookData.categories}</p>
+                <p>{bookData.year}</p>
+              </div>
+              <div className="grade">
+                <Rate
+                  disabled
+                  allowHalf
+                  defaultValue={bookData.grade || 0}
+                  style={{ fontSize: 15, display: "revert" }}
+                />
+              </div>
             </div>
           </>
         )}
@@ -284,21 +306,23 @@ const Book = ({ bookData, type }) => {
           </Select>
         </div>
       </BookContainer>
-      {bookInfoClicked && (
-        <BookInfo
-          type="search"
-          title={bookData.title}
-          author={bookData.author}
-          image={bookData.image_url}
-          description={bookDescription}
-          grading={bookData.grade}
-          handleModal={handleModal}
-          onChange={onChange}
-          addFeedback={false}
-          bookId={bookData.id}
-          googleBookId={bookData.google_book_id}
-        />
-      )}
+      {type != "carousel"
+        ? bookInfoClicked && (
+            <BookInfo
+              type="search"
+              title={bookData.title}
+              author={bookData.author}
+              image={bookData.image_url}
+              description={bookDescription}
+              grading={bookData.grade}
+              handleModal={handleModal}
+              onChange={onChange}
+              addFeedback={false}
+              bookId={bookData.id}
+              googleBookId={bookData.google_book_id}
+            />
+          )
+        : ""}
     </div>
   );
 };
