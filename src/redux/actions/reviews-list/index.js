@@ -15,8 +15,10 @@ export const requestReviews = (token) => (dispatch) => {
       const normalized = {}; // normalisado pelo google_book_id
       const normalizedByReviewId = {}; // normalizado pelo review id
       data.map((currReview) => {
+        if (isNaN(currReview.google_book_id)) {
         normalized[currReview.google_book_id] = { ...currReview };
         normalizedByReviewId[currReview.id] = { ...currReview };
+      }
       });
       dispatch(addToReviewsList(normalized, normalizedByReviewId));
     })

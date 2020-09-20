@@ -12,6 +12,7 @@ import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 import { StyledShelf, ShelvesButtons, BookShelf, Book } from "./styles";
 import BookInfo from "../../components/book-info";
 import { notification } from "antd";
+import noBookImage from '../../assets/images/book-cover/book-image-not-available.png'
 
 const Shelves = () => {
   const history = useHistory();
@@ -170,7 +171,7 @@ const Shelves = () => {
                 <Book
                   colour="darkred"
                   alt={e.title}
-                  src={e.image_url}
+                  src={e.image_url === 'image_url' ? noBookImage : e.image_url}
                   onClick={() => {
                     dispatch(requestUsersBookDescription(e.google_book_id));
                     setBookInfoClicked(true);
@@ -199,7 +200,7 @@ const Shelves = () => {
                 <Book
                   colour="darkred"
                   alt={e.title}
-                  src={e.image_url}
+                  src={e.image_url === 'image_url' ? noBookImage : e.image_url}
                   onClick={() => {
                     dispatch(requestUsersBookDescription(e.google_book_id));
                     setBookInfoClicked(true);
@@ -228,7 +229,7 @@ const Shelves = () => {
                 <Book
                   colour="darkred"
                   alt={e.title}
-                  src={e.image_url}
+                  src={e.image_url === 'image_url' ? noBookImage : e.image_url}
                   onClick={() => {
                     dispatch(requestUsersBookDescription(e.google_book_id));
                     setBookInfoClicked(true);
