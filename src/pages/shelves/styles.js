@@ -6,8 +6,9 @@ export const StyledShelf = styled.div`
     widows: 90vw;
     display: flex;
     flex-flow: column nowrap;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
+    min-height: calc(100% - 100px);
 `;
 
 export const ShelvesButtons = styled.div`

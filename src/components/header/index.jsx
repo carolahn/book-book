@@ -19,7 +19,7 @@ const Header = () => {
 
     return (
         <StyledHeader >
-            <div className="logo-holder" />
+            <div className="logo-holder" onClick={() => history.push('/timeline')} />
             {(where === '/' || where === '/register') ? 
             <>
                 {size.width > 895 ?
@@ -57,9 +57,7 @@ const Header = () => {
             : 
 
             (tokenInfo.token && 
-                (where === '/timeline' || where === '/search' || where === '/my-shelves' ||
-                    where === '/my-shelves/' || where === '/my-shelves/whishlist' || 
-                    where === '/my-shelves/reading' || where === '/my-shelves/read' || where.startsWith('/profile'))) ? 
+                (where === '/timeline' || where === '/search' || where.startsWith('/my-shelves') || where.startsWith('/profile'))) ? 
                 
             <>
                 {size.width > 895 ?
@@ -74,11 +72,7 @@ const Header = () => {
                         history.push("/search");
                         setMenu(false);
                     }} >Search</button>
-                    <button className={where === '/my-shelves' ||
-                                       where === '/my-shelves/' ||
-                                       where === '/my-shelves/read' ||
-                                       where === '/my-shelves/reading' ||
-                                       where === '/my-shelves/whishlist' ? "button here" : "button"}
+                    <button className={where.startsWith('/my-shelves') ? "button here" : "button"}
                     onClick={() => {
                         history.push("/my-shelves/reading");
                         setMenu(false);
@@ -95,7 +89,7 @@ const Header = () => {
                     <div className="menu-button"
                         onClick={() => setMenu((prevState) => !prevState)} />
                     {menu ?
-                        <Menu>
+                        <Menu onClick={() => setMenu(false)} >
                             <LoggedLittleMenu className="little-menu">
                                 <button className={where === '/timeline' ? "little hbtn" : "hbtn"}
                                         onClick={() => {
@@ -107,11 +101,7 @@ const Header = () => {
                                             history.push("/search");
                                             setMenu(false);
                                         }} >Search</button>        
-                                <button className={where === '/my-shelves' ||
-                                                   where === '/my-shelves/' ||
-                                                   where === '/my-shelves/read' ||
-                                                   where === '/my-shelves/reading' ||
-                                                   where === '/my-shelves/whishlist' ? "little hbtn" : "hbtn"}
+                                <button className={where.startsWith('/my-shelves') ? "little hbtn" : "hbtn"}
                                         onClick={() => {
                                             history.push("/my-shelves/reading");
                                             setMenu(false);
@@ -195,4 +185,4 @@ function useWindowSize() {
     }, []);
   
     return windowSize;
-  }
+}

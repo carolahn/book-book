@@ -8,15 +8,31 @@ export const BookSearchContainer = styled.div`
   min-width: 315px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: calc(100% - 100px);
 `;
 
 export const InputContainer = styled.div`
-  width: 60%;
-  max-width: 950px;
+  width: 950px;
   .ant-btn-primary {
     background: #68c866;
     border-color: #68c866;
+    width: 150px;
+  }
+  button.ant-btn.ant-btn-primary.ant-btn-lg.ant-input-search-button {
+    width: 150px;
+  }
+
+  @media screen and (max-width: 940px) {
+    width: 627px;
+  }
+
+  @media screen and (max-width: 627px) {
+    width: 315px;
+    button.ant-btn.ant-btn-primary.ant-btn-lg.ant-input-search-button {
+      width: 100px;
+    }
   }
 `;
 
@@ -64,7 +80,6 @@ export const MostPopularContainer = styled.div`
 `;
 
 export const MostPopularCarousel = styled.div`
-  /* background-color: pink; */
   width: 100%;
   min-width: 315px;
   display: flex;

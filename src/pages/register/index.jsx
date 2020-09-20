@@ -4,6 +4,7 @@ import { Container, StyledRegister } from "./styles.js";
 import { useDispatch, useSelector } from "react-redux";
 import { requestRegisterData } from "../../redux/actions/register/register";
 import { useHistory } from "react-router-dom";
+import { resetRegisterScreen } from '../../redux/actions/register/register'
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const Register = () => {
     if (status === true) {
       setTimeout(() => {
         history.push("/");
+        dispatch(resetRegisterScreen(null))
       }, 1500);
     }
   }, [status]);
@@ -60,6 +62,7 @@ const Register = () => {
           form={form}
           name="register"
           className="formRegister"
+          
         >
           <Form.Item
             name="name"
@@ -67,6 +70,7 @@ const Register = () => {
               {
                 required: true,
                 message: "Please input your Name!",
+                pattern: /^[a-zA-Z\u00C0-\u017F´]+\s+[a-zA-Z\u00C0-\u017F´]{0,}$/
               },
             ]}
             className="formItem"
@@ -84,6 +88,7 @@ const Register = () => {
               {
                 required: true,
                 message: "Please input your Username!",
+                min: 6,
               },
             ]}
             className="formItem"
@@ -121,7 +126,9 @@ const Register = () => {
             rules={[
               {
                 required: true,
-                message: "Please input your Password!",
+                message: "Your password must contain at least 8 characters including one letter, one number and one special character",
+                min: 6,
+                pattern: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
               },
             ]}
             className="formItem"
@@ -139,7 +146,14 @@ const Register = () => {
               {
                 required: true,
                 message: "Please input your Password Again!",
-              },
+              },({ getFieldValue }) => ({
+                validator(rule, value) {
+                  if (!value || getFieldValue('password') === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject('The two passwords that you entered do not match!');
+                },
+              })
             ]}
             className="formItem"
           >
@@ -169,12 +183,13 @@ const Register = () => {
               </span>
             </div>
           ) : status === true ? (
-            <span className="sucess">Sucess</span>
+            <div className="sucess">Sucess</div>
           ) : null}
         </div>
       </StyledRegister>
     </Container>
   );
 };
+
 
 export default Register;

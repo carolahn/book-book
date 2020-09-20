@@ -71,7 +71,7 @@ export default Routes;
 
 const NotAuthorized = styled.div`
   width: 100%;
-  height: calc(100vh - 50px);
+  height: calc(100vh - 100px);
   display: flex;
   justify-content: center;
   align-items: center;

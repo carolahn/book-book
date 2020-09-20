@@ -11,6 +11,22 @@ export const AsideContainer = styled.div`
     width: 275px;
   }
 
+  .no-description {
+    display: grid;
+    place-items: center;
+    height: 158px;
+    margin-top: -9px;
+    margin-left: 11px;
+  }
+  .description {
+    display: grid;
+    place-items: center;
+    height: 158px;
+    margin-top: -3px;
+    margin-left: 11px;
+    text-align: center;
+  }
+
   .search {
     width: 100%;
     height: 100%;
@@ -36,7 +52,5 @@ export const AsideContainer = styled.div`
 
   @media screen and (max-width: 627px) {
     display: none;
-    /* width: 100%;
-    min-width: 315px; */
   }
 `;

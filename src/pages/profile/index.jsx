@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { requestUsersBookDescription } from '../../redux/actions/user-books/'
 import axios from "axios";
 
 import BookListPaginated from "../../containers/book-list-paginated";
@@ -11,7 +12,8 @@ const Profile = () => {
   const { id } = useParams();
   const token = useSelector((state) => state.login.token);
   const [user, setUser] = useState({});
-
+  
+  
   useEffect(() => {
     axios
       .get(`https://ka-users-api.herokuapp.com/users/${id}/`, {
@@ -20,6 +22,7 @@ const Profile = () => {
       .then(({ data }) => {
         setUser(data);
       });
+      
   }, []);
 
   useEffect(() => {
@@ -32,6 +35,7 @@ const Profile = () => {
       .then(({ data }) => {
         setUser({ ...user, books: data });
       });
+      
   }, [user]);
   
   return (
