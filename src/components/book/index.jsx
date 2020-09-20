@@ -108,7 +108,7 @@ const Book = ({ bookData, type }) => {
       <BookContainer className="book" onClick={handleBookInfo}>
         {type === "search-desktop" && (
           <>
-            <img src={bookData.image_url === '' ? noBookImage : bookData.image_url} alt="cover" className="bookImage" />
+            <img src={bookData.image_url === '' || bookData.image_url === null ? noBookImage : bookData.image_url} alt="cover" className="bookImage" />
             <div className="book-info">
               <div className="title">{bookData.title}</div>
               <div className="author">{bookData.author}</div>
@@ -130,7 +130,7 @@ const Book = ({ bookData, type }) => {
 
         {type === "search-mobile" && (
           <>
-            <img src={bookData.image_url === '' ? noBookImage : bookData.image_url} alt="cover" className="bookImage" />
+            <img src={bookData.image_url === '' || bookData.image_url === null ? noBookImage : bookData.image_url} alt="cover" className="bookImage" />
             <div className="book-info">
               <div className="title">{bookData.title}</div>
               <div className="author">{bookData.author}</div>
@@ -159,7 +159,7 @@ const Book = ({ bookData, type }) => {
 
         {type === "timeline-desktop" && (
           <>
-            <img src={bookData.image_url === '' ? noBookImage : bookData.image_url} alt="cover" className="bookImage" />
+            <img src={bookData.image_url === '' || bookData.image_url === null ? noBookImage : bookData.image_url} alt="cover" className="bookImage" />
             <div className="book-info">
               <div className="title">{bookData.title}</div>
               <div className="author">{bookData.author}</div>
@@ -194,7 +194,7 @@ const Book = ({ bookData, type }) => {
 
         {type === "timeline-mobile" && (
           <>
-            <img src={bookData.image_url === '' ? noBookImage : bookData.image_url} alt="cover" className="bookImage" />
+            <img src={bookData.image_url === '' || bookData.image_url === null ? noBookImage : bookData.image_url} alt="cover" className="bookImage" />
             <div className="book-info">
               <div className="title">{bookData.title}</div>
               <div className="author">{bookData.author}</div>
@@ -229,7 +229,7 @@ const Book = ({ bookData, type }) => {
 
         {type === "aside" && (
           <>
-            <img src={bookData.image_url === '' ? noBookImage : bookData.image_url} alt="cover" className="bookImage" />
+            <img src={bookData.image_url === '' || bookData.image_url === null ? noBookImage : bookData.image_url} alt="cover" className="bookImage" />
             <div className="book-info-aside">
               {bookData.review ? (
                 bookData.review.length > 240 ? (
