@@ -29,17 +29,16 @@ const Timeline = () => {
   return (
     <ListContainer>
       <MainContainer>
-        {size.width < 940 ? (
+        {size.width < 940 && (
           <MostPopularCarousel>
             <CarouselMostPopular />
           </MostPopularCarousel>
-        ) : (
-          ""
         )}
+        
         <ResultsContainer>
           {Object.values(booksReviews).length !== 0 ? (
             <BookListPaginated
-              showBooks={Object.values(booksReviews)}
+              showBooks={booksReviews}
               type="timeline"
             />
           ) : (
