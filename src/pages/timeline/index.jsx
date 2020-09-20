@@ -21,7 +21,9 @@ const Timeline = () => {
   const size = useWindowSize();
 
   useEffect(() => {
-    dispatch(requestReviews(token));
+    if (JSON.stringify(booksReviews) === "{}") {
+      dispatch(requestReviews(token));
+    }
   }, [token]);
 
   return (
@@ -35,7 +37,6 @@ const Timeline = () => {
           ""
         )}
         <ResultsContainer>
-
           {Object.values(booksReviews).length !== 0 ? (
             <BookListPaginated
               showBooks={Object.values(booksReviews)}

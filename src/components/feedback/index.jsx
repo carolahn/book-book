@@ -7,7 +7,7 @@ const Feedback = ({user, comment, grading}) => {
 
   return(
     <ContainerFeedback>
-      <h2 className='titleFeedback'>Feedbacks</h2>
+    
       <StyledFeedback>
       
       <h2><UserOutlined style={{fontSize:30}}/> {user}</h2>

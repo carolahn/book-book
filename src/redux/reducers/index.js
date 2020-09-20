@@ -5,7 +5,8 @@ import login from "./login/login";
 import reviewsList from "./reviews-list";
 import searchList from "./search-list";
 import userBooks from "./user-books";
-import bookDescription from './book-description';
+import bookDescription from "./book-description";
+import userBooksById from "./user-books-by-id";
 
 export default combineReducers({
   register,
@@ -14,4 +15,5 @@ export default combineReducers({
   searchList,
   userBooks,
   bookDescription,
+  userBooksById,
 });
