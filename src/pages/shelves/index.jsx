@@ -76,7 +76,6 @@ const Shelves = () => {
         message: "Error:",
         description: "This book are not in your shelves!",
       });
-      return;
     } else {
       dispatch(
         postUserBook(
@@ -105,8 +104,16 @@ const Shelves = () => {
   }
 
   useEffect(() => {
-    if (bookInfoClicked === false && shelfValue !== undefined)
+    if (
+      bookInfoClicked === false &&
+      shelfValue !== undefined &&
+      shelfValue != uniqueBook.shelf
+    ) {
       sendChanges(shelfValue);
+    } else {
+      setShelfValue();
+      return;
+    }
   }, [bookInfoClicked]);
 
   const handleReset = () => {
@@ -177,6 +184,7 @@ const Shelves = () => {
                       description: bookDescription,
                       review: e.review,
                       categories: e.categories,
+                      shelf: e.shelf,
                     });
                   }}
                 />
@@ -205,6 +213,7 @@ const Shelves = () => {
                       description: bookDescription && bookDescription,
                       review: e.review,
                       categories: e.categories,
+                      shelf: e.shelf,
                     });
                   }}
                 />
@@ -233,6 +242,7 @@ const Shelves = () => {
                       description: bookDescription,
                       review: e.review,
                       categories: e.categories,
+                      shelf: e.shelf,
                     });
                   }}
                 />
