@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
 import { StyledBookInfo, ModalContainer } from "./styles/";
 import { Button, Rate, Select } from "antd";
 import Feedback from "../feedback";
@@ -26,6 +27,7 @@ const BookInfo = ({
   bookId,
 }) => {
   const dispatch = useDispatch();
+  const location = useLocation();
   const [feedbackForm, setFeedbackForm] = useState(false);
   const [feedbackMissing, setFeedbackMissing] = useState(false);
 
@@ -53,6 +55,17 @@ const BookInfo = ({
     );
     setTimeout(dispatch(requestReviews(token)), 200);
   };
+
+  useEffect(() => {
+    if (
+      location.pathname === "/my-shelves/wishlist" ||
+      location.pathname === "/my-shelves/reading" ||
+      location.pathname === "/my-shelves/read"
+    ) {
+      dispatch(requestReviews(token));
+    }
+  }, [userBooks]);
+
   const handleNewFeedback = () => {
     if (feedbackForm === false) {
       setFeedbackForm(true);
