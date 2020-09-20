@@ -34,6 +34,7 @@ const BookInfo = ({
   const booksReviewsById = useSelector(
     (state) => state.reviewsList.booksReviewsById
   );
+  const userBooks = useSelector((state) => state.userBooks);
 
   useEffect(() => {
     Object.values(booksReviewsById).map((bookReview) => {
@@ -50,6 +51,7 @@ const BookInfo = ({
     dispatch(
       putBookChanges(token, userId, bookId, 3, event.grading, event.comment)
     );
+    setTimeout(dispatch(requestReviews(token)), 200);
   };
   const handleNewFeedback = () => {
     if (feedbackForm === false) {
