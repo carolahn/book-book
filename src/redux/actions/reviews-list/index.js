@@ -44,7 +44,6 @@ export const requestGoogleInfo = (booksReviews, page) => (dispatch) => {
         urlRequests.push(`https://www.googleapis.com/books/v1/volumes/${key}`);
       }
     });
-    console.log(urlRequests)
   if (urlRequests) {
     let promises = [];
     urlRequests.forEach((item, index) => {
