@@ -6,8 +6,11 @@ export const Container = styled.div`
   > div {
     display: flex;
     flex-direction: column;
-
     align-items: center;
+  }
+
+  @media (max-width: 650px) {
+    margin-top: 10px;
   }
 `;
 

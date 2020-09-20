@@ -11,8 +11,8 @@ const Profile = () => {
   const { id } = useParams();
   const token = useSelector((state) => state.login.token);
   const [user, setUser] = useState({});
-  
-  
+  let filtered = {};
+
   useEffect(() => {
     axios
       .get(`https://ka-users-api.herokuapp.com/users/${id}/`, {
@@ -21,7 +21,6 @@ const Profile = () => {
       .then(({ data }) => {
         setUser(data);
       });
-      
   }, []);
 
   useEffect(() => {
@@ -32,11 +31,11 @@ const Profile = () => {
         headers: { Authorization: token },
       })
       .then(({ data }) => {
-        setUser({ ...user, books: data });
+        data.map((item) => (filtered[item.google_book_id] = item));
+        setUser({ ...user, books: filtered });
       });
-      
   }, [user]);
-  
+
   return (
     user.name !== undefined && (
       <PerfilContainer>
@@ -49,7 +48,7 @@ const Profile = () => {
         </SvgContainer>
         <div>
           {user.books &&
-            (user.books.length > 0 ? (
+            (Object.values(user.books).length > 0 ? (
               <BookListPaginated showBooks={user.books} type="timeline" />
             ) : (
               "User has not finished reading any books"
