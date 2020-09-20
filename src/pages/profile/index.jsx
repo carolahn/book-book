@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { requestUsersBookDescription } from '../../redux/actions/user-books/'
+import { useSelector } from "react-redux";
 import axios from "axios";
 
 import BookListPaginated from "../../containers/book-list-paginated";
