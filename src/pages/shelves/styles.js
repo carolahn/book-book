@@ -63,4 +63,16 @@ export const Book = styled.img`
   justify-content: center;
   align-items: center;
   text-align: center;
+
+  @media screen and (max-width: 410px) {
+    width: 75px;
+    height: 110px;
+    font-size: 10px;
+  }
+
+  /* @media screen and (max-width: 410px) {
+        width: 112.5px;
+        height: 165px;
+        font-size: 10px;
+    } */
 `;

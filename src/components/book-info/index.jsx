@@ -51,7 +51,7 @@ const BookInfo = ({
     dispatch(
       putBookChanges(token, userId, bookId, 3, event.grading, event.comment)
     );
-    setTimeout(dispatch(requestReviews(token)), 300);
+    setTimeout(dispatch(requestReviews(token)), 200);
   };
   const handleNewFeedback = () => {
     if (feedbackForm === false) {
