@@ -31,6 +31,7 @@ const Book = ({ bookData, type }) => {
   function onChange(value) {
     if (userBooks[bookData.google_book_id]) {
       const selectedBook = userBooks[bookData.google_book_id];
+
       if (value === "delete") {
         dispatch(removeBook(user.token, user.id, selectedBook.id));
         notification.info({
@@ -38,12 +39,18 @@ const Book = ({ bookData, type }) => {
           message: "Done:",
           description: "The book has been removed!",
         });
-      } else {
+      } else if (value != selectedBook.shelf) {
         dispatch(putBookChanges(user.token, user.id, selectedBook.id, value));
         notification.success({
           key: user.id,
           message: "Done:",
           description: "Shelf change completed!",
+        });
+      } else if (value == selectedBook.shelf) {
+        notification.info({
+          key: user.id,
+          message: "Info:",
+          description: "The book already is on this shelf!",
         });
       }
     } else if (!userBooks[bookData.google_book_id] && value === "delete") {
@@ -52,7 +59,6 @@ const Book = ({ bookData, type }) => {
         message: "Error:",
         description: "This book are not in your shelves!",
       });
-      return;
     } else {
       dispatch(
         postUserBook(

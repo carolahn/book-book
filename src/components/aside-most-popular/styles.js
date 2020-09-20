@@ -13,6 +13,7 @@ export const Container = styled.div`
     position: relative;
     background: linear-gradient(transparent 44px, #ff914d);
     height: 158px;
+    margin-bottom: 25px;
   }
 
   div.featured-books {
