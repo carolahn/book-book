@@ -10,6 +10,7 @@ import { requestReviews } from "../../redux/actions/reviews-list";
 import {
   putBookChanges,
   requestUsersBookDescription,
+  requestUserBooks,
 } from "../../redux/actions/user-books";
 import noDescription from "../../assets/images/book-info/nodescription.png";
 import noFeedback from "../../assets/images/book-info/nofeedback.png";
@@ -54,6 +55,7 @@ const BookInfo = ({
       putBookChanges(token, userId, bookId, 3, event.grading, event.comment)
     );
     setTimeout(dispatch(requestReviews(token)), 200);
+    setTimeout(dispatch(requestUserBooks(token, userId)), 200);
   };
 
   useEffect(() => {
