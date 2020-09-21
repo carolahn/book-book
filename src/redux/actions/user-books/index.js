@@ -17,9 +17,21 @@ export const requestUserBooks = (token, id) => (dispatch) => {
     .then(({ data }) => {
       const normalized = {};
       const normalizedById = {};
-      data.map((currentBook) => {
-        normalized[currentBook.google_book_id] = { ...currentBook };
-        normalizedById[currentBook.id] = { ...currentBook };
+      const normalizedTeste = {};
+      const url = data.map((item) =>
+        item.image_url.replace(/\w*[htsp]/i, "https")
+      );
+      data.map((currentBook, index) => {
+        // normalized[currentBook.google_book_id] = { ...currentBook };
+        // normalizedById[currentBook.id] = { ...currentBook };
+        normalized[currentBook.google_book_id] = {
+          ...currentBook,
+          image_url: url[index],
+        };
+        normalizedById[currentBook.id] = {
+          ...currentBook,
+          image_url: url[index],
+        };
       });
       dispatch(getUserBooks(normalized));
       dispatch(getUserBooksById(normalizedById));
