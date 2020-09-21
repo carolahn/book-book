@@ -17,7 +17,6 @@ export const requestUserBooks = (token, id) => (dispatch) => {
     .then(({ data }) => {
       const normalized = {};
       const normalizedById = {};
-      const normalizedTeste = {};
       const url = data.map((item) =>
         item.image_url.replace(/\w*[htsp]/i, "https")
       );
