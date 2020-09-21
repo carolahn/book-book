@@ -9,7 +9,6 @@ import FeedbackForm from "../feedback-form";
 import { requestReviews } from "../../redux/actions/reviews-list";
 import {
   putBookChanges,
-  requestUsersBookDescription,
   requestUserBooks,
 } from "../../redux/actions/user-books";
 import noDescription from "../../assets/images/book-info/nodescription.png";
@@ -46,7 +45,7 @@ const BookInfo = ({
 
   useEffect(() => {}, []);
 
-  let shelf = ""; // adicionei
+  let shelf = "";
   Object.values(userBooks).map((book) => {
     if (book.title === title) {
       shelf = book.shelf;
@@ -54,26 +53,21 @@ const BookInfo = ({
   });
 
   useEffect(() => {
-    //adicionei
     let arr = [];
     Object.values(booksReviewsById).map((bookReview) => {
       if (bookReview.title === title) {
         arr = arr.filter((item) => item.id !== bookReview.id);
-        // console.log("em bookReviews", bookReview.id);
         arr.push(bookReview);
       }
     });
     Object.values(userBooksById).map((bookReview) => {
       if (bookReview.title === title) {
         arr = arr.filter((item) => item.id !== bookReview.id);
-        // console.log("em userBooks", bookReview.id);
         arr.push(bookReview);
       }
     });
 
-    console.log("reviews encontradas", arr);
     arr = arr.filter((item) => item.review !== null && item.review !== ""); //filtro de feeds vazios
-    console.log("reviews encontradas filtradas", arr);
     setSelectedReviews(arr);
 
     if (arr.length !== 0) {

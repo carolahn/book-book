@@ -28,9 +28,7 @@ const Book = ({ bookData, type }) => {
     (state) => state.bookDescription.description
   );
 
-  useEffect(() => {
-    console.log("mudou bookInfoClicked");
-  }, [bookInfoClicked]);
+  useEffect(() => {}, [bookInfoClicked]);
 
   function onChange(value) {
     if (userBooks[bookData.google_book_id]) {
@@ -88,8 +86,6 @@ const Book = ({ bookData, type }) => {
 
   const handleBookInfo = (event) => {
     dispatch(requestUsersBookDescription(bookData.google_book_id));
-    // dispatch(requestReviews(user.token)); /////////
-    console.log("passou em handleBookInfo");
     const eventClassName = event.target.className;
     setTimeout(() => {
       if (
@@ -98,16 +94,13 @@ const Book = ({ bookData, type }) => {
         !eventClassName.includes("spanSelect")
       ) {
         setBookInfoClicked(true);
-        console.log("passou em handleBookInfo IF");
       }
     }, 200);
   };
 
   const handleModal = (event) => {
-    console.log("passou em handleModal");
     if (event.target.id === "modal-container") {
       setBookInfoClicked(false);
-      console.log("passou em handleModal false");
     }
   };
 

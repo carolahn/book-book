@@ -177,7 +177,6 @@ const Shelves = () => {
                   onClick={() => {
                     dispatch(requestUsersBookDescription(e.google_book_id));
                     setBookInfoClicked(true);
-                    console.log("e.grade", e.grade);
                     setUniqueBook({
                       author: e.author,
                       title: e.title,

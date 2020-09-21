@@ -4,8 +4,6 @@ import { Rate } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 
 const Feedback = ({ bookReview, user, comment, grading }) => {
-  // console.log("grading", grading);
-  // console.log("bookReview", bookReview);
   return (
     <ContainerFeedback>
       <StyledFeedback>
@@ -18,7 +16,7 @@ const Feedback = ({ bookReview, user, comment, grading }) => {
         <Rate
           disabled
           allowHalf
-          defaultValue={bookReview.grade} //adicionei
+          defaultValue={bookReview.grade}
           style={{ fontSize: 15 }}
           className="feedbackGrade"
         />
