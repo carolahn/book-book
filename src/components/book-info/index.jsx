@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation,  useHistory} from "react-router-dom";
 import { StyledBookInfo, ModalContainer } from "./styles/";
 import { Button, Rate, Select } from "antd";
 import Feedback from "../feedback";
@@ -13,7 +13,7 @@ import {
   requestUserBooks,
 } from "../../redux/actions/user-books";
 import noDescription from "../../assets/images/book-info/nodescription.png";
-import noFeedback from "../../assets/images/book-info/nofeedback.png";
+import noFeedback from "../../assets/images/book-info/nofeedback.png"
 
 const BookInfo = ({
   title,
@@ -24,9 +24,12 @@ const BookInfo = ({
   grading,
   handleModal,
   onChange,
-  googleBookId,
   bookId,
 }) => {
+
+  const { location : { pathname }} = useHistory()
+
+
   const dispatch = useDispatch();
   const location = useLocation();
   const [feedbackForm, setFeedbackForm] = useState(false);
@@ -45,11 +48,14 @@ const BookInfo = ({
         setFeedbackMissing(true);
       }
     });
-  }, []);
+  }, [booksReviewsById]);
 
   const { Option } = Select;
-
+  
   const onFinish = (event) => {
+
+    
+
     setFeedbackForm(false);
     dispatch(
       putBookChanges(token, userId, bookId, 3, event.grading, event.comment)
@@ -87,14 +93,14 @@ const BookInfo = ({
           <div className="topContent">
             <img src={image} className="bookCover" />
             <div className="bookTitle">
-              <h2 className={title.length > 29 && "bigTitle"}>{title}</h2>
+              <h2 className={title.length > 29 ? "bigTitle" : undefined}>{title}</h2>
             </div>
             <h5 className="bookAuthor">{author}</h5>
             <Rate
               disabled
               allowHalf
               defaultValue={grading}
-              style={{ fontSize: 15, display: "revert" }}
+              style={{ fontSize: 10, display: "revert" }}
               className="bookGrade"
             />
             <Select
