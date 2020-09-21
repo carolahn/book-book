@@ -219,24 +219,36 @@ export const StyledBookInfo = styled.div`
   @media (max-width: 420px) {
 
     .bookInfoContainer {
-      height: 80%;
+      height: 65%;
 
       .topContent {
         grid-template-columns: 100px 3fr;
+        grid-template-rows: repeat(4, 36px);
 
         .bookCover {
           width: 100px;
           height: 144px;
         }
+
+        .bookTitle {
+          h2 {
+            line-height: 16px;
+            font-size: 14px;
+          }
+        }
       }
 
       .bookDescription {
-        height: 45%;
+        height: 40%;
       }
     }
 
     .feedbackContainer {
       margin-top: 1.25rem;
+
+      .ant-form-item {
+        margin: 5px;
+      }
 
       .noFeedback {
         margin-top: 10%;
