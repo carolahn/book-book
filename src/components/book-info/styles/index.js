@@ -229,6 +229,10 @@ export const StyledBookInfo = styled.div`
           height: 144px;
         }
       }
+
+      .bookDescription {
+        height: 45%;
+      }
     }
 
     .feedbackContainer {
