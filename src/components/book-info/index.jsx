@@ -169,9 +169,9 @@ const BookInfo = ({
 
         <section className="feedbackContainer" id="feedbackContainer">
           <h2 className="feedbackTitle">Feedbacks</h2>
-          {feedbackForm && <FeedbackForm handleFinish={onFinish} />}
-
-          {selectedReviews.lenght != 0 && //adicionei
+          {feedbackForm ? (
+            <FeedbackForm handleFinish={onFinish} />
+          ) : selectedReviews.lenght != 0 ? (
             Object.values(selectedReviews).map((bookReview) => {
               return (
                 <Feedback
@@ -182,7 +182,10 @@ const BookInfo = ({
                   comment={bookReview.review}
                 />
               );
-            })}
+            })
+          ) : (
+            ""
+          )}
 
           {feedbackMissing === false && (
             <img src={noFeedback} className="noFeedback" />
