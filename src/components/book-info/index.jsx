@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useLocation,  useHistory} from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import { StyledBookInfo, ModalContainer } from "./styles/";
 import { Button, Rate, Select } from "antd";
 import Feedback from "../feedback";
@@ -9,11 +9,10 @@ import FeedbackForm from "../feedback-form";
 import { requestReviews } from "../../redux/actions/reviews-list";
 import {
   putBookChanges,
-  requestUsersBookDescription,
   requestUserBooks,
 } from "../../redux/actions/user-books";
 import noDescription from "../../assets/images/book-info/nodescription.png";
-import noFeedback from "../../assets/images/book-info/nofeedback.png"
+import noFeedback from "../../assets/images/book-info/nofeedback.png";
 
 const BookInfo = ({
   title,
@@ -26,14 +25,15 @@ const BookInfo = ({
   onChange,
   bookId,
 }) => {
-
-  const { location : { pathname }} = useHistory()
-
+  const {
+    location: { pathname },
+  } = useHistory();
 
   const dispatch = useDispatch();
   const location = useLocation();
   const [feedbackForm, setFeedbackForm] = useState(false);
   const [feedbackMissing, setFeedbackMissing] = useState(false);
+  const [selectedReviews, setSelectedReviews] = useState([]);
 
   const token = useSelector((state) => state.login.token);
   const userId = useSelector((state) => state.login.id);
@@ -41,24 +41,46 @@ const BookInfo = ({
     (state) => state.reviewsList.booksReviewsById
   );
   const userBooks = useSelector((state) => state.userBooks);
+  const userBooksById = useSelector((state) => state.userBooksById);
+
+  useEffect(() => {}, []);
+
+  let shelf = "";
+  Object.values(userBooks).map((book) => {
+    if (book.title === title) {
+      shelf = book.shelf;
+    }
+  });
 
   useEffect(() => {
+    let arr = [];
     Object.values(booksReviewsById).map((bookReview) => {
       if (bookReview.title === title) {
-        setFeedbackMissing(true);
+        arr = arr.filter((item) => item.id !== bookReview.id);
+        arr.push(bookReview);
       }
     });
-  }, [booksReviewsById]);
+    Object.values(userBooksById).map((bookReview) => {
+      if (bookReview.title === title) {
+        arr = arr.filter((item) => item.id !== bookReview.id);
+        arr.push(bookReview);
+      }
+    });
+
+    arr = arr.filter((item) => item.review !== null && item.review !== ""); //filtro de feeds vazios
+    setSelectedReviews(arr);
+
+    if (arr.length !== 0) {
+      setFeedbackMissing(true);
+    }
+  }, [booksReviewsById, userBooksById]);
 
   const { Option } = Select;
-  
+
   const onFinish = (event) => {
-
-    
-
     setFeedbackForm(false);
     dispatch(
-      putBookChanges(token, userId, bookId, 3, event.grading, event.comment)
+      putBookChanges(token, userId, bookId, shelf, event.grading, event.comment) //////
     );
     setTimeout(dispatch(requestReviews(token)), 200);
     setTimeout(dispatch(requestUserBooks(token, userId)), 200);
@@ -93,7 +115,9 @@ const BookInfo = ({
           <div className="topContent">
             <img src={image} className="bookCover" />
             <div className="bookTitle">
-              <h2 className={title.length > 29 ? "bigTitle" : undefined}>{title}</h2>
+              <h2 className={title.length > 29 ? "bigTitle" : undefined}>
+                {title}
+              </h2>
             </div>
             <h5 className="bookAuthor">{author}</h5>
             <Rate
@@ -147,22 +171,22 @@ const BookInfo = ({
           <h2 className="feedbackTitle">Feedbacks</h2>
           {feedbackForm ? (
             <FeedbackForm handleFinish={onFinish} />
-          ) : (
-            Object.values(booksReviewsById).map((bookReview) => {
-              if (bookReview.title === title) {
-                return (
-                  <Feedback
-                    key={bookReview.id}
-                    user={bookReview.creator.name}
-                    grading={bookReview.grade}
-                    comment={bookReview.review}
-                  />
-                );
-              } else {
-                return null;
-              }
+          ) : selectedReviews.lenght != 0 ? (
+            Object.values(selectedReviews).map((bookReview) => {
+              return (
+                <Feedback
+                  bookReview={bookReview}
+                  key={bookReview.id}
+                  user={bookReview.creator.name}
+                  grading={bookReview.grade}
+                  comment={bookReview.review}
+                />
+              );
             })
+          ) : (
+            ""
           )}
+
           {feedbackMissing === false && (
             <img src={noFeedback} className="noFeedback" />
           )}
