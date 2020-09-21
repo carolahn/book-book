@@ -37,7 +37,6 @@ export const executeSearch = (adaptedInput, max) => (dispatch) => {
           })
           .then((res) => {
             const normalized = {};
-            console.log("res", res);
             res.map((item, index) => {
               if (item) {
                 normalized[item.id] = normalizator(item);
