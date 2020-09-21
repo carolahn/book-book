@@ -12,7 +12,7 @@ import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 import { StyledShelf, ShelvesButtons, BookShelf, Book } from "./styles";
 import BookInfo from "../../components/book-info";
 import { notification } from "antd";
-import noBookImage from '../../assets/images/book-cover/book-image-not-available.png'
+import noBookImage from "../../assets/images/book-cover/book-image-not-available.png";
 
 const Shelves = () => {
   const history = useHistory();
@@ -173,15 +173,16 @@ const Shelves = () => {
                 <Book
                   colour="darkred"
                   alt={e.title}
-                  src={e.image_url === 'image_url' ? noBookImage : e.image_url}
+                  src={e.image_url === "image_url" ? noBookImage : e.image_url}
                   onClick={() => {
                     dispatch(requestUsersBookDescription(e.google_book_id));
                     setBookInfoClicked(true);
+                    console.log("e.grade", e.grade);
                     setUniqueBook({
                       author: e.author,
                       title: e.title,
                       image: e.image_url,
-                      grade: (e.grade = 0),
+                      grade: (e.grade = 0), ///////////arrumar, não aparece o grading do google
                       googleBookId: e.google_book_id,
                       id: e.id,
                       description: bookDescription,
@@ -202,7 +203,7 @@ const Shelves = () => {
                 <Book
                   colour="darkred"
                   alt={e.title}
-                  src={e.image_url === 'image_url' ? noBookImage : e.image_url}
+                  src={e.image_url === "image_url" ? noBookImage : e.image_url}
                   onClick={() => {
                     dispatch(requestUsersBookDescription(e.google_book_id));
                     setBookInfoClicked(true);
@@ -231,7 +232,7 @@ const Shelves = () => {
                 <Book
                   colour="darkred"
                   alt={e.title}
-                  src={e.image_url === 'image_url' ? noBookImage : e.image_url}
+                  src={e.image_url === "image_url" ? noBookImage : e.image_url}
                   onClick={() => {
                     dispatch(requestUsersBookDescription(e.google_book_id));
                     setBookInfoClicked(true);

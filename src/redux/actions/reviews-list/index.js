@@ -12,11 +12,9 @@ export const requestReviews = (token) => (dispatch) => {
       },
     })
     .then(({ data }) => {
-      
       const normalized = {}; // normalisado pelo google_book_id
       const normalizedByReviewId = {}; // normalizado pelo review id
       const url = data.map((item) => {
-        
         if (item.image_url) {
           return item.image_url.replace(/\w*[htsp]/i, "https");
         } else {
@@ -38,7 +36,6 @@ export const requestReviews = (token) => (dispatch) => {
           };
         }
       });
-      
       dispatch(addToReviewsList(normalized, normalizedByReviewId));
     });
   //.catch((e) => {
