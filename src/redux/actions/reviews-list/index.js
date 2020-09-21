@@ -12,18 +12,39 @@ export const requestReviews = (token) => (dispatch) => {
       },
     })
     .then(({ data }) => {
+      console.log(data);
       const normalized = {}; // normalisado pelo google_book_id
       const normalizedByReviewId = {}; // normalizado pelo review id
-      data.map((currReview) => {
-        normalized[currReview.google_book_id] = { ...currReview };
-        normalizedByReviewId[currReview.id] = { ...currReview };
+      const url = data.map((item) => {
+        console.log("item", item);
+        if (item.image_url) {
+          return item.image_url.replace(/\w*[htsp]/i, "https");
+        } else {
+          return undefined;
+        }
       });
+      data.map((currReview, index) => {
+        if (isNaN(currReview.google_book_id)) {
+          // normalized[currReview.google_book_id] = { ...currReview };
+          // normalizedByReviewId[currReview.id] = { ...currReview };
+
+          normalized[currReview.google_book_id] = {
+            ...currReview,
+            image_url: url[index],
+          };
+          normalizedByReviewId[currReview.id] = {
+            ...currReview,
+            image_url: url[index],
+          };
+        }
+      });
+      console.log("normalizedByReviewId", normalizedByReviewId);
       dispatch(addToReviewsList(normalized, normalizedByReviewId));
-    })
-    .catch((e) => {
-      const errorstatus = e.response.status;
-      console.log("Erro: ", errorstatus);
     });
+  //.catch((e) => {
+  //const errorstatus = e.response.status;
+  //console.log("Erro: ", errorstatus);
+  //});
 };
 
 const addToReviewsList = (booksReviews, booksReviewsById) => ({
@@ -37,7 +58,6 @@ const addToReviewsList = (booksReviews, booksReviewsById) => ({
 export const requestGoogleInfo = (booksReviews, page) => (dispatch) => {
   let urlRequests = [];
   let booksDescriptions = [];
-
   Object.keys(booksReviews)
     .slice(page * 10 - 10, page * 10)
     .map((key) => {
@@ -45,7 +65,6 @@ export const requestGoogleInfo = (booksReviews, page) => (dispatch) => {
         urlRequests.push(`https://www.googleapis.com/books/v1/volumes/${key}`);
       }
     });
-
   if (urlRequests) {
     let promises = [];
     urlRequests.forEach((item, index) => {

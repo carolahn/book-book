@@ -1,21 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { requestUsersBookDescription } from '../../redux/actions/user-books/'
+import { useSelector } from "react-redux";
 import axios from "axios";
 
 import BookListPaginated from "../../containers/book-list-paginated";
 
 import { PerfilContainer, SvgContainer } from "./styled";
 
-const Perfil = () => {
-
-  const dispatch = useDispatch()
+const Profile = () => {
   const { id } = useParams();
   const token = useSelector((state) => state.login.token);
   const [user, setUser] = useState({});
-  
-  
+  let filtered = {};
+
   useEffect(() => {
     axios
       .get(`https://ka-users-api.herokuapp.com/users/${id}/`, {
@@ -24,7 +21,6 @@ const Perfil = () => {
       .then(({ data }) => {
         setUser(data);
       });
-      
   }, []);
 
   useEffect(() => {
@@ -35,11 +31,11 @@ const Perfil = () => {
         headers: { Authorization: token },
       })
       .then(({ data }) => {
-        setUser({ ...user, books: data });
+        data.map((item) => (filtered[item.google_book_id] = item));
+        setUser({ ...user, books: filtered });
       });
-      
   }, [user]);
-  
+
   return (
     user.name !== undefined && (
       <PerfilContainer>
@@ -52,7 +48,7 @@ const Perfil = () => {
         </SvgContainer>
         <div>
           {user.books &&
-            (user.books.length > 0 ? (
+            (Object.values(user.books).length > 0 ? (
               <BookListPaginated showBooks={user.books} type="timeline" />
             ) : (
               "User has not finished reading any books"
@@ -63,4 +59,4 @@ const Perfil = () => {
   );
 };
 
-export default Perfil;
+export default Profile;

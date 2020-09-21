@@ -9,26 +9,30 @@ import {
   postUserBook,
   removeBook,
   putBookChanges,
-  requestUsersBookDescription
+  requestUsersBookDescription,
 } from "../../redux/actions/user-books";
 import { Link } from "react-router-dom";
+import noBookImage from '../../assets/images/book-cover/book-image-not-available.png'
 
 const Book = ({ bookData, type }) => {
   const { Option } = Select;
   const dispatch = useDispatch();
   const user = useSelector((state) => state.login);
   const userBooks = useSelector((state) => state.userBooks);
+  const userBooksById = useSelector((state) => state.userBooksById);
 
   const [bookInfoClicked, setBookInfoClicked] = useState(false);
   const googleInfo = useSelector((state) => state.reviewsList.googleInfo);
-  const bookDescription = useSelector((state) => state.bookDescription.description)
+  const bookDescription = useSelector(
+    (state) => state.bookDescription.description
+  );
 
   useEffect(() => {}, [bookInfoClicked]);
 
   function onChange(value) {
-
     if (userBooks[bookData.google_book_id]) {
       const selectedBook = userBooks[bookData.google_book_id];
+
       if (value === "delete") {
         dispatch(removeBook(user.token, user.id, selectedBook.id));
         notification.info({
@@ -36,12 +40,18 @@ const Book = ({ bookData, type }) => {
           message: "Done:",
           description: "The book has been removed!",
         });
-      } else {
+      } else if (value != selectedBook.shelf) {
         dispatch(putBookChanges(user.token, user.id, selectedBook.id, value));
         notification.success({
           key: user.id,
           message: "Done:",
           description: "Shelf change completed!",
+        });
+      } else if (value == selectedBook.shelf) {
+        notification.info({
+          key: user.id,
+          message: "Info:",
+          description: "The book already is on this shelf!",
         });
       }
     } else if (!userBooks[bookData.google_book_id] && value === "delete") {
@@ -50,7 +60,6 @@ const Book = ({ bookData, type }) => {
         message: "Error:",
         description: "This book are not in your shelves!",
       });
-      return;
     } else {
       dispatch(
         postUserBook(
@@ -73,10 +82,10 @@ const Book = ({ bookData, type }) => {
       });
     }
   }
-  
+
   const handleBookInfo = (event) => {
-    dispatch(requestUsersBookDescription(bookData.google_book_id))
-    const eventClassName = event.target.className
+    dispatch(requestUsersBookDescription(bookData.google_book_id));
+    const eventClassName = event.target.className;
     setTimeout(() => {
       if (
         bookInfoClicked === false &&
@@ -85,8 +94,7 @@ const Book = ({ bookData, type }) => {
       ) {
         setBookInfoClicked(true);
       }
-    } , 200)
-    
+    }, 200);
   };
 
   const handleModal = (event) => {
@@ -94,13 +102,13 @@ const Book = ({ bookData, type }) => {
       setBookInfoClicked(false);
     }
   };
-
+  
   return (
     <div>
       <BookContainer className="book" onClick={handleBookInfo}>
         {type === "search-desktop" && (
           <>
-            <img src={bookData.image_url} alt="cover" className="bookImage" />
+            <img src={bookData.image_url === '' || bookData.image_url === null ? noBookImage : bookData.image_url} alt="cover" className="bookImage" />
             <div className="book-info">
               <div className="title">{bookData.title}</div>
               <div className="author">{bookData.author}</div>
@@ -117,13 +125,12 @@ const Book = ({ bookData, type }) => {
                 />
               </div>
             </div>
-           
           </>
         )}
 
         {type === "search-mobile" && (
           <>
-            <img src={bookData.image_url} alt="cover" className="bookImage" />
+            <img src={bookData.image_url === '' || bookData.image_url === null ? noBookImage : bookData.image_url} alt="cover" className="bookImage" />
             <div className="book-info">
               <div className="title">{bookData.title}</div>
               <div className="author">{bookData.author}</div>
@@ -147,13 +154,12 @@ const Book = ({ bookData, type }) => {
                 />
               </div>
             </div>
-            
           </>
         )}
 
         {type === "timeline-desktop" && (
           <>
-            <img src={bookData.image_url} alt="cover" className="bookImage" />
+            <img src={bookData.image_url === '' || bookData.image_url === null ? noBookImage : bookData.image_url} alt="cover" className="bookImage" />
             <div className="book-info">
               <div className="title">{bookData.title}</div>
               <div className="author">{bookData.author}</div>
@@ -183,13 +189,12 @@ const Book = ({ bookData, type }) => {
                 />
               </div>
             </div>
-           
           </>
         )}
 
         {type === "timeline-mobile" && (
           <>
-            <img src={bookData.image_url} alt="cover" className="bookImage" />
+            <img src={bookData.image_url === '' || bookData.image_url === null ? noBookImage : bookData.image_url} alt="cover" className="bookImage" />
             <div className="book-info">
               <div className="title">{bookData.title}</div>
               <div className="author">{bookData.author}</div>
@@ -219,14 +224,12 @@ const Book = ({ bookData, type }) => {
                 />
               </div>
             </div>
-           
-           
           </>
         )}
 
         {type === "aside" && (
           <>
-            <img src={bookData.image_url} alt="cover" className="bookImage" />
+            <img src={bookData.image_url === '' || bookData.image_url === null ? noBookImage : bookData.image_url} alt="cover" className="bookImage" />
             <div className="book-info-aside">
               {bookData.review ? (
                 bookData.review.length > 240 ? (
@@ -249,8 +252,30 @@ const Book = ({ bookData, type }) => {
                 disabled
                 allowHalf
                 defaultValue={bookData.grade || 0}
-                style={{ fontSize: 15, display: "revert" }}
+                style={{ fontSize: 15, display: "center" }}
               />
+            </div>
+          </>
+        )}
+
+        {type === "carousel" && (
+          <>
+            <img src={bookData.image_url} alt="cover" className="bookImage" />
+            <div className="book-info">
+              <div className="title">{bookData.title}</div>
+              <div className="author">{bookData.author}</div>
+              <div className="description description-search-desktop">
+                <p>{bookData.categories}</p>
+                <p>{bookData.year}</p>
+              </div>
+              <div className="grade">
+                <Rate
+                  disabled
+                  allowHalf
+                  defaultValue={bookData.grade || 0}
+                  style={{ fontSize: 15, display: "revert" }}
+                />
+              </div>
             </div>
           </>
         )}
@@ -282,22 +307,24 @@ const Book = ({ bookData, type }) => {
           </Select>
         </div>
       </BookContainer>
-      {bookInfoClicked && (
-              <BookInfo
-                type="search"
-                title={bookData.title}
-                image={bookData.image_url}
-                description={bookDescription}
-                grading={bookData.grade}
-                handleModal={handleModal}
-                onChange={onChange}
-                addFeedback={false}
-                bookId={bookData.id}
-                googleBookId={bookData.google_book_id}
-              />
-            )}
+      {type != "carousel"
+        ? bookInfoClicked && (
+            <BookInfo
+              type="search"
+              title={bookData.title}
+              author={bookData.author}
+              image={bookData.image_url}
+              description={bookDescription}
+              grading={bookData.grade}
+              handleModal={handleModal}
+              onChange={onChange}
+              addFeedback={false}
+              bookId={bookData.id}
+              googleBookId={bookData.google_book_id}
+            />
+          )
+        : ""}
     </div>
-    
   );
 };
 

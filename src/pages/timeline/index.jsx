@@ -21,24 +21,24 @@ const Timeline = () => {
   const size = useWindowSize();
 
   useEffect(() => {
-    dispatch(requestReviews(token));
+    if (JSON.stringify(booksReviews) === "{}") {
+      dispatch(requestReviews(token));
+    }
   }, [token]);
 
   return (
     <ListContainer>
       <MainContainer>
-        {size.width < 940 ? (
+        {size.width < 940 && (
           <MostPopularCarousel>
             <CarouselMostPopular />
           </MostPopularCarousel>
-        ) : (
-          ""
         )}
+        
         <ResultsContainer>
-
           {Object.values(booksReviews).length !== 0 ? (
             <BookListPaginated
-              showBooks={Object.values(booksReviews)}
+              showBooks={booksReviews}
               type="timeline"
             />
           ) : (

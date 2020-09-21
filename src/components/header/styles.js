@@ -21,6 +21,13 @@ export const StyledHeader = styled.div`
         grid-column: 1;
         justify-self: flex-start;
         align-self: center;
+        /* cursor: pointer; */
+    }
+
+    .logo-holder:hover, .button:hover {
+        cursor: pointer;
+        scale: 0.9;
+        transition: 0.2s;
     }
 
     .button-holder {
@@ -61,10 +68,6 @@ export const StyledHeader = styled.div`
         width: 30px;
         height: 25px;
         margin-right: 1.8rem;
-    }
-
-    @media screen and (max-width: 560px) {
-
     }
 `;
 
@@ -124,5 +127,11 @@ export const LoggedLittleMenu = styled.div`
 
     .little-login, .little-register, .little {
         border-bottom: 2px solid #1890ff;
+    }
+
+    .hbtn {
+        cursor: pointer;
+        /* scale: 0.9;
+        transition: 0.2s; */
     }
 `;

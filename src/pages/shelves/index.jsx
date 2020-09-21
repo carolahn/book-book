@@ -5,11 +5,14 @@ import {
   removeBook,
   putBookChanges,
   requestUsersBookDescription,
+  deleteAllBooks,
 } from "../../redux/actions/user-books";
+import { requestReviews } from "../../redux/actions/reviews-list";
 import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 import { StyledShelf, ShelvesButtons, BookShelf, Book } from "./styles";
 import BookInfo from "../../components/book-info";
 import { notification } from "antd";
+import noBookImage from '../../assets/images/book-cover/book-image-not-available.png'
 
 const Shelves = () => {
   const history = useHistory();
@@ -18,10 +21,11 @@ const Shelves = () => {
 
   const userBooks = useSelector((state) => Object.values(state.userBooks));
   const userBooksObj = useSelector((state) => state.userBooks);
-
+  const userBooksById = useSelector((state) => state.userBooksById);
   const bookDescription = useSelector(
     (state) => state.bookDescription.description
   );
+  const booksReviews = useSelector((state) => state.reviewsList.booksReviews);
 
   const [bookInfoClicked, setBookInfoClicked] = useState(false);
   const [uniqueBook, setUniqueBook] = useState({});
@@ -34,6 +38,12 @@ const Shelves = () => {
   const readShelf = userBooks.filter((e) => e.shelf === 3);
 
   const where = location.pathname;
+
+  useEffect(() => {
+    if (JSON.stringify(booksReviews) === "{}") {
+      dispatch(requestReviews(tokenInfo.token));
+    }
+  }, []);
 
   const handleModal = (event) => {
     if (event.target.id === "modal-container") {
@@ -67,7 +77,6 @@ const Shelves = () => {
         message: "Error:",
         description: "This book are not in your shelves!",
       });
-      return;
     } else {
       dispatch(
         postUserBook(
@@ -96,12 +105,27 @@ const Shelves = () => {
   }
 
   useEffect(() => {
-    if (bookInfoClicked === false && shelfValue !== undefined)
+    if (
+      bookInfoClicked === false &&
+      shelfValue !== undefined &&
+      shelfValue != uniqueBook.shelf
+    ) {
       sendChanges(shelfValue);
+    } else {
+      setShelfValue();
+      return;
+    }
   }, [bookInfoClicked]);
+
+  const handleReset = () => {
+    dispatch(deleteAllBooks(tokenInfo.token, tokenInfo.id, userBooksById));
+  };
 
   return (
     <StyledShelf className="shelf">
+      <button onClick={handleReset} className="reset-btn">
+        RESET
+      </button>
       {bookInfoClicked ? (
         <>
           <BookInfo
@@ -149,7 +173,7 @@ const Shelves = () => {
                 <Book
                   colour="darkred"
                   alt={e.title}
-                  src={e.image_url}
+                  src={e.image_url === 'image_url' ? noBookImage : e.image_url}
                   onClick={() => {
                     dispatch(requestUsersBookDescription(e.google_book_id));
                     setBookInfoClicked(true);
@@ -163,6 +187,7 @@ const Shelves = () => {
                       description: bookDescription,
                       review: e.review,
                       categories: e.categories,
+                      shelf: e.shelf,
                     });
                   }}
                 />
@@ -177,7 +202,7 @@ const Shelves = () => {
                 <Book
                   colour="darkred"
                   alt={e.title}
-                  src={e.image_url}
+                  src={e.image_url === 'image_url' ? noBookImage : e.image_url}
                   onClick={() => {
                     dispatch(requestUsersBookDescription(e.google_book_id));
                     setBookInfoClicked(true);
@@ -191,6 +216,7 @@ const Shelves = () => {
                       description: bookDescription && bookDescription,
                       review: e.review,
                       categories: e.categories,
+                      shelf: e.shelf,
                     });
                   }}
                 />
@@ -205,7 +231,7 @@ const Shelves = () => {
                 <Book
                   colour="darkred"
                   alt={e.title}
-                  src={e.image_url}
+                  src={e.image_url === 'image_url' ? noBookImage : e.image_url}
                   onClick={() => {
                     dispatch(requestUsersBookDescription(e.google_book_id));
                     setBookInfoClicked(true);
@@ -219,6 +245,7 @@ const Shelves = () => {
                       description: bookDescription,
                       review: e.review,
                       categories: e.categories,
+                      shelf: e.shelf,
                     });
                   }}
                 />

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addToMostPopular } from "../../redux/actions/reviews-list";
-
+import { useHistory } from 'react-router-dom' 
 import Book from "../book";
 import { Container, WrapBook } from "./styles";
 
@@ -11,6 +11,7 @@ const AsideMostPopular = () => {
   const booksReviews = useSelector((state) => state.reviewsList.booksReviews);
   const user = useSelector((state) => state.login);
   const dispatch = useDispatch();
+  
 
   useEffect(() => {
     if (JSON.stringify(booksReviews) !== "{}") {
