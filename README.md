@@ -8,10 +8,11 @@ MVP - Rede social para busca e avaliação de livros
 #### Sobre:
 Projeto implementado no curso da [Kenzie Academy](https://kenzie.com.br/) em setembro de 2020;
 - permite o cadastro de usuários;
-- psicólogo pode editar seu perfil, horários de atendimento e valor da consulta;
-- usuário pode visualizar todas as informações do psicólogo e realizar o login apenas para agendar uma consulta;
-- usuário tem acesso a sua lista de consultas, podendo cancelar ou reagendar consultas futuras ou avaliar consultas já realizadas;
-- próximo ao horário agendado, o usuário tem acesso ao link do Whereby para realizar a consulta.
+- permite a busca por livros através da API Google Books;
+- usuário pode visualizar o rating, resumo e reviews dos livros;
+- usuário pode adicionar livros às suas prateleiras;
+- usuário pode editar reviews e visualizar os livros das prateleiras de outros usuários.
+
 
 #### Tecnologias:
 - JavaScript, React, Redux;
@@ -20,18 +21,23 @@ Projeto implementado no curso da [Kenzie Academy](https://kenzie.com.br/) em set
 
 
 *******************************************************************************************************************************
-### Home
-
-
-
-*******************************************************************************************************************************
-### Busca
-
+### Página de busca
+![Screenshot from 2020-10-16 18-00-32](https://user-images.githubusercontent.com/62309069/96308887-8f83d180-0fda-11eb-92bd-849ce49ad935.png)
 
 
 *******************************************************************************************************************************
-### Perfil do psicólogo
+### Prateleiras do usuário
+![Screenshot from 2020-10-16 18-00-49](https://user-images.githubusercontent.com/62309069/96308905-97437600-0fda-11eb-950e-0bdd9d492466.png)
 
+
+*******************************************************************************************************************************
+### Dados e reviews do livro
+![Screenshot from 2020-10-16 18-01-13](https://user-images.githubusercontent.com/62309069/96308912-9ca0c080-0fda-11eb-8a29-01177d6ca3d2.png)
+
+
+*******************************************************************************************************************************
+### Editar review
+![Screenshot from 2020-10-16 18-01-47](https://user-images.githubusercontent.com/62309069/96308929-a32f3800-0fda-11eb-80bd-033ad81db4cf.png)
 
 
 #### Time(gestão ágil - scrum):
